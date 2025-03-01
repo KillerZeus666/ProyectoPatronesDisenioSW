@@ -2,8 +2,10 @@ package com.proyecto.demo.controlador;
 
 import com.proyecto.demo.entidad.Usuario;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Controller;
 
-@RestController
+
+@Controller
 @RequestMapping("/usuario")
 public class UsuarioController {
     
