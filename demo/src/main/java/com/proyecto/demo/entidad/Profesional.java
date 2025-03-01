@@ -1,42 +1,53 @@
 package com.proyecto.demo.entidad;
 
+import jakarta.persistence.*;
 import java.util.List;
 
+@Entity
 public class Profesional extends Usuario {
-    private String tipo_servicio;
-    private String tipo_queja;
-    private List<Incumplimiento> procesoIncumplimiento; 
+
+    @Column(nullable = false)
+    private String tipoServicio;
+
+    @Column(nullable = false)
+    private String tipoQueja;
+
+    @OneToMany
+    @JoinColumn(name = "profesional_id")
+    private List<Incumplimiento> procesoIncumplimiento;
 
     // Constructor vacío
     public Profesional() {}
 
-    // Constructor con los nuevos parámetros
-    public Profesional(String nombre, String correo, String contraseña, String tipo_servicio, String tipo_queja, List<Incumplimiento> procesoIncumplimiento) {
+    // Constructor con parámetros
+    public Profesional(String nombre, String correo, String contraseña, 
+                       String tipoServicio, String tipoQueja, List<Incumplimiento> procesoIncumplimiento) {
         super(nombre, correo, contraseña);
-        this.tipo_servicio = tipo_servicio;
-        this.tipo_queja = tipo_queja;
+        this.tipoServicio = tipoServicio;
+        this.tipoQueja = tipoQueja;
         this.procesoIncumplimiento = procesoIncumplimiento;
     }
 
-    // Getters y Setters
+    // Getters
     public String getTipoServicio() {
-        return tipo_servicio;
-    }
-
-    public void setTipoServicio(String tipo_servicio) {
-        this.tipo_servicio = tipo_servicio;
+        return tipoServicio;
     }
 
     public String getTipoQueja() {
-        return tipo_queja;
-    }
-
-    public void setTipoQueja(String tipo_queja) {
-        this.tipo_queja = tipo_queja;
+        return tipoQueja;
     }
 
     public List<Incumplimiento> getProcesoIncumplimiento() {
         return procesoIncumplimiento;
+    }
+
+    // Setters
+    public void setTipoServicio(String tipoServicio) {
+        this.tipoServicio = tipoServicio;
+    }
+
+    public void setTipoQueja(String tipoQueja) {
+        this.tipoQueja = tipoQueja;
     }
 
     public void setProcesoIncumplimiento(List<Incumplimiento> procesoIncumplimiento) {

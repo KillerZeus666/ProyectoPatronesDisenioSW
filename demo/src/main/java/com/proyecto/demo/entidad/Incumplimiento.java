@@ -1,43 +1,53 @@
 package com.proyecto.demo.entidad;
 
-public class Incumplimiento {
-    private long id;
-    private String descripcion;
-    private Queja queja; 
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-    // Constructor vacío
-    public Incumplimiento() {}
+@Entity
+@Getter
+@Setter
+@NoArgsConstructor
+public class Incumplimiento {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false)
+    private String descripcion;
+
+    @OneToOne
+    @JoinColumn(name = "queja_id", nullable = false)
+    private Queja queja;
+
+    @ManyToOne
+    @JoinColumn(name = "empresa_id", nullable = false)
+    private Empresa empresa;
 
     // Constructor con parámetros
-    public Incumplimiento(long id, String descripcion, Queja queja) {
-        this.id = id;
+    public Incumplimiento(String descripcion, Queja queja, Empresa empresa) {
         this.descripcion = descripcion;
         this.queja = queja;
+        this.empresa = empresa;
     }
 
-    // Getters
-    public long getId() {
-        return id;
+    @Override
+    public String toString() {
+        return "Incumplimiento{id=" + id + ", descripcion='" + descripcion + '\'' + ", queja=" + queja + ", empresa=" + empresa + '}';
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Incumplimiento that = (Incumplimiento) obj;
+        return id != null && id.equals(that.id);
     }
 
-    public Queja getQueja() {
-        return queja;
-    }
-
-    // Setters
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public void setQueja(Queja queja) {
-        this.queja = queja;
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
     }
 }

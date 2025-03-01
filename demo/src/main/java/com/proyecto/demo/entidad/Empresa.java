@@ -1,81 +1,108 @@
 package com.proyecto.demo.entidad;
 
+import jakarta.persistence.*;
 import java.util.List;
 
+@Entity
 public class Empresa {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false, unique = true)
     private String nombre;
-    private int id;
-    private String contraseña; 
-    private List<Servicio> servicios; 
-    private List<Respuesta> respuestasEmitidas; 
-    private List<Queja> quejas; 
-    private List<Incumplimiento> procesoIncumplimiento; 
+
+    @Column(nullable = false)
+    private String contrasena;
+
+    @OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL)
+    private List<Servicio> servicios;
+
+    @OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL)
+    private List<Respuesta> respuestasEmitidas;
+
+    @OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL)
+    private List<Queja> quejas;
+
+    @OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL)
+    private List<Incumplimiento> procesoIncumplimiento;
+
+    @ManyToOne
+    @JoinColumn(name = "entidad_vigilante_id")
+    private EntidadVigilante entidadVigilante;
 
     // Constructor vacío
     public Empresa() {}
 
     // Constructor con parámetros
-    public Empresa(String nombre, int id, String contraseña) {
+    public Empresa(String nombre, String contrasena) {
         this.nombre = nombre;
-        this.id = id;
-        this.contraseña = contraseña;
+        this.contrasena = contrasena;
     }
 
-    // Getters
+    // Getters y Setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getNombre() {
         return nombre;
     }
 
-    public int getId() {
-        return id;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public String getContraseña() {
-        return contraseña;
+    public String getContrasena() {
+        return contrasena;
+    }
+
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
     }
 
     public List<Servicio> getServicios() {
         return servicios;
     }
 
-    public List<Respuesta> getRespuestasEmitidas() {
-        return respuestasEmitidas;
-    }
-
-    public List<Queja> getQuejas() {
-        return quejas;
-    }
-
-    public List<Incumplimiento> getProcesoIncumplimiento() {
-        return procesoIncumplimiento;
-    }
-
-    // Setters
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
-    }
-
     public void setServicios(List<Servicio> servicios) {
         this.servicios = servicios;
+    }
+
+    public List<Respuesta> getRespuestasEmitidas() {
+        return respuestasEmitidas;
     }
 
     public void setRespuestasEmitidas(List<Respuesta> respuestasEmitidas) {
         this.respuestasEmitidas = respuestasEmitidas;
     }
 
+    public List<Queja> getQuejas() {
+        return quejas;
+    }
+
     public void setQuejas(List<Queja> quejas) {
         this.quejas = quejas;
     }
 
+    public List<Incumplimiento> getProcesoIncumplimiento() {
+        return procesoIncumplimiento;
+    }
+
     public void setProcesoIncumplimiento(List<Incumplimiento> procesoIncumplimiento) {
         this.procesoIncumplimiento = procesoIncumplimiento;
+    }
+
+    public EntidadVigilante getEntidadVigilante() {
+        return entidadVigilante;
+    }
+
+    public void setEntidadVigilante(EntidadVigilante entidadVigilante) {
+        this.entidadVigilante = entidadVigilante;
     }
 }

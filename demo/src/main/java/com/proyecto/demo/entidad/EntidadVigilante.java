@@ -1,13 +1,29 @@
 package com.proyecto.demo.entidad;
 
+import jakarta.persistence.*;
 import java.util.List;
 
+@Entity
 public class EntidadVigilante {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) 
+    private Long id;
+
+    @Column(nullable = false, unique = true)
     private String nombre;
+
+    @Column(nullable = false, unique = true)
     private long nit;
-    private String contraseña; 
+
+    @Column(nullable = false, unique = true)
     private String correo;
-    private List<Empresa> empresas; 
+
+    @Column(nullable = false)
+    private String contraseña; 
+
+    @OneToMany(mappedBy = "entidadVigilante", cascade = CascadeType.ALL)
+    private List<Empresa> empresas;
 
     // Constructor vacío
     public EntidadVigilante() {}
@@ -21,6 +37,10 @@ public class EntidadVigilante {
     }
 
     // Getters
+    public Long getId() {
+        return id;
+    }
+
     public String getNombre() {
         return nombre;
     }
@@ -42,6 +62,10 @@ public class EntidadVigilante {
     }
 
     // Setters
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }

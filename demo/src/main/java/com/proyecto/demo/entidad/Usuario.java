@@ -1,23 +1,42 @@
 package com.proyecto.demo.entidad;
 
+import jakarta.persistence.*;
 import java.util.List;
 
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Usuario {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false, length = 100)
     private String nombre;
+
+    @Column(unique = true, nullable = false)
     private long cedula;
-    private long numero_celular;
+
+    @Column(unique = true, nullable = false)
+    private long numeroCelular;
+
+    @Column(unique = true, nullable = false)
     private String correo;
-    private String contraseña; 
+
+    @Column(nullable = false)
+    private String contraseña;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<Queja> quejas;
 
     // Constructor vacío
     public Usuario() {}
 
     // Constructor con todos los parámetros
-    public Usuario(String nombre, long cedula, long numero_celular, String correo, String contraseña, List<Queja> quejas) {
+    public Usuario(String nombre, long cedula, long numeroCelular, String correo, String contraseña, List<Queja> quejas) {
         this.nombre = nombre;
         this.cedula = cedula;
-        this.numero_celular = numero_celular;
+        this.numeroCelular = numeroCelular;
         this.correo = correo;
         this.contraseña = contraseña;
         this.quejas = quejas;
@@ -30,49 +49,58 @@ public class Usuario {
         this.contraseña = contraseña;
     }
 
-    // Getters y Setters
-    public String getNombre() {
-        return nombre;
+    // Getters
+    public Long getId() {
+        return id;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public String getNombre() {
+        return nombre;
     }
 
     public long getCedula() {
         return cedula;
     }
 
-    public void setCedula(long cedula) {
-        this.cedula = cedula;
-    }
-
-    public long getNumero_celular() {
-        return numero_celular;
-    }
-
-    public void setNumero_celular(long numero_celular) {
-        this.numero_celular = numero_celular;
+    public long getNumeroCelular() {
+        return numeroCelular;
     }
 
     public String getCorreo() {
         return correo;
     }
 
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
-
     public String getContraseña() {
         return contraseña;
     }
 
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
-    }
-
     public List<Queja> getQuejas() {
         return quejas;
+    }
+
+    // Setters
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setCedula(long cedula) {
+        this.cedula = cedula;
+    }
+
+    public void setNumeroCelular(long numeroCelular) {
+        this.numeroCelular = numeroCelular;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
     }
 
     public void setQuejas(List<Queja> quejas) {
