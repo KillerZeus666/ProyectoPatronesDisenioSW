@@ -1,20 +1,25 @@
 package com.proyecto.demo.entidad;
 
+import java.util.Date;
+import java.util.List;
+
 public class Usuario {
     private String nombre;
     private long cedula;
     private long numero_celular;
     private String correo;
+    private List<Queja> quejas;
 
     // Constructor vacío
     public Usuario() {}
 
     // Constructor con parámetros
-    public Usuario(String nombre, long cedula, long numero_celular, String correo) {
+    public Usuario(String nombre, long cedula, long numero_celular, String correo, List<Queja> quejas) {
         this.nombre = nombre;
         this.cedula = cedula;
         this.numero_celular = numero_celular;
         this.correo = correo;
+        this.quejas = quejas;
     }
 
     // Getters y Setters
@@ -48,5 +53,13 @@ public class Usuario {
 
     public void setCorreo(String correo) {
         this.correo = correo;
+    }
+
+    public List<Queja> getQuejas() {
+        return quejas;
+    }
+
+    public void setQuejas(List<Queja> quejas) {
+        this.quejas = quejas;
     }
 }
