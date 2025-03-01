@@ -1,6 +1,5 @@
 package com.proyecto.demo.entidad;
 
-import java.util.Date;
 import java.util.List;
 
 public class Usuario {
@@ -8,18 +7,27 @@ public class Usuario {
     private long cedula;
     private long numero_celular;
     private String correo;
+    private String contraseña; 
     private List<Queja> quejas;
 
     // Constructor vacío
     public Usuario() {}
 
-    // Constructor con parámetros
-    public Usuario(String nombre, long cedula, long numero_celular, String correo, List<Queja> quejas) {
+    // Constructor con todos los parámetros
+    public Usuario(String nombre, long cedula, long numero_celular, String correo, String contraseña, List<Queja> quejas) {
         this.nombre = nombre;
         this.cedula = cedula;
         this.numero_celular = numero_celular;
         this.correo = correo;
+        this.contraseña = contraseña;
         this.quejas = quejas;
+    }
+
+    // Constructor alternativo para `Profesional`
+    public Usuario(String nombre, String correo, String contraseña) {
+        this.nombre = nombre;
+        this.correo = correo;
+        this.contraseña = contraseña;
     }
 
     // Getters y Setters
@@ -53,6 +61,14 @@ public class Usuario {
 
     public void setCorreo(String correo) {
         this.correo = correo;
+    }
+
+    public String getContraseña() {
+        return contraseña;
+    }
+
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
     }
 
     public List<Queja> getQuejas() {

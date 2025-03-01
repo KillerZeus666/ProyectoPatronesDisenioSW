@@ -5,6 +5,7 @@ import java.util.List;
 public class EntidadVigilante {
     private String nombre;
     private long nit;
+    private String contraseña; 
     private String correo;
     private List<Empresa> empresas; 
 
@@ -12,10 +13,11 @@ public class EntidadVigilante {
     public EntidadVigilante() {}
 
     // Constructor con parámetros
-    public EntidadVigilante(String nombre, long nit, String correo) {
+    public EntidadVigilante(String nombre, long nit, String correo, String contraseña) {
         this.nombre = nombre;
         this.nit = nit;
         this.correo = correo;
+        this.contraseña = contraseña;
     }
 
     // Getters
@@ -29,6 +31,10 @@ public class EntidadVigilante {
 
     public String getCorreo() {
         return correo;
+    }
+
+    public String getContraseña() {
+        return contraseña;
     }
 
     public List<Empresa> getEmpresas() {
@@ -46,6 +52,10 @@ public class EntidadVigilante {
 
     public void setCorreo(String correo) {
         this.correo = correo;
+    }
+
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
     }
 
     public void setEmpresas(List<Empresa> empresas) {
