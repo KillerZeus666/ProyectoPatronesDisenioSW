@@ -7,8 +7,8 @@ import org.springframework.stereotype.Repository;
 public class RespuestaRepository {
     
     /*
-    public Usuario findById(int id){
-    return usuario.get(id); 
+    public Respuesta findById(int id){
+    return respuesta.get(id); 
     }
     */
 }
