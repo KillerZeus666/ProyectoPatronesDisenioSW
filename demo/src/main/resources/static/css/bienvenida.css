@@ -45,6 +45,8 @@
     height: auto;
     border-radius: 10px; /* Opcional: redondea las esquinas de la imagen */
 }
+
+
 /*Funcionalidades Estilo para la sección */
 .funcionalidades {
     background-color: rgba(44, 148, 148, 0.7); /* Fondo con opacidad */
@@ -57,7 +59,7 @@
 .tarjetas-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* 3 tarjetas por fila */
-    gap: 10px;
+    gap: 10px 0px;
     justify-items: center;
     margin-top: 20px;
 }
@@ -93,4 +95,61 @@
 .tarjeta p {
     font-size: 0.9em;
     color: #333;
+}
+
+/* Seccion empresas */
+.seccion {
+    background-color: white;
+    padding: 20px;
+}
+.titulo {
+    font-size: 30px;
+    color: #2C9494;
+    text-align: left;
+}
+.descripcion {
+    font-size: 18px;
+    margin-top: 10px;
+    color: #333;
+}
+.contenedor-rectangulos {
+    display: flex;
+    justify-items: center;
+    flex-wrap: wrap;
+    justify-content: center; /* Centrar los rectángulos horizontalmente */
+    align-items: center; /* Centrar los rectángulos verticalmente */
+    gap: 20px;
+    margin-top: 20px;
+}
+.rectangulo {
+    background-color: #ffffff;
+    border-radius: 15px;
+    padding: 15px;
+    width: 35%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+.rectangulo img {
+    width: 40px;
+    height: 40px;
+}
+.rectangulo h3 {
+    color: #1A4D4D;
+    font-size: 24px;
+    margin: 10px 0;
+}
+.rectangulo p {
+    font-size: 16px;
+    color: #333;
+}
+.rectangulo button {
+    background-color: #1A4D4D;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.rectangulo button:hover {
+    background-color: #155F5F;
 }
