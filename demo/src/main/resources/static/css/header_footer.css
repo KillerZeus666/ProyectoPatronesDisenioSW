@@ -14,6 +14,12 @@ header {
     padding: 20px;
     width: 100%; /* Asegura que el header ocupe todo el ancho de la página */
 }
+/* Estilos generales */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Hace que el body ocupe toda la altura de la ventana */
+}
 
 /* Estilos para la barra de navegación */
 nav {
@@ -34,4 +40,39 @@ nav a:hover {
 /* Estilo para el logo */
 .logo img {
     height: 50px; /* Ajusta el tamaño del logo según sea necesario */
+}
+/* Estilos para el footer *//* Estilos para el footer */
+footer {
+    background-color: #2C9494;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Asegura que el contenido esté centrado vertical y horizontalmente */
+    padding: 20px;
+    margin-top: auto; /* Hace que el footer siempre se quede al fondo */
+}
+
+/* Logo en el footer */
+.logo-footer img {
+    height: 50px; /* Ajusta el tamaño del logo */
+    margin-bottom: 20px; /* Espacio entre el logo y los iconos */
+}
+
+/* Contenedor de los iconos sociales */
+.social-icons {
+    display: flex;
+    gap: 20px;
+    justify-content: center; /* Centra los íconos horizontalmente */
+}
+
+/* Estilo de los iconos sociales */
+.social-icons a img {
+    width: 30px; /* Ajusta el tamaño de los íconos */
+    height: 30px;
+    transition: transform 0.3s ease;
+}
+
+.social-icons a img:hover {
+    transform: scale(1.2); /* Efecto de aumento en el hover */
 }
