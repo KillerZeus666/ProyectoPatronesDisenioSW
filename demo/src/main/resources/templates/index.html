@@ -83,40 +83,90 @@
             </div>
         </div>
     </section>
-
-     <!-- Empresas vinculadas -->
-     <div class="seccion">
-        <div class="titulo">Empresas Vinculadas</div>
-        <div class="descripcion">
-            Las siguientes empresas prestadoras de servicios domiciliarios hacen parte de nuestra red de vigilancia y gestión de quejas.
+<!-- Empresas vinculadas -->
+<div class="seccion">
+    <div class="titulo">Empresas Vinculadas</div>
+    <div class="descripcion">
+        Las siguientes empresas prestadoras de servicios domiciliarios hacen parte de nuestra red de vigilancia y gestión de quejas.
+    </div>
+    <div class="contenedor-rectangulos">
+        <!-- Rectángulo 1 -->
+        <div class="rectangulo">
+            <div class="card">
+                <!-- Cara delantera -->
+                <div class="card-front">
+                    <img src="../static/images/gota-de-agua.png" alt="Agua">
+                    <h3>Servicio de Agua</h3>
+                    <p>Facilitamos la radicación y seguimiento de reportes sobre fallos en el servicio de agua potable, fugas y cortes inesperados.</p>
+                </div>
+                <!-- Cara trasera -->
+                <div class="card-back">
+                    <h3>Lista de Empresas</h3>
+                    <ul>
+                        <li>AquaRural</li>
+                        <li>EmCali</li>
+                        <li>Empresa 3</li>
+                    </ul>
+                </div>
+            </div>
         </div>
-        <div class="contenedor-rectangulos">
-            <div class="rectangulo">
-                <img src="../static/images/gota-de-agua.png" alt="Agua">
-                <h3>Servicio de Agua</h3>
-                <p> Facilitamos la radicación y seguimiento de reportes sobre fallos en el servicio de agua potable, fugas y cortes inesperados.</p>
-                <button>Ver empresas</button>
+        <!-- Rectángulo 2 -->
+        <div class="rectangulo">
+            <div class="card">
+                <div class="card-front">
+                    <img src="../static/images/energia-renovable.png" alt="Luz">
+                    <h3>Servicio de energía</h3>
+                    <p>Garantizamos la correcta gestión de quejas relacionadas con el suministro eléctrico.</p>
+                </div>
+                <div class="card-back">
+                    <h3>Lista de Empresas</h3>
+                    <ul>
+                        <li>Codensa</li>
+                        <li>Celsia</li>
+                        <li>InterColombia</li>
+                    </ul>
+                </div>
             </div>
-            <div class="rectangulo">
-                <img src="../static/images/energia-renovable.png" alt="Luz">
-                <h3>Servicio de energía</h3>
-                <p>Garantizamos la correcta gestión de quejas relacionadas con el suministro eléctrico.</p>
-                <button>Ver empresas</button>
+        </div>
+        <!-- Rectángulo 3 -->
+        <div class="rectangulo">
+            <div class="card">
+                <div class="card-front">
+                    <img src="../static/images/bote-de-basura.png" alt="Gas">
+                    <h3>Servicio de Aseo y Residuos</h3>
+                    <p>Permitimos reportar inconvenientes en la recolección de residuos y el servicio de aseo urbano, garantizando una pronta respuesta.</p>
+                </div>
+                <div class="card-back">
+                    <h3>Lista de Empresas</h3>
+                    <ul>
+                        <li>CityUrbana</li>
+                        <li>Aseo Capital</li>
+                        <li>Veolia Colombia</li>
+                    </ul>
+                </div>
             </div>
-            <div class="rectangulo">
-                <img src="../static/images/bote-de-basura.png" alt="Gas">
-                <h3>Servicio de Aseo y Residuos</h3>
-                <p>Permitimos reportar inconvenientes en la recolección de residuos y el servicio de aseo urbano, garantizando una pronta respuesta.</p>
-                <button>Ver empresas</button>
-            </div>
-            <div class="rectangulo">
-                <img src="../static/images/alcantarilla.png" alt="Basura">
-                <h3>Servicio de Agua y Alcantarillado</h3>
-                <p>Manejamos quejas sobre obstrucciones, malos olores o problemas en el sistema de alcantarillado, agilizando su resolución.</p>
-                <button>Ver empresas</button>
+        </div>
+        <!-- Rectángulo 4 -->
+        <div class="rectangulo">
+            <div class="card">
+                <div class="card-front">
+                    <img src="../static/images/alcantarilla.png" alt="Basura">
+                    <h3>Servicio de Agua y Alcantarillado</h3>
+                    <p>Manejamos quejas sobre obstrucciones, malos olores o problemas en el sistema de alcantarillado, agilizando su resolución.</p>
+                </div>
+                <div class="card-back">
+                    <h3>Lista de Empresas</h3>
+                    <ul>
+                        <li>Aguas de la Sabana</li>
+                        <li>Aguas del Valle</li>
+                        <li>EPM (Empresas Públicas de Medellín)</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
+</div>
+
 
     <!--Footer -->
     <footer>
@@ -137,5 +187,16 @@
             </div>
         </div>
     </footer>
+
+     <!-- Aquí va tu script JavaScript -->
+     <script>
+        // Agrega un evento de clic en cada botón para voltear la tarjeta
+        document.querySelectorAll('.ver-empresas').forEach(button => {
+            button.addEventListener('click', function() {
+                const card = this.closest('.card');
+                card.style.transform = card.style.transform === 'rotateY(180deg)' ? 'rotateY(0deg)' : 'rotateY(180deg)';
+            });
+        });
+    </script>
 </body>
 </html>

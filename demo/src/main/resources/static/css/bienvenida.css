@@ -123,12 +123,13 @@
     margin-top: 20px;
 }
 .rectangulo {
-    background-color: #ffffff;
+    background-color: #2C9494;
     border-radius: 15px;
     padding: 15px;
     width: 35%;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     text-align: center;
+    perspective: 1000px;
 }
 .rectangulo img {
     width: 40px;
@@ -145,7 +146,7 @@
 }
 .rectangulo button {
     background-color: #1A4D4D;
-    color: white;
+    color: rgb(142, 26, 26);
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
@@ -153,5 +154,66 @@
     margin-top: 10px;
 }
 .rectangulo button:hover {
+    background-color: #155F5F;
+}
+
+.card {
+    width: 100%;
+    height: 300px; /* Altura de la tarjeta */
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s; /* Animación de flip */
+}
+
+.card:hover {
+    transform: rotateY(180deg); /* Al pasar el ratón se voltea la tarjeta */
+}
+
+.card-front, .card-back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden; /* Oculta la cara trasera cuando no está visible */
+    padding: 20px;
+    text-align: center;
+    border-radius: 15px;
+}
+
+.card-front {
+    background-color: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card-back {
+    background-color: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transform: rotateY(180deg); /* Voltea la cara trasera */
+    padding-top: 20px;
+}
+
+.card-back ul {
+    list-style: none;
+    padding: 0;
+    color: #333;
+}
+
+.card-back li {
+    font-size: 16px;
+    margin: 5px 0;
+}
+
+button.ver-empresas {
+    background-color: #1A4D4D;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button.ver-empresas:hover {
     background-color: #155F5F;
 }
