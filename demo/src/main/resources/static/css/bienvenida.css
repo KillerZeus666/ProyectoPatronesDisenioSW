@@ -111,6 +111,7 @@
     font-size: 18px;
     margin-top: 10px;
     color: #333;
+    margin-bottom: 15px;
 }
 .contenedor-rectangulos {
     display: flex;
@@ -149,6 +150,7 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    margin-top: 10px;
 }
 .rectangulo button:hover {
     background-color: #155F5F;
