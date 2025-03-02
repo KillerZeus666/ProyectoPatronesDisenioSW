@@ -1,0 +1,99 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+/* Título principal */
+h1 {
+    text-align: center;
+    font-size: 23;
+    margin: 30px 0;
+}
+
+/* Estilo para los tabs */
+.tabs {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.tab {
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: #f4f4f4;
+    margin: 0 5px;
+    border-radius: 5px;
+    font-size: 1.2rem;
+}
+
+.tab:hover, .active {
+    background-color: #2C9494;
+    color: white;
+}
+
+/* Sección de empresas */
+.empresa-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Centra las empresas horizontalmente */
+    padding: 20px;
+}
+/* Sección de empresas */
+.empresa-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Centra las empresas horizontalmente */
+    padding: 20px;
+    background-color: rgba(44, 148, 148, 0.6); /* Fondo de la sección */
+}
+
+.empresa {
+    display: flex;
+    align-items: center;
+    background-color: white; /* Fondo blanco para cada empresa */
+    border-radius: 10px;
+    margin: 10px 0;
+    width: 80%;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+.empresa img {
+    width: 50px;
+    height: 50px;
+    margin-right: 15px;
+}
+
+.empresa-info {
+    flex: 1;
+}
+
+.empresa-info h3 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.empresa-info p {
+    margin: 5px 0;
+    font-size: 1rem;
+}
+
+.boton-queja {
+    padding: 10px 20px;
+    background-color: #2C9494;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.boton-queja:hover {
+    background-color: #1e6e6e;
+}
