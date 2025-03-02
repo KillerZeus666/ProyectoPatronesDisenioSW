@@ -45,3 +45,52 @@
     height: auto;
     border-radius: 10px; /* Opcional: redondea las esquinas de la imagen */
 }
+/*Funcionalidades Estilo para la sección */
+.funcionalidades {
+    background-color: rgba(44, 148, 148, 0.7); /* Fondo con opacidad */
+    padding: 40px;
+    text-align: center;
+    color: rgb(0, 0, 0);
+}
+
+/* Contenedor de las tarjetas */
+.tarjetas-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 tarjetas por fila */
+    gap: 10px;
+    justify-items: center;
+    margin-top: 20px;
+}
+
+/* Estilo de cada tarjeta */
+.tarjeta {
+    background-color: rgba(255, 255, 255, 0.8); /* Fondo claro con opacidad */
+    border-radius: 10px;
+    width: 250px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+    margin: 0; /* Elimina cualquier margen */
+
+}
+
+.tarjeta:hover {
+    transform: scale(1.05); /* Efecto al pasar el ratón */
+}
+
+.tarjeta img {
+    width: 100%;
+    border-radius: 5px;
+    height: 150px;
+    object-fit: cover;
+}
+
+.tarjeta h3 {
+    margin: 15px 0;
+}
+
+.tarjeta p {
+    font-size: 0.9em;
+    color: #333;
+}
