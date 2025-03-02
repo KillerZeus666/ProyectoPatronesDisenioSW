@@ -1,14 +1,11 @@
 package com.proyecto.demo.repositorio;
 
 import com.proyecto.demo.entidad.Empresa;
+
 import org.springframework.stereotype.Repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+
 @Repository
-public class EmpresaRepository {
-    
-    /*
-    public Empresa findById(int id){
-    return empresa.get(id); 
-    }
-    */
+public interface EmpresaRepository extends JpaRepository<Empresa, Long> {
 }

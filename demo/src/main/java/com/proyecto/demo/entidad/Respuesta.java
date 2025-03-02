@@ -21,6 +21,10 @@ public class Respuesta {
     @JoinColumn(name = "empresa_id") // Asegúrate de que el nombre coincida con la base de datos
     private Empresa empresa;
 
+    @OneToOne
+    @JoinColumn(name = "queja_id")
+    private Queja queja;
+
     // Constructor vacío
     public Respuesta() {}
 
@@ -29,6 +33,14 @@ public class Respuesta {
         this.fecha = fecha;
         this.descripcion = descripcion;
         this.empresa = empresa;
+    }
+
+
+    public Respuesta(Date fechaRespuesta, String descripcion, Empresa empresa, Queja queja) {
+        this.fecha = fechaRespuesta;
+        this.descripcion = descripcion;
+        this.empresa = empresa;
+        this.queja = queja;
     }
 
     // Getters

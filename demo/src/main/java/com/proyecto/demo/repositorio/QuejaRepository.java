@@ -9,7 +9,7 @@ import java.util.List;
 public interface QuejaRepository extends JpaRepository<Queja, Long> {
 
     List<Queja> findByUsuario_Cedula(Long cedula);
-    List<Queja> findByServicio_Usuario_Cedula(Long cedula);
+    //List<Queja> findByServicio_Usuario_Cedula(Long cedula);
 
 
 

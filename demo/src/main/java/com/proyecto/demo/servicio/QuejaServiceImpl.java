@@ -35,6 +35,6 @@ public class QuejaServiceImpl implements QuejaService {
 
     @Override
     public List<Queja> verQuejasPorUsr(Long cedula) {
-        return quejaRepository.findByServicio_Usuario_Cedula(cedula);
+        return quejaRepository.findByUsuario_Cedula(cedula);
     }
 }
