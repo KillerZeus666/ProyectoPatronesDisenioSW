@@ -1,0 +1,47 @@
+/* Reset de márgenes y padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilo para la sección */
+.gestion {
+    display: flex;
+    flex-direction: row; /* Organiza los elementos de manera horizontal */
+    align-items: center; /* Centra los elementos verticalmente */
+    justify-content: center; /* Centra todo el contenido dentro de la sección */
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px; /* Opcional: agrega bordes redondeados */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Opcional: agrega sombra */
+    margin: 20px auto; /* Centra la sección en la página y da espacio arriba y abajo */
+    width: 90%; /* Controla el ancho de la sección, ajusta según lo necesites */
+    text-align: center; /* Centra el texto en la sección */
+}
+
+/* Estilo para el contenido de la izquierda */
+.gestion .contenido {
+    flex: 1; /* Toma todo el espacio disponible en el contenedor */
+    margin-right: 20px; /* Espacio entre el texto y la imagen */
+}
+
+/* Estilo para el título */
+.gestion h2 {
+    color: #4B9B9D; /* Color del título */
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+/* Estilo para el párrafo */
+.gestion p {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/* Estilo para la imagen a la derecha */
+.gestion .imagen img {
+    width: 40%; /* Ajusta el tamaño de la imagen (puedes cambiar este valor) */
+    height: auto;
+    border-radius: 10px; /* Opcional: redondea las esquinas de la imagen */
+}
