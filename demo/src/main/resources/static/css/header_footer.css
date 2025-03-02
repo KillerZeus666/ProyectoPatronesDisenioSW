@@ -1,0 +1,37 @@
+/* Elimina márgenes y rellenos predeterminados */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilos para el header */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #2C9494;
+    padding: 20px;
+    width: 100%; /* Asegura que el header ocupe todo el ancho de la página */
+}
+
+/* Estilos para la barra de navegación */
+nav {
+    display: flex;
+    gap: 20px;
+}
+
+nav a {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    font-size: 18px;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* Estilo para el logo */
+.logo img {
+    height: 50px; /* Ajusta el tamaño del logo según sea necesario */
+}
