@@ -39,6 +39,9 @@ document.getElementById("Buscar").addEventListener("click", function() {
                         <p class="fecha">${queja.fecha}</p>
                     </div>
                 </div>
+
+                 <!-- Botón para responder -->
+                 <button class="btn-responder">Responder</button>
             `;
             contenedorResultados.appendChild(tarjeta);
         });

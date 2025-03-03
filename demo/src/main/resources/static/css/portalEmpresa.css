@@ -45,6 +45,7 @@ button:hover {
     flex-wrap: wrap;
     justify-content: center;
     gap: 15px;
+    margin-bottom: 50px;
 }
 
 .tarjeta {
@@ -102,4 +103,21 @@ button:hover {
 .fecha {
     font-size: 12px;
     color: gray;
+}
+
+.btn-responder {
+    display: block;
+    width: fit-content;
+    margin: 10px auto; /* Centra horizontalmente */
+    padding: 8px 16px;
+    background-color: #2a7a7a;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.btn-responder:hover {
+    background-color:#2C9494;
 }
