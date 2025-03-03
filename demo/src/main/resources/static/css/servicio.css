@@ -48,9 +48,9 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center; /* Centra las empresas horizontalmente */
+    justify-content: center; 
     padding: 20px;
-    background-color: rgba(44, 148, 148, 0.6); /* Fondo de la sección */
+    background-color: rgba(44, 148, 148, 0.6);
 }
 
 .empresa {
