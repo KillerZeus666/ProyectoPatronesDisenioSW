@@ -26,7 +26,7 @@
     <h2>Selecciona la empresa</h2>
 
     <div class="contenedor">
-        <select>
+        <select id="empresa">
             <option>EmCali</option>
             <option>Acueducto</option>
             <option>Condensa</option>
@@ -36,9 +36,12 @@
             <option>Epm</option>
             <option>Aguas de la Sabana</option>
         </select>
-        <button>Buscar</button>
+        <button id="Buscar">Buscar</button>
     </div>
+    
 
+    <!-- Contenedor donde se mostrarán las tarjetas -->
+    <div id="resultados"></div>
 
     <!-- Footer -->
     <footer>
@@ -60,5 +63,6 @@
         </div>
     </footer>
 
+    <script src="../static/scripts/portalEmpresa.js" defer></script>
 </body>
 </html>
