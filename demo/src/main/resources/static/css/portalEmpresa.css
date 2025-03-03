@@ -1,0 +1,40 @@
+h1 {
+    color: #2C9494;
+    text-align: center;
+    margin-bottom: 10px;
+}
+h2 {
+    color: #4A4A4A;
+    text-align: center;
+    margin-bottom: 20px; 
+}
+.contenedor {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Alinea verticalmente */
+    gap: 10px; /* Ajusta la separación entre select y botón */
+}
+
+select, button {
+    padding: 10px 15px; /* Mismo padding */
+    font-size: 14px; /* Mismo tamaño de fuente */
+    width: 150px; /* Mismo ancho */
+    height: 40px; /* Misma altura */
+}
+
+select {
+    border: 1px solid #ccc; /* Opcional, para que se vea mejor */
+    border-radius: 5px;
+}
+
+button {
+    background-color: #2a7a7a;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #2C9494;
+}
