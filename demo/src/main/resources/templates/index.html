@@ -4,18 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pagina de Inicio</title>
-    <link rel="stylesheet" href="../static/css/header_footer.css">
-    <link rel="stylesheet" href="../static/css/bienvenida.css">
+    <link rel="stylesheet" th:href="@{/css/header_footer.css(v=${#dates.createNow().getTime()})}">
+    <link rel="stylesheet" th:href="@{/css/bienvenida.css(v=${#dates.createNow().getTime()})}">
 
 </head>
 <body>
     <!-- Header con logo y barra de navegación -->
     <header>
         <div class="logo">
-            <img src="../static/images/logo.png" alt="Logo">
+            <img src="https://i.postimg.cc/4NzHq4j1/logo.png" alt="Logo">
         </div>
         <nav>
-            <a href="index.html">Inicio</a>
+            <a th:href="@{/index}">Inicio</a>
+            <a th:href="@{/servicio}">Empresas</a>
             <a href="servicio.html">Empresas</a>
             <a href="portalUsuario.html">Portal Usuario</a>
             <a href="portalEmpresa.html">Portal Empresa</a>
@@ -31,7 +32,7 @@
             <p>Les damos la bienvenida al portal Onmichannel. A través de este espacio, la ciudadanía podrá radicar de manera respetuosa sus quejas relacionadas a una entidad; así como, hacer seguimiento de las mismas.</p>
         </div>
         <div class="imagen">
-            <img src="../static/images/image.png" alt="Imagen ilustrativa">
+            <img src="https://i.postimg.cc/gk96gLtJ/image.png" alt="Imagen ilustrativa">
         </div>
     </section>
     
@@ -44,42 +45,42 @@
         <div class="tarjetas-container">
             <!-- Tarjeta 1 -->
             <div class="tarjeta">
-                <img src="../static/images/queja.jpeg" alt="Funcionalidad 1">
+                <img src="https://i.postimg.cc/cLhg19xg/queja.jpg" alt="Funcionalidad 1">
                 <h3>Recepción de Quejas</h3>
                 <p>Presente sus quejas a través de correo electrónico, sitio web o aplicación móvil, garantizando accesibilidad y facilidad de uso.</p>
             </div>
 
             <!-- Tarjeta 2 -->
             <div class="tarjeta">
-                <img src="../static/images/enrutamiento.jpg" alt="Enrutamiento Inteligente">
+                <img src="https://i.postimg.cc/PqfDmG3Q/enrutamiento.jpg" alt="Enrutamiento Inteligente">
                 <h3>Enrutamiento Inteligente</h3>
                 <p>El sistema dirige cada queja a la empresa correspondiente automáticamente.</p>
             </div>
 
             <!-- Tarjeta 3 -->
             <div class="tarjeta">
-                <img src="../static/images/unificar.jpeg" alt="Unificación automática">
+                <img src="https://i.postimg.cc/RF6NRvcK/unificar.jpg" alt="Unificación automática">
                 <h3>Unificación automática</h3>
                 <p>El sistema agrupa quejas provenientes del mismo ciudadano u hogar, evitando duplicidades y optimizando la gestión.</p>
             </div>
 
             <!-- Tarjeta 4 -->
             <div class="tarjeta">
-                <img src="../static/images/semafoto.jpg" alt="Semáforo de Vencimiento">
+                <img src="https://i.postimg.cc/25X1h1BC/semafoto.jpg" alt="Semáforo de Vencimiento">
                 <h3>Semáforo de Vencimiento</h3>
                 <p>Monitorea tiempos y alerta sobre quejas próximas a vencer.</p>
             </div>
 
             <!-- Tarjeta 5 -->
             <div class="tarjeta">
-                <img src="../static/images/tablero.jpg" alt="Tablero de Control">
+                <img src="https://i.postimg.cc/SRcRBV1K/tablero.jpg" alt="Tablero de Control">
                 <h3>Tablero de Control</h3>
                 <p>Visualiza y gestiona quejas en tiempo real con filtros personalizados.</p>
             </div>
 
             <!-- Tarjeta 6 -->
             <div class="tarjeta">
-                <img src="../static/images/lupa.jpeg" alt="Investigación Incumplimiento">
+                <img src="https://i.postimg.cc/9QCwh5hH/lupa.jpg" alt="Investigación Incumplimiento">
                 <h3>Investigación Incumplimiento</h3>
                 <p> Quejas vencidas se escalan automáticamente para su análisis.</p>
             </div>
@@ -97,7 +98,7 @@
             <div class="card">
                 <!-- Cara delantera -->
                 <div class="card-front">
-                    <img src="../static/images/gota-de-agua.png" alt="Agua">
+                    <img src="https://i.postimg.cc/6pfR260Q/gota-de-agua.png" alt="Agua">
                     <h3>Servicio de Agua</h3>
                     <p>Facilitamos la radicación y seguimiento de reportes sobre fallos en el servicio de agua potable, fugas y cortes inesperados.</p>
                 </div>
@@ -115,7 +116,7 @@
         <div class="rectangulo">
             <div class="card">
                 <div class="card-front">
-                    <img src="../static/images/energia-renovable.png" alt="Luz">
+                    <img src="https://i.postimg.cc/Kc1nq2Z9/energia-renovable.png" alt="Luz">
                     <h3>Servicio de energía</h3>
                     <p>Garantizamos la correcta gestión de quejas relacionadas con el suministro eléctrico.</p>
                 </div>
@@ -132,7 +133,7 @@
         <div class="rectangulo">
             <div class="card">
                 <div class="card-front">
-                    <img src="../static/images/bote-de-basura.png" alt="Gas">
+                    <img src="https://i.postimg.cc/BtWZNDqG/bote-de-basura.png" alt="Gas">
                     <h3>Servicio de Aseo y Residuos</h3>
                     <p>Permitimos reportar inconvenientes en la recolección de residuos y el servicio de aseo urbano, garantizando una pronta respuesta.</p>
                 </div>
@@ -149,7 +150,7 @@
         <div class="rectangulo">
             <div class="card">
                 <div class="card-front">
-                    <img src="../static/images/alcantarilla.png" alt="Basura">
+                    <img src="https://i.postimg.cc/1RbDbjXy/alcantarilla.png" alt="Basura">
                     <h3>Servicio de Agua y Alcantarillado</h3>
                     <p>Manejamos quejas sobre obstrucciones, malos olores o problemas en el sistema de alcantarillado, agilizando su resolución.</p>
                 </div>
@@ -170,17 +171,17 @@
     <footer>
         <div class="footer-content">
             <div class="logo-footer">
-                <img src="../static/images/logo.png" alt="Logo">
+                <img src="https://i.postimg.cc/4NzHq4j1/logo.png" alt="Logo">
             </div>
             <div class="social-icons">
                 <a href="#" target="_blank">
-                    <img src="../static/images/github.png" alt="GitHub">
+                    <img src="https://i.postimg.cc/nhJBh9q5/github.png" alt="GitHub">
                 </a>
                 <a href="#" target="_blank">
-                    <img src="../static/images/instagram.png" alt="Instagram">
+                    <img src="https://images.vexels.com/media/users/3/137380/isolated/preview/1b2ca367caa7eff8b45c09ec09b44c16-logotipo-de-icono-de-instagram.png" alt="Instagram">
                 </a>
                 <a href="#" target="_blank">
-                    <img src="../static/images/facebook.png" alt="Facebook">
+                    <img src="https://images.vexels.com/media/users/3/137253/isolated/preview/90dd9f12fdd1eefb8c8976903944c026-logotipo-de-icono-de-facebook.png?w=360" alt="Facebook">
                 </a>
             </div>
         </div>
