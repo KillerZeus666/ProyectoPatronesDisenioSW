@@ -48,6 +48,11 @@ public class Usuario {
         this.correo = correo;
         this.contraseña = contraseña;
     }
+   // Constructor alternativo para `Profesional`
+    public Usuario(String correo, String contraseña) {
+        this.correo = correo;
+        this.contraseña = contraseña;
+    }
 
     // Getters
     public Long getId() {

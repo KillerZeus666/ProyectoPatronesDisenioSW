@@ -6,5 +6,6 @@ import com.proyecto.demo.entidad.Usuario;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
-    // Si necesitas métodos personalizados, agrégalos aquí.
+
+    Usuario findByCorreoAndContraseña(String correo, String contraseña);
 }

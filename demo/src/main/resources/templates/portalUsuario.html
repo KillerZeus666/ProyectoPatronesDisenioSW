@@ -5,6 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Servicio</title>
         <link rel="stylesheet" th:href="@{/css/header_footer.css(v=${#dates.createNow().getTime()})}">
+        <link rel="stylesheet" th:href="@{/css/login.css(v=${#dates.createNow().getTime()})}">
+
     </head>
 <body>
     <!-- Header con logo y barra de navegación -->
@@ -20,6 +22,30 @@
             <a th:href="@{/portalAdmin}">Portal Administrador</a>            
         </nav>
     </header>
+
+    <!-- Iniciar Sesion -->
+
+    <section class="formularioLogin">
+            <div class="formularioContainer">
+                <h2>Iniciar Sesión</h2>
+                <form th:action="@{/inicio_sesion}" method="POST">
+                <label for="correo">Usuario:</label>
+                    <input type="text" id="correo" name="correo" placeholder="Ingresa tu correo" required>
+        
+                    <label for="contraseña">Contraseña:</label>
+                    <input type="contraseña" id="contraseña" name="contraseña" placeholder="Ingresa tu contraseña" required>
+        
+                    <button type="submit">Ingresar</button>
+
+                    <!-- Mensaje de error -->
+                <p th:if="${error}" style="color: red;">[[${error}]]</p>
+
+                
+                
+                </form>
+            </div>
+
+        </section>
 
 <!--Footer -->
 <footer>

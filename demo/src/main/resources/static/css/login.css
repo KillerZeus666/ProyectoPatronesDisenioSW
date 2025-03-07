@@ -1,0 +1,134 @@
+/* Contenedor principal del formulario */
+.formularioLogin {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 10px; 
+    background-color: #f9f9f9;
+}
+.formularioRegistro {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #f9f9f9;
+    padding: 20px;
+}
+
+/* Contenedor del formulario */
+.formularioContainer {
+    background: white;
+    margin: 0 auto; /* Centrado sin margen extra */
+    max-width: 400px;
+    padding: 40px; /* Más espacio interno */
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 450px; /* Aumenta el tamaño del formulario */
+    max-width: 90%; /* Evita que sea demasiado grande en pantallas pequeñas */
+}
+
+/* Títulos */
+.formularioContainer h2 {
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 24px; /* Un poco más grande */
+}
+
+/* Formulario */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Etiquetas */
+label {
+    font-weight: bold;
+    text-align: left;
+}
+
+/* Campos de entrada */
+input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Botón */
+button {
+    padding: 14px;
+    background-color: #3c5b6f;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background-color: #5e7e92;
+}
+
+/* Enlace de registro */
+.registro {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.registro a {
+    color: #5e7e92;
+    text-decoration: none;
+}
+
+.registro a:hover {
+    text-decoration: underline;
+}
+
+/* Estilos para el formulario de selección de tipo de usuario */
+label {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 8px;
+    display: block;
+    color: #333;
+}
+
+select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #fff;
+    color: #555;
+    cursor: pointer;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+select:focus {
+    border-color: #000000;  
+}
+
+option {
+    padding: 10px;
+    font-size: 1rem;
+    background-color: #fff;
+    color:  #3c5b6f;
+}
+
+/* Diseño de los campos cuando el formulario es grande (responsive) */
+@media (max-width: 600px) {
+    label {
+        font-size: 1rem;
+    }
+
+    select {
+        font-size: 0.9rem;
+        padding: 10px;
+    }
+}
