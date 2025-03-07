@@ -16,4 +16,17 @@ public class WindowController {
     public String mostrarPaginaServicio() {
         return "servicio";
     }
+
+    @GetMapping("/portalEmpresa")
+    public String mostrarPortalEmpresa() {
+        return "portalEmpresa";
+    }
+    @GetMapping("/portalUsuario")
+    public String mostrarPortalUsuario() {
+        return "portalUsuario";
+    }
+    @GetMapping("/portalAdmin")
+    public String mostrarPortalAdmin() {
+        return "portalAdministrador";
+    }
 }

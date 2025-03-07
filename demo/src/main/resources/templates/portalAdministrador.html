@@ -4,43 +4,43 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Servicio</title>
-        <link rel="stylesheet" href="../static/css/header_footer.css">
-        <link rel="stylesheet" href="../static/css/servicio.css">
+        <link rel="stylesheet" th:href="@{/css/header_footer.css(v=${#dates.createNow().getTime()})}">
     </head>
 <body>
     <!-- Header con logo y barra de navegación -->
     <header>
         <div class="logo">
-            <img src="../static/images/logo.png" alt="Logo">
+            <img src="https://i.postimg.cc/4NzHq4j1/logo.png" alt="Logo">
         </div>
         <nav>
-            <a href="index.html">Inicio</a>
-            <a href="servicio.html">Empresas</a>
-            <a href="portalUsuario.html">Portal Usuario</a>
-            <a href="portalEmpresa.html">Portal Empresa</a>
-            <a href="portalAdministrador.html">Portal Administrador</a>
+            <a th:href="@{/index}">Inicio</a>
+            <a th:href="@{/servicio}">Empresas</a>
+            <a th:href="@{/portalUsuario}">Portal Usuario</a>
+            <a th:href="@{/portalEmpresa}">Portal Empresa</a>
+            <a th:href="@{/portalAdmin}">Portal Administrador</a>            
         </nav>
     </header>
 
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="logo-footer">
-                <img src="../static/images/logo.png" alt="Logo">
-            </div>
-            <div class="social-icons">
-                <a href="#" target="_blank">
-                    <img src="../static/images/github.png" alt="GitHub">
-                </a>
-                <a href="#" target="_blank">
-                    <img src="../static/images/instagram.png" alt="Instagram">
-                </a>
-                <a href="#" target="_blank">
-                    <img src="../static/images/facebook.png" alt="Facebook">
-                </a>
-            </div>
+  <!--Footer -->
+  <footer>
+    <div class="footer-content">
+        <div class="logo-footer">
+            <img src="https://i.postimg.cc/4NzHq4j1/logo.png" alt="Logo">
         </div>
-    </footer>
+        <div class="social-icons">
+            <a href="#" target="_blank">
+                <img src="https://i.postimg.cc/nhJBh9q5/github.png" alt="GitHub">
+            </a>
+            <a href="#" target="_blank">
+                <img src="https://images.vexels.com/media/users/3/137380/isolated/preview/1b2ca367caa7eff8b45c09ec09b44c16-logotipo-de-icono-de-instagram.png" alt="Instagram">
+            </a>
+            <a href="#" target="_blank">
+                <img src="https://images.vexels.com/media/users/3/137253/isolated/preview/90dd9f12fdd1eefb8c8976903944c026-logotipo-de-icono-de-facebook.png?w=360" alt="Facebook">
+            </a>
+        </div>
+    </div>
+</footer>
+
 
 </body>
 </html>
