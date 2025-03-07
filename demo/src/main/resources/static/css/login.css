@@ -61,7 +61,7 @@ input {
 /* Botón */
 button {
     padding: 14px;
-    background-color: #3c5b6f;
+    background-color:#4bb7b7 ;
     color: white;
     border: none;
     border-radius: 5px;
@@ -71,7 +71,7 @@ button {
 }
 
 button:hover {
-    background-color: #5e7e92;
+    background-color:#2C9494 ;
 }
 
 /* Enlace de registro */

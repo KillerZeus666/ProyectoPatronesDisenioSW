@@ -31,15 +31,15 @@ public class WindowController {
 
     @GetMapping("/portalEmpresa")
     public String mostrarPortalEmpresa() {
-        return "portalEmpresa";
+        return "inicio_sesion";
     }
     @GetMapping("/portalUsuario")
     public String mostrarPortalUsuario() {
-        return "portalUsuario";
+        return "inicio_sesion";
     }
     @GetMapping("/portalAdmin")
     public String mostrarPortalAdmin() {
-        return "portalAdministrador";
+        return "inicio_sesion";
     }
 
 
