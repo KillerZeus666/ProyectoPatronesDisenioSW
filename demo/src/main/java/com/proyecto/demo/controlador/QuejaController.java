@@ -5,7 +5,6 @@ import com.proyecto.demo.servicio.QuejaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -17,13 +16,17 @@ public class QuejaController {
 
     // Endpoint para registrar una queja
     @PostMapping("/registrar")
-    public Queja registrarQueja(@RequestParam Long id, 
-                                @RequestParam Date fecha, 
-                                @RequestParam String tipo, 
-                                @RequestParam String descripcion, 
-                                @RequestParam Long idServicio) {
-        return quejaService.registrarQueja(id, fecha, tipo, descripcion, idServicio);
-    }
+    public Queja registrarQueja(@RequestBody QuejaRequest request) {
+        return quejaService.registrarQueja(
+            request.getFecha(),
+            request.getTipo(),
+            request.getDescripcion(),
+            request.getIdServicio(),
+            request.getIdEmpresa(),
+            request.getIdUsuario()
+        );
+    }    
+    
 
     // Endpoint para buscar una queja por ID
     @GetMapping("/{id}")

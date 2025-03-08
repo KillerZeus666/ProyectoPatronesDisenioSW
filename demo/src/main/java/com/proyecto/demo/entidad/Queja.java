@@ -35,15 +35,6 @@ public class Queja {
     // Constructor vacío
     public Queja() {}
 
-    // Constructor con parámetros (sin id porque se autogenera)
-    public Queja(Date fecha, String tipo, String descripcion, Servicio servicio, Empresa empresa, Usuario usuario) {
-        this.fecha = fecha;
-        this.tipo = tipo;
-        this.descripcion = descripcion;
-        this.servicio = servicio;
-        this.empresa = empresa;
-        this.usuario = usuario;
-    }
 
     public Queja(Date fecha, String tipo, String descripcion, Servicio servicio, Empresa empresa) {
         this.fecha = fecha;
@@ -54,6 +45,15 @@ public class Queja {
         this.usuario = null; // Se asigna null por defecto
     }
     
+
+    public Queja(Date fecha, String tipo, String descripcion, Servicio servicio, Empresa empresa, Usuario usuario) {
+        this.fecha = fecha;
+        this.tipo = tipo;
+        this.descripcion = descripcion;
+        this.servicio = servicio;
+        this.empresa = empresa;
+        this.usuario = usuario;
+    }
 
     // Getters y Setters
     public Long getId() {
