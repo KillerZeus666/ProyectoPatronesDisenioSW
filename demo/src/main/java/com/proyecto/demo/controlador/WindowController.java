@@ -31,15 +31,15 @@ public class WindowController {
 
     @GetMapping("/portalEmpresa")
     public String mostrarPortalEmpresa() {
-        return "inicio_sesion";
+        return "portalEmpresa";
     }
     @GetMapping("/portalUsuario")
     public String mostrarPortalUsuario() {
-        return "inicio_sesion";
+        return "portalUsuario";
     }
     @GetMapping("/portalAdmin")
     public String mostrarPortalAdmin() {
-        return "inicio_sesion";
+        return "portalAdministrador";
     }
 
 
@@ -56,7 +56,7 @@ public class WindowController {
     
         // Guardar la cédula en la sesión
         session.setAttribute("cedula", usuario.getCedula());
-        return "portalUsuario"; 
+        return "index"; 
     }
     
     

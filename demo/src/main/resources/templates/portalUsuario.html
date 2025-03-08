@@ -24,9 +24,28 @@
     </header>
 
     <!-- Iniciar Sesion -->
-     <h1>Bienvenido Usuario</h1>
 
+    <section class="formularioLogin">
+            <div class="formularioContainer">
+                <h2>Iniciar Sesión</h2>
+                <form th:action="@{/inicio_sesion}" method="POST">
+                <label for="correo">Correo:</label>
+                    <input type="text" id="correo" name="correo" placeholder="Ingresa tu correo" required>
+        
+                    <label for="contraseña">Contraseña:</label>
+                    <input type="contraseña" id="contraseña" name="contraseña" placeholder="Ingresa tu contraseña" required>
+        
+                    <button type="submit">Ingresar</button>
 
+                    <!-- Mensaje de error -->
+                <p th:if="${error}" style="color: red;">[[${error}]]</p>
+
+                
+                
+                </form>
+            </div>
+
+        </section>
 
 <!--Footer -->
 <footer>
