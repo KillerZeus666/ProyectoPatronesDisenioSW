@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Quejas</title>
+    <link rel="stylesheet" th:href="@{/css/header_footer.css(v=${#dates.createNow().getTime()})}">
+    <link rel="stylesheet" th:href="@{/css/list.css(v=${#dates.createNow().getTime()})}">
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <div class="logo">
+        <img src="https://i.postimg.cc/4NzHq4j1/logo.png" alt="Logo">
+      </div>
+      <nav>
+        <a th:href="@{/index}">Inicio</a>
+        <a th:href="@{/servicio}">Empresas</a>
+        <a th:href="@{/portalUsuario}">Portal Usuario</a>
+        <a th:href="@{/portalEmpresa}">Portal Empresa</a>
+        <a th:href="@{/portalAdmin}">Portal Administrador</a>            
+      </nav>
+    </header>
+    
+    <!-- Sección de listado de quejas -->
+    <section class="quejas-container">
+      <h1>Mis Quejas</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Fecha</th>
+            <th>Tipo</th>
+            <th>Descripción</th>
+            <th>Servicio</th>
+            <th>Empresa</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Itera sobre la lista de quejas enviada en el modelo -->
+          <tr th:each="queja : ${quejas}">
+            <td th:text="${queja.id}">1</td>
+            <td th:text="${#dates.format(queja.fecha, 'yyyy-MM-dd')}">2025-01-01</td>
+            <td th:text="${queja.tipo}">Reclamo</td>
+            <td th:text="${queja.descripcion}">Descripción de la queja</td>
+            <td th:text="${queja.servicio != null ? queja.servicio.id : 'N/A'}">Servicio</td>
+            <td th:text="${queja.empresa != null ? queja.empresa.id : 'N/A'}">Empresa</td>
+          </tr>
+        </tbody>
+      </table>
+      <!-- Enlace para volver a las opciones del ciudadano -->
+      <a class="btn" th:href="@{/opcionesCiudadano}">Volver a Opciones</a>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+      <div class="footer-content">
+        <div class="logo-footer">
+          <img src="https://i.postimg.cc/4NzHq4j1/logo.png" alt="Logo">
+        </div>
+        <div class="social-icons">
+          <a href="#" target="_blank">
+            <img src="https://i.postimg.cc/nhJBh9q5/github.png" alt="GitHub">
+          </a>
+          <a href="#" target="_blank">
+            <img src="https://images.vexels.com/media/users/3/137380/isolated/preview/1b2ca367caa7eff8b45c09ec09b44c16-logotipo-de-icono-de-instagram.png" alt="Instagram">
+          </a>
+          <a href="#" target="_blank">
+            <img src="https://images.vexels.com/media/users/3/137253/isolated/preview/90dd9f12fdd1eefb8c8976903944c026-logotipo-de-icono-de-facebook.png?w=360" alt="Facebook">
+          </a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

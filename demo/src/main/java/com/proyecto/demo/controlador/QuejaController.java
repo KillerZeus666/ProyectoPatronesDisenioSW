@@ -1,13 +1,20 @@
 package com.proyecto.demo.controlador;
 
 import com.proyecto.demo.entidad.Queja;
+import com.proyecto.demo.entidad.Usuario;
 import com.proyecto.demo.servicio.QuejaService;
+
+import jakarta.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
 
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/quejas")
 public class QuejaController {
 
@@ -16,8 +23,17 @@ public class QuejaController {
 
     // Endpoint para registrar una queja
     @PostMapping("/registrar")
-    public Queja registrarQueja(@RequestBody QuejaRequest request) {
-        return quejaService.registrarQueja(
+    public String registrarQueja(@ModelAttribute QuejaRequest request, Model model, HttpSession session) {
+        // Obtener el usuario de la sesión
+        Usuario usuarioLogueado = (Usuario) session.getAttribute("usuarioLogueado");
+        if (usuarioLogueado == null) {
+            return "redirect:/inicio_sesion"; // Redirige si no hay usuario autenticado
+        }
+        // Asigna el idUsuario obtenido de la sesión al objeto request
+        request.setIdUsuario(usuarioLogueado.getId());
+        
+        // Llama al servicio para registrar la queja
+        Queja nuevaQueja = quejaService.registrarQueja(
             request.getFecha(),
             request.getTipo(),
             request.getDescripcion(),
@@ -25,18 +41,21 @@ public class QuejaController {
             request.getIdEmpresa(),
             request.getIdUsuario()
         );
-    }    
+        return "redirect:/opcionesCiudadano"; // Redirige a la vista de opciones, por ejemplo
+    }  
     
 
     // Endpoint para buscar una queja por ID
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public Queja buscarQueja(@PathVariable Long id) {
         return quejaService.buscarQueja(id);
     }
 
-    // Endpoint para ver quejas por cédula de usuario
+    // Endpoint para listar todas las quejas    
     @GetMapping("/usuario/{cedula}")
-    public List<Queja> verQuejasPorUsr(@PathVariable Long cedula) {
-        return quejaService.verQuejasPorUsr(cedula);
+    public String verQuejasPorUsuario(@PathVariable Long cedula, Model model) {
+        List<Queja> quejas = quejaService.verQuejasPorUsr(cedula);
+        model.addAttribute("quejas", quejas);
+        return "QuejasCiudadano";  // Nombre de esta plantilla (misQuejas.html)
     }
 }
