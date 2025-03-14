@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 
 
 @RestController
@@ -17,6 +18,14 @@ public class RespuestaController {
 
     @Autowired
     private RespuestaService respuestaService;
+
+    // Mostrar la vista para generar la respuesta con los datos de la queja y la empresa
+    @GetMapping("/registrar")
+    public String mostrarFormulario(@RequestParam Long idQueja, @RequestParam Long idEmpresa, Model model) {
+        model.addAttribute("idQueja", idQueja);
+        model.addAttribute("idEmpresa", idEmpresa);
+        return "respuestaEmpresa";  // Redirige a la vista respuestaempresa.html
+    }
 
     // Endpoint para registrar una respuesta
     @PostMapping("/registrar")
