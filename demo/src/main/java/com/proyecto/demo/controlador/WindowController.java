@@ -8,10 +8,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.proyecto.demo.entidad.Empresa;
 import com.proyecto.demo.entidad.Queja;
 import com.proyecto.demo.entidad.Usuario;
 import com.proyecto.demo.servicio.QuejaService;
 import com.proyecto.demo.servicio.UsuarioService;
+import com.proyecto.demo.servicio.EmpresaService;
+
 
 import jakarta.servlet.http.HttpSession;
 
@@ -24,6 +27,9 @@ public class WindowController {
 
     @Autowired
     private QuejaService quejaService;
+
+    @Autowired
+    private EmpresaService empresaService;
 
     @GetMapping("/index")
     public String mostrarPaginaIndex() {
@@ -54,8 +60,9 @@ public class WindowController {
                                 @RequestParam("contraseña") String contraseña,
                                 Model model, HttpSession session) {
         Usuario usuario = usuarioService.validarUsuario(correo, contraseña);
+        Empresa empresa= empresaService.validarEmpresa(correo, contraseña);
     
-        if (usuario == null) { 
+        if (usuario == null && empresa == null) { 
             model.addAttribute("error", "Correo o contraseña incorrectos");
             return "portalUsuario"; 
         }

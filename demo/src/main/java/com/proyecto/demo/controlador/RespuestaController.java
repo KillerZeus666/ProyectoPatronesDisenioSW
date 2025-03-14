@@ -4,6 +4,9 @@ import com.proyecto.demo.entidad.Respuesta;
 import com.proyecto.demo.servicio.RespuestaService;
 
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -21,7 +24,7 @@ public class RespuestaController {
                                         @RequestParam String descripcion,
                                         @RequestParam Long idEmpresa, 
                                         @RequestParam Long idQueja) {
-        return respuestaService.registrarRespuesta(id, descripcion, idEmpresa, idQueja);
+        return respuestaService.registrarRespuesta( descripcion, idEmpresa, idQueja);
     }
 
     // Endpoint para obtener una respuesta por ID
@@ -32,18 +35,15 @@ public class RespuestaController {
 
     // Endpoint para ver respuestas por ID de queja
     @GetMapping("/queja/{id}")
-    public Respuesta verRespuestasPorQueja(@PathVariable Long id) {
+    public List<Respuesta> verRespuestasPorQueja(@PathVariable Long id) {
         return respuestaService.verRespuestasPorQueja(id);
     }
 
     // Endpoint para obtener respuestas por empresa
     @GetMapping("/empresa/{id}")
-    public Respuesta obtenerRespuestasPorEmpresa(@PathVariable Long id) {
+    public List<Respuesta> obtenerRespuestasPorEmpresa(@PathVariable Long id) {
         return respuestaService.buscarRespuestasPorEmpresa(id);
     }
     
-    /*@GetMapping("/info")
-    public String obtenerInfo() {
-        return "Información del usuario";
-    }*/
+  
 }

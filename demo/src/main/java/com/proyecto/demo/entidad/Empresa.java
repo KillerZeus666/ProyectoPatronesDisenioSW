@@ -14,7 +14,7 @@ public class Empresa {
     private String nombre;
 
     @Column(nullable = false)
-    private String contrasena;
+    private String contraseña;
 
     @OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL)
     private List<Servicio> servicios;
@@ -36,9 +36,9 @@ public class Empresa {
     public Empresa() {}
 
     // Constructor con parámetros
-    public Empresa(String nombre, String contrasena) {
+    public Empresa(String nombre, String contraseña) {
         this.nombre = nombre;
-        this.contrasena = contrasena;
+        this.contraseña = contraseña;
     }
 
     // Getters y Setters
@@ -58,12 +58,12 @@ public class Empresa {
         this.nombre = nombre;
     }
 
-    public String getContrasena() {
-        return contrasena;
+    public String getcontraseña() {
+        return contraseña;
     }
 
-    public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
+    public void setcontraseña(String contraseña) {
+        this.contraseña = contraseña;
     }
 
     public List<Servicio> getServicios() {
