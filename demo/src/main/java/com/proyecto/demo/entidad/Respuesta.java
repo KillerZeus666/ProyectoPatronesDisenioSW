@@ -76,4 +76,12 @@ public class Respuesta {
     public void setEmpresa(Empresa empresa) {
         this.empresa = empresa;
     }
+    public Queja getQueja() {
+        return queja;
+    }
+    
+    public void setQueja(Queja queja) {
+        this.queja = queja;
+    }
+    
 }

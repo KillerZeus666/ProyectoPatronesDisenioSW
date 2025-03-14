@@ -9,13 +9,6 @@ import java.util.List;
 public interface QuejaRepository extends JpaRepository<Queja, Long> {
 
     List<Queja> findByUsuario_Cedula(Long cedula);
-    //List<Queja> findByServicio_Usuario_Cedula(Long cedula);
+    List<Queja> findByEmpresa_Id(Long empresaId);
 
-
-
-    // Buscar una queja por ID
-    //Queja findById(long id);
-
-    // Listar todas las quejas asociadas a un usuario por su cédula
-    //List<Queja> findByServicio_Usuario_Cedula(long cedula);
 }
