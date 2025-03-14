@@ -12,6 +12,10 @@ public class Profesional extends Usuario {
     @Column(nullable = false)
     private String tipoQueja;
 
+    @OneToOne
+    @JoinColumn(name = "servicio_id", nullable = false)
+    private Servicio servicio;
+
     @OneToMany
     @JoinColumn(name = "profesional_id")
     private List<Incumplimiento> procesoIncumplimiento;
