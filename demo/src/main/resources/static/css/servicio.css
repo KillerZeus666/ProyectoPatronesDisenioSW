@@ -12,28 +12,33 @@ h1 {
     margin: 30px 0;
 }
 
-/* Estilo para los tabs */
 .tabs {
     display: flex;
-    justify-content: center;
-    padding: 10px;
+    justify-content: center; /* Centra los tabs horizontalmente */
+    align-items: center; /* Centra los tabs verticalmente */
+    gap: 10px; /* Espaciado entre tabs */
+    padding: 15px;
     border: 1px solid #ddd;
     border-radius: 5px;
+    width: fit-content; /* Ajusta el tamaño al contenido */
+    margin: 0 auto; /* Centra el contenedor de tabs */
 }
 
 .tab {
     padding: 10px 20px;
     cursor: pointer;
     background-color: #f4f4f4;
-    margin: 0 5px;
     border-radius: 5px;
     font-size: 1.2rem;
+    text-align: center;
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
 }
 
 .tab:hover, .active {
     background-color: #2C9494;
     color: white;
 }
+
 
 /* Sección de empresas */
 .empresa-container {
@@ -85,13 +90,19 @@ h1 {
 }
 
 .boton-queja {
-    padding: 10px 20px;
+    padding: 5px 15px;
     background-color: #2C9494;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    width: 100px;
     font-size: 1rem;
+    margin-top: 30px; 
+    text-align: center;
+    display: block; /* Hace que el botón respete los márgenes automáticos */
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .boton-queja:hover {

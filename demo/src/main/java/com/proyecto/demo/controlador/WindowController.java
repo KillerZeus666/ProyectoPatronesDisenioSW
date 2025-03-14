@@ -66,11 +66,16 @@ public class WindowController {
             model.addAttribute("error", "Correo o contraseña incorrectos");
             return "portalUsuario"; 
         }
-    
-        // Guardar el usuario completo en la sesión
-        session.setAttribute("usuarioLogueado", usuario);
-        // Redirigir a la pantalla de opciones del ciudadano
-        return "redirect:/opcionesCiudadano";
+        if (empresa != null) {
+            // Guardar ID y nombre de la empresa en la sesión
+            session.setAttribute("empresaId", empresa.getId());
+            session.setAttribute("empresaNombre", empresa.getNombre());
+            return "redirect:/portalEmpresa"; // Redirigir a la vista de empresa
+        } else {
+            // Guardar el usuario completo en la sesión
+            session.setAttribute("usuarioLogueado", usuario);
+            return "redirect:/opcionesCiudadano"; // Redirigir a la vista del usuario
+        }
     }
     
 
