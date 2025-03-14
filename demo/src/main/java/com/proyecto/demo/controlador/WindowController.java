@@ -70,8 +70,12 @@ public class WindowController {
             // Guardar ID y nombre de la empresa en la sesión
             session.setAttribute("empresaId", empresa.getId());
             session.setAttribute("empresaNombre", empresa.getNombre());
+        
+            // Imprimir en consola para verificar si se guarda correctamente
+            System.out.println("Empresa guardada en sesión: " + empresa.getNombre());
+        
             return "redirect:/portalEmpresa"; // Redirigir a la vista de empresa
-        } else {
+        }else {
             // Guardar el usuario completo en la sesión
             session.setAttribute("usuarioLogueado", usuario);
             return "redirect:/opcionesCiudadano"; // Redirigir a la vista del usuario

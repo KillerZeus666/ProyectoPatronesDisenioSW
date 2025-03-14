@@ -17,35 +17,18 @@
         <nav>
             <a th:href="@{/index}">Inicio</a>
             <a th:href="@{/servicio}">Empresas</a>
-            <a th:href="@{/portalUsuario}">Portal Usuario</a>
-            <a th:href="@{/portalEmpresa}">Portal Empresa</a>
-            <a th:href="@{/portalAdmin}">Portal Administrador</a>            
+            <a th:href="@{/portalUsuario}">Iniciar sesión</a>
         </nav>
     </header>
-    <!-- Sección Buscar Empresa -->
-    <h1>Bienvenido al Portal de las Empresas</h1>
-    <h2>Selecciona la empresa</h2>
-
-    <div class="contenedor">
-        <select id="empresa">
-            <option>EmCali</option>
-            <option>Acueducto</option>
-            <option>Condensa</option>
-            <option>InterColombia</option>
-            <option>Veolia Colombia</option>
-            <option>Aseo Capital</option>
-            <option>Epm</option>
-            <option>Aguas de la Sabana</option>
-        </select>
-        <button id="Buscar">Buscar</button>
-    </div>
+        <h1>Bienvenido al Portal de las Empresas</h1>
+        <h2 id="empresaNombre" th:text="${session.empresaNombre}">Empresa desconocida</h2>
+        
+        <!-- Botón para ver quejas de la empresa -->
+        <button id="verQuejas">Ver Quejas</button>
+        
+        <!-- Contenedor donde se mostrarán las quejas -->
+        <div id="resultados"></div>
     
-
-    <!-- Contenedor donde se mostrarán las tarjetas -->
-    <div id="resultados"></div>
-
-    <!--Bienvenida -->
-    <h1>Bienvenida Empresa</h1>
     <!--Footer -->
     <footer>
         <div class="footer-content">
