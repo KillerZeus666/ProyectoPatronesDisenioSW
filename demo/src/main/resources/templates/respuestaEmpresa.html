@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Generar Respuesta</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/header_footer.css(v=${#dates.createNow().getTime()})}">
+    <link rel="stylesheet" th:href="@{/css/form.css(v=${#dates.createNow().getTime()})}">
+</head>
+<body>
+     <!-- Header con logo y navegación -->
+     <header>
+        <div class="logo">
+            <img src="https://i.postimg.cc/4NzHq4j1/logo.png" alt="Logo">
+        </div>
+        <nav>
+            <a th:href="@{/index}">Inicio</a>
+            <a th:href="@{/servicio}">Empresas</a>
+            <a th:href="@{/portalUsuario}">Iniciar sesión</a>
+        </nav>
+    </header>
+
+    <h2>Responder Queja</h2>
+
+    <form th:action="@{/respuestas/registrar}" method="post">
+        <label>Fecha:</label>
+        <input type="datetime-local" name="fecha" required> <br>
+
+        <label>Descripción:</label>
+        <textarea name="descripcion" required></textarea> <br>
+
+        <label>ID de la Empresa:</label>
+        <input type="number" name="idEmpresa" required> <br>
+
+        <label>ID de la Queja:</label>
+        <input type="number" name="idQueja" required> <br>
+
+        <button type="submit">Enviar Respuesta</button>
+    </form>
+
+    <a href="/respuestas">Volver a la lista de respuestas</a>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="logo-footer">
+                <img src="https://i.postimg.cc/4NzHq4j1/logo.png" alt="Logo">
+            </div>
+            <div class="social-icons">
+                <a href="#" target="_blank">
+                    <img src="https://i.postimg.cc/nhJBh9q5/github.png" alt="GitHub">
+                </a>
+                <a href="#" target="_blank">
+                    <img src="https://images.vexels.com/media/users/3/137380/isolated/preview/1b2ca367caa7eff8b45c09ec09b44c16-logotipo-de-icono-de-instagram.png" alt="Instagram">
+                </a>
+                <a href="#" target="_blank">
+                    <img src="https://images.vexels.com/media/users/3/137253/isolated/preview/90dd9f12fdd1eefb8c8976903944c026-logotipo-de-icono-de-facebook.png?w=360" alt="Facebook">
+                </a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

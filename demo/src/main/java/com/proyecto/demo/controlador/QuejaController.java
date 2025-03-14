@@ -7,6 +7,7 @@ import com.proyecto.demo.servicio.QuejaService;
 import jakarta.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -57,5 +58,13 @@ public class QuejaController {
         List<Queja> quejas = quejaService.verQuejasPorUsr(cedula);
         model.addAttribute("quejas", quejas);
         return "QuejasCiudadano";  // Nombre de esta plantilla (misQuejas.html)
+    }
+
+    // Endpoint para listar todas las quejas de una empresa con su id y mostrarlas en una vista HTML
+    @GetMapping("/{empresaId}")
+    public String obtenerQuejasPorEmpresa(@PathVariable Long empresaId, Model model) {
+        List<Queja> quejas = quejaService.verQuejasPorEmpresa(empresaId);
+        model.addAttribute("quejas", quejas);
+        return "vistaQuejas"; // Nombre del archivo HTML (vistaQuejas.html)
     }
 }
