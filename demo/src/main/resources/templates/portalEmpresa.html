@@ -23,8 +23,11 @@
         <h1>Bienvenido al Portal de las Empresas</h1>
         <h2 id="empresaNombre" th:text="${session.empresaNombre}" th:data-empresa-id="${session.empresaId}">Empresa desconocida</h2>
         
-        <!-- Botón para ver quejas de la empresa -->
-        <button id="verQuejas">Ver Quejas</button>
+       <!-- Enlace que genera la URL con el empresaId de la sesión -->
+        <a th:href="@{/quejas/{empresaId}(empresaId=${session.empresaId})}">
+            <button>Ver Quejas</button>
+        </a>
+
         
         <!-- Contenedor donde se mostrarán las quejas -->
         <div id="resultados"></div>
@@ -49,6 +52,6 @@
         </div>
     </footer>
 
-    <script th:src="@{/scripts/portalEmpresa.js}" defer></script>
+    
 </body>
 </html>
