@@ -48,6 +48,7 @@ footer {
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
     justify-content: center; /* Asegura que el contenido esté centrado vertical y horizontalmente */
     padding: 20px;
     margin-top: auto; /* Hace que el footer siempre se quede al fondo */

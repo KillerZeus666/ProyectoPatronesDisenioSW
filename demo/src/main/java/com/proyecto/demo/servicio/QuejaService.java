@@ -14,5 +14,8 @@ public interface QuejaService {
 
     // Ver todas las quejas por cédula del usuario
     List<Queja> verQuejasPorUsr(Long cedula);
+
+      //Ver todas las quejas por empresa
+    List<Queja> verQuejasPorEmpresa(Long id);
 }
 

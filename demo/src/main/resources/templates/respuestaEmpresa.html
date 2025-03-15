@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Servicio</title>
-        <link rel="stylesheet" th:href="@{/css/header_footer.css(v=${#dates.createNow().getTime()})}">
-        <link rel="stylesheet" th:href="@{/css/portalEmpresa.css(v=${#dates.createNow().getTime()})}">
-
-    </head>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Generar Respuesta</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/header_footer.css(v=${#dates.createNow().getTime()})}">
+    <link rel="stylesheet" th:href="@{/css/form.css(v=${#dates.createNow().getTime()})}">
+</head>
 <body>
-    <!-- Header con logo y barra de navegación -->
+
+    <!-- Header con logo y navegación -->
     <header>
         <div class="logo">
             <img src="https://i.postimg.cc/4NzHq4j1/logo.png" alt="Logo">
@@ -20,19 +19,25 @@
             <a th:href="@{/portalUsuario}">Iniciar sesión</a>
         </nav>
     </header>
-        <h1>Bienvenido al Portal de las Empresas</h1>
-        <h2 id="empresaNombre" th:text="${session.empresaNombre}" th:data-empresa-id="${session.empresaId}">Empresa desconocida</h2>
-        
-       <!-- Enlace que genera la URL con el empresaId de la sesión -->
-        <a th:href="@{/quejas/{empresaId}(empresaId=${session.empresaId})}">
-            <button>Ver Quejas</button>
-        </a>
 
-        
-        <!-- Contenedor donde se mostrarán las quejas -->
-        <div id="resultados"></div>
-    
-    <!--Footer -->
+    <!-- Contenedor principal para centrar el contenido -->
+    <main class="container">
+        <h1>Responder Queja</h1>
+
+        <form th:action="@{/respuestas/registrar}" method="post">
+            <input type="hidden" name="idQueja" th:value="${idQueja}">
+            <input type="hidden" name="idEmpresa" th:value="${idEmpresa}">
+
+            <label for="descripcion">Respuesta:</label>
+            <textarea id="descripcion" name="descripcion" required></textarea>
+
+            <button type="submit">Enviar Respuesta</button>
+        </form>
+
+        <a href="/portalEmpresa">Volver</a>
+    </main>
+
+    <!-- Footer -->
     <footer>
         <div class="footer-content">
             <div class="logo-footer">
@@ -52,6 +57,5 @@
         </div>
     </footer>
 
-    
 </body>
 </html>

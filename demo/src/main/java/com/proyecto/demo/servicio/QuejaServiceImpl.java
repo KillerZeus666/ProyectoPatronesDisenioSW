@@ -73,4 +73,11 @@ public class QuejaServiceImpl implements QuejaService {
     public List<Queja> verQuejasPorUsr(Long cedula) {
         return quejaRepository.findByUsuario_Cedula(cedula);
     }
+
+    public List<Queja> verQuejasPorEmpresa(Long empresaId) {
+        List<Queja> quejas = quejaRepository.findByEmpresa_Id(empresaId);
+        System.out.println("Quejas encontradas para empresa " + empresaId + ": " + quejas.size());
+        return quejas;
+    }
+    
 }
