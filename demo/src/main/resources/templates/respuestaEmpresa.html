@@ -18,27 +18,23 @@
             <a th:href="@{/portalUsuario}">Iniciar sesión</a>
         </nav>
     </header>
-
-    <h2>Responder Queja</h2>
-
-    <form th:action="@{/respuestas/registrar}" method="post">
-        <label>Fecha:</label>
-        <input type="datetime-local" name="fecha" required> <br>
-
-        <label>Descripción:</label>
-        <textarea name="descripcion" required></textarea> <br>
-
-        <label>ID de la Empresa:</label>
-        <input type="number" name="idEmpresa" required> <br>
-
-        <label>ID de la Queja:</label>
-        <input type="number" name="idQueja" required> <br>
-
-        <button type="submit">Enviar Respuesta</button>
-    </form>
-
-    <a href="/respuestas">Volver a la lista de respuestas</a>
-
+    <body>
+        <h1>Responder Queja</h1>
+        
+        <form th:action="@{/respuestas/registrar}" method="post">
+            <input type="hidden" name="idQueja" th:value="${idQueja}">
+            <input type="hidden" name="idEmpresa" th:value="${idEmpresa}">
+        
+            <label for="descripcion">Respuesta:</label>
+            <textarea id="descripcion" name="descripcion" required></textarea>
+        
+            <button type="submit">Enviar Respuesta</button>
+        </form>
+        
+    
+        <a href="/portalEmpresa">Volver</a>
+    </body>
+    
     <!-- Footer -->
     <footer>
         <div class="footer-content">

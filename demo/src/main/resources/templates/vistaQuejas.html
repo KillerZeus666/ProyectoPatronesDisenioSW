@@ -39,10 +39,11 @@
                     <td th:text="${queja.descripcion}"></td>
                     <td th:text="${queja.fecha}"></td>
                     <td>
-                        <a th:href="@{/agregarRespuesta/{idQueja}(idQueja=${queja.id})}" class="btn-accion">
+                        <a th:href="@{/respuestas/registrar(idQueja=${queja.id})}" class="btn-accion">
                             Agregar Respuesta
                         </a>
                     </td>
+                    
                     
                 </tr>
             </tbody>
