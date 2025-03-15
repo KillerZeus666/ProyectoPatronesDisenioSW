@@ -15,6 +15,8 @@ public class TipoQueja {
     @Column(nullable = false, length = 100)
     private String descripcion;
 
+    public TipoQueja() {} // Constructor sin argumentos
+
     public TipoQueja(String descripcion) {
         this.descripcion = descripcion;
     }

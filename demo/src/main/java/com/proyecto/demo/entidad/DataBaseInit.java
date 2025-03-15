@@ -35,7 +35,7 @@ public class DataBaseInit implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         // Verificamos si ya existen datos en las tablas principales
-        if (usuarioRepository.count() > 0 || empresaRepository.count() > 0) {
+        if (usuarioRepository.count() > 0 || empresaRepository.count() > 0 || quejaRepository.count() > 0 ) {
             log.info("La base de datos ya contiene datos. Saltando la inicialización.");
             return; // Salimos del método si ya hay datos
         }
