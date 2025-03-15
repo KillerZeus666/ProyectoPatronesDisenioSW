@@ -17,5 +17,8 @@ public interface QuejaService {
 
       //Ver todas las quejas por empresa
     List<Queja> verQuejasPorEmpresa(Long id);
+
+    //Método que se ejecuta periodicamente para verificar quejas vencidas
+    public void verificarQuejasVencidas();
 }
 

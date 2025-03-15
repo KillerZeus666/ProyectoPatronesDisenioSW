@@ -1,6 +1,7 @@
 package com.proyecto.demo.entidad;
 
 import jakarta.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -42,14 +43,11 @@ public class Usuario {
         this.quejas = quejas;
     }
 
-    // Constructor alternativo para `Profesional`
-    public Usuario(String nombre, String correo, String contraseña) {
+    // Constructor con lista de quejas vacía
+    public Usuario(String nombre, long cedula, long numeroCelular, String correo, String contraseña) {
         this.nombre = nombre;
-        this.correo = correo;
-        this.contraseña = contraseña;
-    }
-   // Constructor alternativo para `Profesional`
-    public Usuario(String correo, String contraseña) {
+        this.cedula = cedula;
+        this.numeroCelular = numeroCelular;
         this.correo = correo;
         this.contraseña = contraseña;
     }

@@ -1,9 +1,11 @@
 package com.proyecto.demo.servicio;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import com.proyecto.demo.entidad.Empresa;
@@ -36,6 +38,9 @@ public class QuejaServiceImpl implements QuejaService {
 
     @Autowired
     private TipoQuejaRepository tipoQuejaRepository; // Agregado para validar el tipo de queja
+
+    @Autowired
+    private List<IncumplimientoService> observers;
 
     @PostConstruct
     public void init() {
@@ -79,5 +84,46 @@ public class QuejaServiceImpl implements QuejaService {
         System.out.println("Quejas encontradas para empresa " + empresaId + ": " + quejas.size());
         return quejas;
     }
+
+    private Date calcularFechaLimite(Queja queja) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(queja.getFecha());
+        calendar.add(Calendar.DAY_OF_MONTH, 1); // Suma 1 día; ajusta según tu lógica
+        return calendar.getTime();
+    }
+    
+
+    private boolean estaVencida(Queja queja) {
+        Date fechaLimite = calcularFechaLimite(queja);
+        return new Date().after(fechaLimite);
+    }
+
+    // Notifica el vencimiento de la queja a todos los observadores (servicios de incumplimiento)
+    private void notificarVencimiento(Queja queja) {
+        // Log para notificar el envío
+        System.out.println("Notificando vencimiento de queja con id: " + queja.getId());
+
+        for (IncumplimientoService observer : observers) {
+            observer.onQuejaVencida(queja);
+        }
+    }
+
+    @Override
+    @Scheduled(cron = "0 * * * * *") // Ejemplo: cada minuto
+    public void verificarQuejasVencidas() {
+        // Se calcula la fecha límite: fecha actual menos 1 día
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_MONTH, -1);
+        Date fechaMinima = calendar.getTime();
+        
+        List<Queja> quejasPendientes = quejaRepository.findAllPendientes(fechaMinima);
+        
+        for (Queja queja : quejasPendientes) {
+            if (estaVencida(queja)) {
+                notificarVencimiento(queja);
+            }
+        }
+    }
+    
     
 }

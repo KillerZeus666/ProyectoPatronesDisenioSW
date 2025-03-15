@@ -1,4 +1,4 @@
-package com.proyecto.demo.controlador;
+package com.proyecto.demo.dto;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Date;

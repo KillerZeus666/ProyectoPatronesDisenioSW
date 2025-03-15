@@ -6,11 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class EntidadVigilanteRepository {
-
-    public void save(EntidadVigilante ventanillaUnica) {
-    }
-    
+public interface EntidadVigilanteRepository extends JpaRepository<EntidadVigilante, Long> {
     /*
     public EntidadVigilante findById(int id){
     return EntidadVigilante.get(id); 

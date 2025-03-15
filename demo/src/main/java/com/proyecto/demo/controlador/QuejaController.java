@@ -1,5 +1,6 @@
 package com.proyecto.demo.controlador;
 
+import com.proyecto.demo.dto.QuejaRequest;
 import com.proyecto.demo.entidad.Queja;
 import com.proyecto.demo.entidad.Usuario;
 import com.proyecto.demo.servicio.EmpresaService;
