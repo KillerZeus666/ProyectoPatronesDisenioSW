@@ -6,7 +6,7 @@ import java.util.Date;
 public class QuejaRequest {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date fecha;
-    private String tipo;
+    private Long tipo;
     private String descripcion;
     private Long idServicio;
     private Long idEmpresa;
@@ -19,10 +19,10 @@ public class QuejaRequest {
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
-    public String getTipo() {
+    public Long getTipo() {
         return tipo;
     }
-    public void setTipo(String tipo) {
+    public void setTipo(Long tipo) {
         this.tipo = tipo;
     }
     public String getDescripcion() {

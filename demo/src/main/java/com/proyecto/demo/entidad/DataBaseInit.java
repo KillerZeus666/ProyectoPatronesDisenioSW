@@ -13,6 +13,7 @@ import com.proyecto.demo.repositorio.QuejaRepository;
 import com.proyecto.demo.repositorio.EntidadVigilanteRepository;
 import com.proyecto.demo.repositorio.RespuestaRepository;
 import com.proyecto.demo.repositorio.ServicioRepository;
+import com.proyecto.demo.repositorio.TipoQuejaRepository;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +30,7 @@ public class DataBaseInit implements ApplicationRunner {
     private final QuejaRepository quejaRepository;
     private final EntidadVigilanteRepository entidadVigilanteRepository;
     private final ServicioRepository servicioRepository;
+    private final TipoQuejaRepository tipoQuejaRepository;
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
@@ -109,13 +111,35 @@ public class DataBaseInit implements ApplicationRunner {
             Servicio servicioEnergia = new Servicio("Energía Eléctrica", empresa3);
             servicioRepository.save(servicioEnergia);
 
+            // Insertar tipos de queja
+            TipoQueja malServicio = new TipoQueja("Mal servicio");
+            tipoQuejaRepository.save(malServicio);
+
+            TipoQueja cobrosIndebidos = new TipoQueja("Cobros indebidos");
+            tipoQuejaRepository.save(cobrosIndebidos);
+
+            TipoQueja incumplimientoNormas = new TipoQueja("Incumplimiento de normas");
+            tipoQuejaRepository.save(incumplimientoNormas);
+
+            TipoQueja suspensionSinAviso = new TipoQueja("Suspensión del servicio sin previo aviso");
+            tipoQuejaRepository.save(suspensionSinAviso);
+
+            TipoQueja adulteracionContadores = new TipoQueja("Adulteración o cambio de contadores o medidores");
+            tipoQuejaRepository.save(adulteracionContadores);
+
+            TipoQueja danoPropiedadMobiliaria = new TipoQueja("Daño a propiedad mobiliaria causada por empresa prestadora");
+            tipoQuejaRepository.save(danoPropiedadMobiliaria);
+
+            TipoQueja danoPropiedadInmobiliaria = new TipoQueja("Daño a propiedad inmobiliaria causada por empresa prestadora");
+            tipoQuejaRepository.save(danoPropiedadInmobiliaria);
+
             // Insertar quejas asociadas a los usuarios
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
             // Queja de Juan Pérez sobre el servicio de agua
             Queja queja1 = new Queja(
                     sdf.parse("2023-10-01"),
-                    "Reclamo",
+                    malServicio,
                     "El agua llega con mal olor y sabor.",
                     servicioAgua,
                     empresa1,
@@ -126,7 +150,7 @@ public class DataBaseInit implements ApplicationRunner {
             // Queja de María Gómez sobre el servicio de gas
             Queja queja2 = new Queja(
                     sdf.parse("2023-10-02"),
-                    "Reclamo",
+                    cobrosIndebidos,
                     "El gas no enciende correctamente.",
                     servicioGas,
                     empresa2,
@@ -137,7 +161,7 @@ public class DataBaseInit implements ApplicationRunner {
             // Queja de Juan Pérez sobre el servicio de energía
             Queja queja3 = new Queja(
                     sdf.parse("2023-10-03"),
-                    "Reclamo",
+                    suspensionSinAviso,
                     "Cortes frecuentes de energía.",
                     servicioEnergia,
                     empresa3,

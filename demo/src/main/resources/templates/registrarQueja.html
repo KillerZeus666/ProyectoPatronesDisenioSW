@@ -27,7 +27,16 @@
             <input type="date" id="fecha" th:field="*{fecha}" required>
             
             <label for="tipo">Tipo:</label>
-            <input type="text" id="tipo" th:field="*{tipo}" placeholder="Ej: Reclamo" required>
+            <select id="tipo" th:field="*{tipo}" required>
+                <option value="" disabled selected>Seleccione un tipo de queja</option>
+                <option th:value="1">Mal servicio</option>
+                <option th:value="2">Cobros indebidos</option>
+                <option th:value="3">Incumplimiento de normas</option>
+                <option th:value="4">Suspensión del servicio sin previo aviso</option>
+                <option th:value="5">Adulteración o cambio de contadores o medidores</option>
+                <option th:value="6">Daño a propiedad mobiliaria causada por empresa prestadora</option>
+                <option th:value="7">Daño a propiedad inmobiliaria causada por empresa prestadora</option>
+            </select>
             
             <label for="descripcion">Descripción:</label>
             <textarea id="descripcion" th:field="*{descripcion}" placeholder="Detalle la queja" required></textarea>
@@ -44,7 +53,6 @@
             <button type="submit">Registrar Queja</button>
         </form>
 
-        
         <!-- Footer -->
         <footer>
             <div class="footer-content">

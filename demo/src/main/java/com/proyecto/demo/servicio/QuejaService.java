@@ -7,7 +7,7 @@ import java.util.List;
 public interface QuejaService {
 
     // Registrar una nueva queja (sin ID, agregando idUsuario)
-    Queja registrarQueja(Date fecha, String tipo, String descripcion, Long idServicio, Long idEmpresa, Long idUsuario);
+    Queja registrarQueja(Date fecha, Long idTipoQueja, String descripcion, Long idServicio, Long idEmpresa, Long idUsuario);
 
     // Buscar una queja por ID
     Queja buscarQueja(Long id);
