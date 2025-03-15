@@ -7,8 +7,9 @@
     <link rel="stylesheet" th:href="@{/css/form.css(v=${#dates.createNow().getTime()})}">
 </head>
 <body>
-     <!-- Header con logo y navegación -->
-     <header>
+
+    <!-- Header con logo y navegación -->
+    <header>
         <div class="logo">
             <img src="https://i.postimg.cc/4NzHq4j1/logo.png" alt="Logo">
         </div>
@@ -19,25 +20,22 @@
         </nav>
     </header>
 
-    <h2>Responder Queja</h2>
+    <!-- Contenedor principal para centrar el contenido -->
+    <main class="container">
+        <h1>Responder Queja</h1>
 
-    <form th:action="@{/respuestas/registrar}" method="post">
-        <label>Fecha:</label>
-        <input type="datetime-local" name="fecha" required> <br>
+        <form th:action="@{/respuestas/registrar}" method="post">
+            <input type="hidden" name="idQueja" th:value="${idQueja}">
+            <input type="hidden" name="idEmpresa" th:value="${idEmpresa}">
 
-        <label>Descripción:</label>
-        <textarea name="descripcion" required></textarea> <br>
+            <label for="descripcion">Respuesta:</label>
+            <textarea id="descripcion" name="descripcion" required></textarea>
 
-        <label>ID de la Empresa:</label>
-        <input type="number" name="idEmpresa" required> <br>
+            <button type="submit">Enviar Respuesta</button>
+        </form>
 
-        <label>ID de la Queja:</label>
-        <input type="number" name="idQueja" required> <br>
-
-        <button type="submit">Enviar Respuesta</button>
-    </form>
-
-    <a href="/respuestas">Volver a la lista de respuestas</a>
+        <a href="/portalEmpresa">Volver</a>
+    </main>
 
     <!-- Footer -->
     <footer>
@@ -58,5 +56,6 @@
             </div>
         </div>
     </footer>
+
 </body>
 </html>

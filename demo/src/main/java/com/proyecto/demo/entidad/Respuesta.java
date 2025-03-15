@@ -18,7 +18,7 @@ public class Respuesta {
     private String descripcion;
 
     @ManyToOne
-    @JoinColumn(name = "empresa_id") // Asegúrate de que el nombre coincida con la base de datos
+    @JoinColumn(name = "empresa_id") 
     private Empresa empresa;
 
     @OneToOne

@@ -29,6 +29,7 @@
                     <th>ID</th>
                     <th>Descripción</th>
                     <th>Fecha</th>
+                    <th>Acción</th> <!-- Nueva columna -->
                 </tr>
             </thead>
             <tbody>
@@ -37,6 +38,13 @@
                     <td th:text="${queja.id}"></td>
                     <td th:text="${queja.descripcion}"></td>
                     <td th:text="${queja.fecha}"></td>
+                    <td>
+                        <a th:href="@{/respuestas/registrar(idQueja=${queja.id})}" class="btn-accion">
+                            Agregar Respuesta
+                        </a>
+                    </td>
+                    
+                    
                 </tr>
             </tbody>
         </table>

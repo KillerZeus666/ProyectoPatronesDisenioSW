@@ -3,6 +3,21 @@ h1 {
     font-size: 23;
     margin: 30px 0;
 }
+
+.btn-accion {
+    display: inline-block;
+    padding: 8px 15px;
+    background-color:#2C9494; /* Azul */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+.btn-accion:hover {
+    background-color: #1F6B6B; /* Azul más oscuro al pasar el mouse */
+}
+
+
 /* Contenedor de la tabla para centrar */
 .table-container {
     display: flex;
@@ -55,3 +70,4 @@ h1 {
 .btn-volver:hover {
     background: #1F6B6B;
 }
+
