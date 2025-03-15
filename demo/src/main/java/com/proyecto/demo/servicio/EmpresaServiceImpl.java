@@ -1,5 +1,7 @@
 package com.proyecto.demo.servicio;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,5 +19,10 @@ public class EmpresaServiceImpl implements EmpresaService{
     public Empresa validarEmpresa(String correo, String contraseña){
         return empresaRepository.findByNombreAndContraseña(correo, contraseña);
 
+    }
+
+    @Override
+    public List<Empresa> obtenerTodasLasEmpresas() {
+        return empresaRepository.findAll();
     }
 }

@@ -12,6 +12,10 @@ public class QuejaRequest {
     private Long idEmpresa;
     private Long idUsuario;
 
+    // Default constructor
+    public QuejaRequest() {
+    }
+
     // Getters y Setters
     public Date getFecha() {
         return fecha;

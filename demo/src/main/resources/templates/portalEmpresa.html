@@ -24,7 +24,7 @@
         <h2 id="empresaNombre" th:text="${session.empresaNombre}" th:data-empresa-id="${session.empresaId}">Empresa desconocida</h2>
         
        <!-- Enlace que genera la URL con el empresaId de la sesión -->
-        <a th:href="@{/quejas/{empresaId}(empresaId=${session.empresaId})}">
+        <a th:href="@{/quejas/empresa/{empresaId}(empresaId=${session.empresaId})}">
             <button>Ver Quejas</button>
         </a>
 

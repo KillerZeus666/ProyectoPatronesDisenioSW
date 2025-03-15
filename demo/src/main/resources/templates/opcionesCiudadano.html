@@ -27,7 +27,7 @@
         <p>Elige una opción:</p>
         <div class="opciones">
           <!-- Opción para registrar una nueva queja -->
-          <a class="btn" th:href="@{/quejas/registrar}">Registrar Queja</a>
+          <a class="btn" th:href="@{/quejas/formulario}">Registrar Queja</a>
           <!-- Opción para ver las quejas realizadas por el usuario -->
           <!-- Se asume que el objeto 'usuario' ya está en el modelo y tiene el atributo 'cedula' -->
           <a class="btn" th:href="@{'/quejas/usuario/' + ${usuario.cedula}}">Ver Mis Quejas</a>
