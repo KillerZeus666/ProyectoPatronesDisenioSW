@@ -1,18 +1,12 @@
 package com.proyecto.demo.controlador;
 
 import org.springframework.beans.factory.annotation.Autowired;
-<<<<<<< HEAD
-=======
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
->>>>>>> 527be6eb40cf5edafaee360f563d843afcfb860b
 import org.springframework.web.bind.annotation.*;
 
 import com.proyecto.demo.entidad.Queja;
 import com.proyecto.demo.servicio.QuejaService;
 
-import java.util.Date;
 import java.util.List;
 
 @RestController
