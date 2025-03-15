@@ -76,9 +76,10 @@ public class QuejaController {
 
     // Endpoint para ver quejas por cédula de usuario, devolviendo JSON
     @GetMapping("/usuario/{cedula}")
-    @ResponseBody
-    public List<Queja> verQuejasPorUsr(@PathVariable Long cedula) {
-        return quejaService.verQuejasPorUsr(cedula);
+    public String verQuejasPorUsr(@PathVariable Long cedula, Model model) {
+        List<Queja> quejas = quejaService.verQuejasPorUsr(cedula);
+        model.addAttribute("quejas", quejas);
+        return "vistaQuejasCiudadano";
     }
 
     // Endpoint para listar todas las quejas de una empresa y mostrarlas en una vista HTML
