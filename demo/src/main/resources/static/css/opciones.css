@@ -4,11 +4,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 60vh;
+    height: calc(100vh - 80px); /* Resta la altura del header */
     background: white;
-    color: white;
     text-align: center;
+    position: relative; /* Evita que suba sobre el header */
+    z-index: 1;
+    margin-top: 50px; /* Separa del header */
 }
+
 
 /* Caja con contenido */
 .opcionesQuejas .container {
