@@ -9,11 +9,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.proyecto.demo.entidad.Empresa;
+import com.proyecto.demo.entidad.EntidadVigilante;
 import com.proyecto.demo.entidad.Queja;
 import com.proyecto.demo.entidad.Usuario;
 import com.proyecto.demo.servicio.QuejaService;
 import com.proyecto.demo.servicio.UsuarioService;
 import com.proyecto.demo.servicio.EmpresaService;
+import com.proyecto.demo.servicio.EntidadVigilanteService;
 
 
 import jakarta.servlet.http.HttpSession;
@@ -30,6 +32,9 @@ public class WindowController {
 
     @Autowired
     private EmpresaService empresaService;
+
+    @Autowired
+    private EntidadVigilanteService entidadService;
 
     @GetMapping("/index")
     public String mostrarPaginaIndex() {
@@ -54,32 +59,44 @@ public class WindowController {
         return "portalAdministrador";
     }
 
+    @GetMapping("/portalAdministrador")
+    public String mostrarPortalAdministrador() {
+        return "portalAdministrador";
+    }
 
     @PostMapping("/inicio_sesion")
     public String iniciarSesion(@RequestParam("correo") String correo,
                                 @RequestParam("contraseña") String contraseña,
                                 Model model, HttpSession session) {
         Usuario usuario = usuarioService.validarUsuario(correo, contraseña);
-        Empresa empresa= empresaService.validarEmpresa(correo, contraseña);
+        Empresa empresa = empresaService.validarEmpresa(correo, contraseña);
+        EntidadVigilante entidadVigilante = entidadService.validarEntidad(correo, contraseña);
     
-        if (usuario == null && empresa == null) { 
+        // Caso 1: Ningún usuario, empresa ni entidad coinciden
+        if (usuario == null && empresa == null && entidadVigilante == null) {
             model.addAttribute("error", "Correo o contraseña incorrectos");
-            return "portalUsuario"; 
+            return "portalUsuario";
         }
+    
+        // Caso 2: Inicio de sesión de empresa
         if (empresa != null) {
-            // Guardar ID y nombre de la empresa en la sesión
             session.setAttribute("empresaId", empresa.getId());
             session.setAttribute("empresaNombre", empresa.getNombre());
-        
-            // Imprimir en consola para verificar si se guarda correctamente
             System.out.println("Empresa guardada en sesión: " + empresa.getNombre());
-        
-            return "redirect:/portalEmpresa"; // Redirigir a la vista de empresa
-        }else {
-            // Guardar el usuario completo en la sesión
-            session.setAttribute("usuarioLogueado", usuario);
-            return "redirect:/opcionesCiudadano"; // Redirigir a la vista del usuario
+            return "redirect:/portalEmpresa";
         }
+    
+        // Caso 3: Inicio de sesión de entidad vigilante
+        if (entidadVigilante != null) {
+            session.setAttribute("entidadId", entidadVigilante.getId());
+            session.setAttribute("entidadNombre", entidadVigilante.getNombre());
+            System.out.println("Entidad Vigilante guardada en sesión: " + entidadVigilante.getNombre());
+            return "redirect:/portalAdministrador";
+        }
+    
+        // Caso 4: Inicio de sesión de usuario
+        session.setAttribute("usuarioLogueado", usuario);
+        return "redirect:/opcionesCiudadano";
     }
     
 
