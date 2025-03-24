@@ -44,8 +44,8 @@ public class DataBaseInit implements ApplicationRunner {
                 "Juan Pérez", 
                 123456789, 
                 3001234567L, 
-                "juan.perez@example.com", 
-                "juan123", 
+                "Juan@gmail.com", 
+                "123", 
                 null
         );
         usuarioRepository.save(usuarioJuan);
