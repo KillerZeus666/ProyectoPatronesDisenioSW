@@ -15,10 +15,15 @@ public class TipoQueja {
     @Column(nullable = false, length = 100)
     private String descripcion;
 
-    public TipoQueja() {} // Constructor sin argumentos
+    @Column(nullable = false, columnDefinition = "INT DEFAULT 3")
+    private int tiempoAtencion = 3; // Valor por defecto
 
-    public TipoQueja(String descripcion) {
+    public TipoQueja() {
+    } // Constructor sin argumentos
+
+    public TipoQueja(String descripcion, int tiempoAtencion) {
         this.descripcion = descripcion;
+        this.tiempoAtencion = tiempoAtencion;
     }
 
     // Getters and Setters
@@ -37,4 +42,13 @@ public class TipoQueja {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
+
+    public int getTiempoAtencion() {
+        return this.tiempoAtencion;
+    }
+
+    public void setTiempoAtencion(int tiempoAtencion) {
+        this.tiempoAtencion = tiempoAtencion;
+    }
+
 }
