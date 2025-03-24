@@ -72,7 +72,7 @@ h1 {
 }
 
 .btn-enviar {
-    background-color: #007bff; /* Azul */
+    background-color:#2C9494;  /* Azul */
     color: white;
     border: none;
     padding: 8px 12px;
@@ -82,12 +82,12 @@ h1 {
 }
 
 .btn-enviar:hover {
-    background-color: #0056b3; /* Azul más oscuro al pasar el mouse */
+    background-color: #1F6B6B; /* Azul más oscuro al pasar el mouse */
 }
 
 .mensaje-exito {
     background-color: #d4edda;
-    color: #155724;
+    color: #1F6B6B;
     padding: 10px;
     margin: 10px 0;
     border: 1px solid #c3e6cb;
@@ -97,9 +97,10 @@ h1 {
     top: 20px;
     right: 20px;
     z-index: 1000;
+    transition: opacity 0.5s ease-in-out;
 }
 
-.mensaje-exito.ocultar {
-    display: none;
+.ocultar {
+    opacity: 0;
+    pointer-events: none;
 }
-
