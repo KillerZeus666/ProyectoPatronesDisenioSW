@@ -17,5 +17,9 @@ public interface QuejaService {
 
       //Ver todas las quejas por empresa
     List<Queja> verQuejasPorEmpresa(Long id);
-}
+
+
+    //Ver todas las quejas de la BD
+    List<Queja> obtenerTodasLasQuejas();
+ }
 

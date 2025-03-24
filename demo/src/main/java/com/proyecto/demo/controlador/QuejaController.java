@@ -67,4 +67,11 @@ public class QuejaController {
         model.addAttribute("quejas", quejas);
         return "vistaQuejas"; // Nombre del archivo HTML (vistaQuejas.html)
     }
+    //Metodo para mostrar todas las quejas 
+    @GetMapping("/todas")
+    public String listarTodasLasQuejas(Model model) {
+        List<Queja> listaQuejas = quejaService.obtenerTodasLasQuejas(); // Método en el servicio
+        model.addAttribute("quejas", listaQuejas);
+        return "listaQuejas"; // Asegúrate de que el nombre coincida con la vista HTML
+    }
 }

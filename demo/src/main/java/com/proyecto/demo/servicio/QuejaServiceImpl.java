@@ -71,5 +71,9 @@ public class QuejaServiceImpl implements QuejaService {
         System.out.println("Quejas encontradas para empresa " + empresaId + ": " + quejas.size());
         return quejas;
     }
-    
+
+    @Override
+    public List<Queja> obtenerTodasLasQuejas() {
+        return quejaRepository.findAll();
+    }
 }
