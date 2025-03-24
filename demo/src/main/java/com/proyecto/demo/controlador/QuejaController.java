@@ -11,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -74,4 +74,38 @@ public class QuejaController {
         model.addAttribute("quejas", listaQuejas);
         return "listaQuejas"; // Asegúrate de que el nombre coincida con la vista HTML
     }
+
+
+    @PostMapping("/enviar")
+    public String enviarQueja(@RequestParam("idQueja") Long idQueja, Model model) {
+        // Simulación del envío de la queja
+        System.out.println("Queja con ID " + idQueja + " enviada con éxito.");
+    
+        // Agregar mensaje de éxito al modelo para mostrarlo en la misma vista
+        model.addAttribute("mensaje", "Queja con ID " + idQueja + " enviada con éxito.");
+    
+        // Aquí debes cargar la lista de quejas desde el servicio o repositorio
+        List<Queja> listaDeQuejas = quejaService.obtenerTodasLasQuejas(); // Asegúrate de tener este método
+        model.addAttribute("quejas", listaDeQuejas);
+        return "listaQuejas"; 
+    }
+    
+
+    @GetMapping("/enviar")
+    public String mostrarListaDeQuejas(@RequestParam(value = "mensaje", required = false) String mensaje, 
+                                       @RequestParam(value = "idQueja", required = false) Long idQueja, 
+                                       Model model) {
+        // Si hay un mensaje y un ID de queja, lo añadimos al modelo
+        if (mensaje != null && idQueja != null) {
+            model.addAttribute("mensaje", mensaje);
+        }
+    
+        // Aquí debes cargar la lista de quejas desde el servicio o repositorio
+        List<Queja> listaDeQuejas = quejaService.obtenerTodasLasQuejas(); // Asegúrate de tener este método
+        model.addAttribute("quejas", listaDeQuejas);
+    
+        return "listaQuejas"; // Asegúrate de que este es el nombre correcto de la vista
+    }
+    
+
 }

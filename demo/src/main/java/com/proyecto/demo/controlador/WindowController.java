@@ -64,6 +64,16 @@ public class WindowController {
         return "portalAdministrador";
     }
 
+    @GetMapping("/listaQuejas")
+    public String mostrarTodasLasQuejas() {
+        return "listaQuejas";
+    }
+    @GetMapping("/todas")
+    public String mostrarTodasLasQuejasController() {
+        return "redirect:/quejas/todas";
+    }
+
+
     @PostMapping("/inicio_sesion")
     public String iniciarSesion(@RequestParam("correo") String correo,
                                 @RequestParam("contraseña") String contraseña,
