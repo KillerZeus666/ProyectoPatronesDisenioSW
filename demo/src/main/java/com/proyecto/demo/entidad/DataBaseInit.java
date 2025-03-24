@@ -1,18 +1,13 @@
 package com.proyecto.demo.entidad;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.Arrays;
 
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
-import com.proyecto.demo.repositorio.EmpresaRepository;
-import com.proyecto.demo.repositorio.UsuarioRepository;
-import com.proyecto.demo.repositorio.QuejaRepository;
-import com.proyecto.demo.repositorio.EntidadVigilanteRepository;
-import com.proyecto.demo.repositorio.RespuestaRepository;
-import com.proyecto.demo.repositorio.ServicioRepository;
+import com.proyecto.demo.repositorio.*;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -26,113 +21,70 @@ public class DataBaseInit implements ApplicationRunner {
     private final EmpresaRepository empresaRepository;
     private final QuejaRepository quejaRepository;
     private final EntidadVigilanteRepository entidadVigilanteRepository;
-    private final ServicioRepository servicioRepository;  // Asegúrate de tener este repositorio
+    private final ServicioRepository servicioRepository;
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
         // Inicializar Entidad Vigilante
         EntidadVigilante entidadVigilante = new EntidadVigilante(
                 "Superintendencia de Servicios Públicos Domiciliarios", 
                 123456789, 
-                "sspd@example.com", 
+                "sspd@gmail.com", 
                 "sspd123"
         );
         entidadVigilanteRepository.save(entidadVigilante);
 
         // Insertar usuarios
-        Usuario usuarioJuan = new Usuario(
-                "Juan Pérez", 
-                123456789, 
-                3001234567L, 
-                "Juan@gmail.com", 
-                "123", 
-                null
-        );
-        usuarioRepository.save(usuarioJuan);
-
-        Usuario usuarioMaria = new Usuario(
-                "María Gómez", 
-                987654321, 
-                3109876543L, 
-                "maria.gomez@example.com", 
-                "maria123", 
-                null
-        );
-        usuarioRepository.save(usuarioMaria);
+        Usuario[] usuarios = {
+            new Usuario("Juan Pérez", 123456789, 3001234567L, "Juan@gmail.com", "123", null),
+            new Usuario("María Gómez", 987654321, 3109876543L, "maria.gomez@gmail.com", "maria123", null),
+            new Usuario("Ana Rodríguez", 234567891, 3002345678L, "ana.rodriguez@gmail.com", "ana789", null),
+            new Usuario("Luis Martínez", 345678912, 3103456789L, "luis.martinez@gmail.com", "luis321", null),
+            new Usuario("Sofía Ramírez", 456789123, 3154567890L, "sofia@gmail.com", "sofia654", null),
+            new Usuario("Carlos Torres", 567891234, 3115678901L, "carlos@gmail.com", "carlos987", null),
+            new Usuario("Laura Fernández", 678912345, 3146789012L, "laura.fernandez@gmail.com", "laura147", null),
+            new Usuario("Diego Sánchez", 789123456, 3197890123L, "diego.sanchez@gmail.com", "diego258", null),
+            new Usuario("Paula Herrera", 891234567, 3168912345L, "paula.herrera@gmail.com", "paula369", null),
+            new Usuario("Fernando Gutiérrez", 912345678, 3179123456L, "fernando.gutierre@gmail.com", "fernando753", null),
+            new Usuario("Camila López", 102345678, 3121023456L, "camila.lopez@gmail.com", "camila852", null)
+        };
+        usuarioRepository.saveAll(Arrays.asList(usuarios));
 
         // Insertar empresas
-        Empresa empresa1 = new Empresa("Acueducto", "1");
-        empresaRepository.save(empresa1);
-
-        Empresa empresa2 = new Empresa("Codensa", "2");
-        empresaRepository.save(empresa2);
-
-        Empresa empresa3 = new Empresa("Epm", "3");
-        empresaRepository.save(empresa3);
-
-        Empresa empresa4 = new Empresa("Aguas de la Sabana Bogota", "4");
-        empresaRepository.save(empresa4);
-
-        Empresa empresa5 = new Empresa("Aseo Capital", "5");
-        empresaRepository.save(empresa5);
-
-        Empresa empresa6 = new Empresa("EmCali", "6");
-        empresaRepository.save(empresa6);
-
-        Empresa empresa7 = new Empresa("InterColombia", "7");
-        empresaRepository.save(empresa7);
-
-        Empresa empresa8 = new Empresa("Veolia", "8");
-        empresaRepository.save(empresa8);
+        Empresa[] empresas = {
+            new Empresa("Acueducto", "1"),
+            new Empresa("Codensa", "2"),
+            new Empresa("Epm", "3"),
+            new Empresa("Aguas de la Sabana Bogota", "4"),
+            new Empresa("Aseo Capital", "5"),
+            new Empresa("EmCali", "6"),
+            new Empresa("InterColombia", "7"),
+            new Empresa("Veolia", "8")
+        };
+        empresaRepository.saveAll(Arrays.asList(empresas));
 
         // Insertar servicios asociados a las empresas
-        Servicio servicioAgua = new Servicio("Agua Potable", empresa1);
-        servicioRepository.save(servicioAgua);
-
-        Servicio servicioAlcantarillado = new Servicio("Alcantarillado", empresa1);
-        servicioRepository.save(servicioAlcantarillado);
-
-        Servicio servicioGas = new Servicio("Gas Domiciliario", empresa2);
-        servicioRepository.save(servicioGas);
-
-        Servicio servicioEnergia = new Servicio("Energía Eléctrica", empresa3);
-        servicioRepository.save(servicioEnergia);
+        Servicio[] servicios = {
+            new Servicio("Agua Potable", empresas[5]), // EmCali
+            new Servicio("Agua Potable", empresas[0]), // Acueducto
+            new Servicio("Energía Eléctrica", empresas[1]), // Codensa
+            new Servicio("Energía Eléctrica", empresas[6]), // InterColombia
+            new Servicio("Alcantarillado", empresas[2]), // EPM
+            new Servicio("Alcantarillado", empresas[3]), // Aguas de la Sabana
+            new Servicio("Servicio Aseo", empresas[7]), // Veolia
+            new Servicio("Servicio Aseo", empresas[4])  // Aseo Capital
+        };
+        servicioRepository.saveAll(Arrays.asList(servicios));
 
         // Insertar quejas asociadas a los usuarios
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-
-        // Queja de Juan Pérez sobre el servicio de agua
-        Queja queja1 = new Queja(
-                sdf.parse("2023-10-01"),
-                "Reclamo",
-                "El agua llega con mal olor y sabor.",
-                servicioAgua,
-                empresa1,
-                usuarioJuan
-        );
-        quejaRepository.save(queja1);
-
-        // Queja de María Gómez sobre el servicio de gas
-        Queja queja2 = new Queja(
-                sdf.parse("2023-10-02"),
-                "Reclamo",
-                "El gas no enciende correctamente.",
-                servicioGas,
-                empresa2,
-                usuarioMaria
-        );
-        quejaRepository.save(queja2);
-
-        // Queja de Juan Pérez sobre el servicio de energía
-        Queja queja3 = new Queja(
-                sdf.parse("2023-10-03"),
-                "Reclamo",
-                "Cortes frecuentes de energía.",
-                servicioEnergia,
-                empresa3,
-                usuarioJuan
-        );
-        quejaRepository.save(queja3);
+        Queja[] quejas = {
+            new Queja(sdf.parse("2023-10-01"), "Reclamo", "El agua llega con mal olor y sabor.", servicios[1], empresas[0], usuarios[0]),
+            new Queja(sdf.parse("2023-10-02"), "Reclamo", "El gas no enciende correctamente.", servicios[2], empresas[1], usuarios[1]),
+            new Queja(sdf.parse("2023-10-03"), "Reclamo", "Cortes frecuentes de energía.", servicios[4], empresas[2], usuarios[0])
+        };
+        quejaRepository.saveAll(Arrays.asList(quejas));
 
         System.out.println("Base de datos inicializada con datos de ejemplo.");
     }   
