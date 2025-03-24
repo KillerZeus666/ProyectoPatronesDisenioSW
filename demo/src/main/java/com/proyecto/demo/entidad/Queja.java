@@ -14,11 +14,12 @@ public class Queja {
     @Column(nullable = false)
     private Date fecha;
 
-    @Column(nullable = false, length = 50)
-    private String tipo;
-
     @Column(nullable = false, length = 500)
     private String descripcion;
+
+    @ManyToOne
+    @JoinColumn(name = "tipoqueja_id", nullable = false)
+    private TipoQueja tipo;
 
     @ManyToOne
     @JoinColumn(name = "servicio_id", nullable = false)
@@ -33,10 +34,10 @@ public class Queja {
     private Usuario usuario;
 
     // Constructor vacío
-    public Queja() {}
+    public Queja() {
+    }
 
-
-    public Queja(Date fecha, String tipo, String descripcion, Servicio servicio, Empresa empresa) {
+    public Queja(Date fecha, TipoQueja tipo, String descripcion, Servicio servicio, Empresa empresa) {
         this.fecha = fecha;
         this.tipo = tipo;
         this.descripcion = descripcion;
@@ -44,9 +45,8 @@ public class Queja {
         this.empresa = empresa;
         this.usuario = null; // Se asigna null por defecto
     }
-    
 
-    public Queja(Date fecha, String tipo, String descripcion, Servicio servicio, Empresa empresa, Usuario usuario) {
+    public Queja(Date fecha, TipoQueja tipo, String descripcion, Servicio servicio, Empresa empresa, Usuario usuario) {
         this.fecha = fecha;
         this.tipo = tipo;
         this.descripcion = descripcion;
@@ -72,11 +72,11 @@ public class Queja {
         this.fecha = fecha;
     }
 
-    public String getTipo() {
+    public TipoQueja getTipo() {
         return tipo;
     }
 
-    public void setTipo(String tipo) {
+    public void setTipo(TipoQueja tipo) {
         this.tipo = tipo;
     }
 

@@ -3,9 +3,10 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal Administrador</title>
+    <title>Configuraciones</title>
     <link rel="stylesheet" th:href="@{/css/header_footer.css(v=${#dates.createNow().getTime()})}">
     <link rel="stylesheet" th:href="@{/css/opciones.css(v=${#dates.createNow().getTime()})}">
+    <link rel="stylesheet" th:href="@{/css/quejasPorEmpresa.css}">
   </head>
   <body>
     <!-- Header -->
@@ -20,19 +21,33 @@
       </nav>
     </header>
     
-    <!-- Sección de opciones del Administrador -->
-    <section class="opcionesQuejas">
-      <div class="container">
-        <h2>Portal del Administrador</h2>
-        <p>Elige una opción:</p>
-        <div class="opciones">
-          <!-- Opción para ver todas las quejas -->
-          <a class="btn" th:href="@{/quejas/todas}">Ver todas las quejas</a>
-          <!-- Opción para configuraciones      -->
-          <a class="btn" th:href="@{/tipo_quejas}">Configuración</a>
-        </div>
-      </div>
-    </section>
+    <!-- Sección de configuraciones del Administrador -->
+    <main>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Descripción</th>
+                    <th>Tiempo de Atención (días)</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="tipo : ${tiposQueja}">
+                    <td th:text="${tipo.id}"></td>
+                    <td th:text="${tipo.descripcion}"></td>
+                    <td>
+                        <form th:action="@{/tipo_quejas/actualizar}" method="post">
+                            <input type="hidden" name="id" th:value="${tipo.id}">
+                            <input type="number" name="tiempoAtencion" th:value="${tipo.tiempoAtencion}" min="1" required>
+                            <button type="submit">Actualizar</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <a th:href="@{/portalAdministrador}" class="btn-volver">Volver al Portal Administrador</a>
+    </main>
     
     <!-- Footer -->
     <footer>

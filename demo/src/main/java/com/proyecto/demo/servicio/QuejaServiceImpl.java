@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.proyecto.demo.entidad.Empresa;
 import com.proyecto.demo.entidad.Queja;
 import com.proyecto.demo.entidad.Servicio;
+import com.proyecto.demo.entidad.TipoQueja;
 import com.proyecto.demo.entidad.Usuario;
 import com.proyecto.demo.repositorio.EmpresaRepository;
 import com.proyecto.demo.repositorio.QuejaRepository;
@@ -38,13 +39,14 @@ public class QuejaServiceImpl implements QuejaService {
     }
 
     @Override
-    public Queja registrarQueja(Date fecha, String tipo, String descripcion, Long idServicio, Long idEmpresa,Long idUsuario) {
+    public Queja registrarQueja(Date fecha, TipoQueja tipo, String descripcion, Long idServicio, Long idEmpresa,
+            Long idUsuario) {
         Servicio servicio = servicioRepository.findById(idServicio)
                 .orElseThrow(() -> new IllegalArgumentException("El servicio especificado no existe"));
 
         Usuario usuario = usuarioRepository.findById(idUsuario)
                 .orElseThrow(() -> new IllegalArgumentException("El usuario especificado no existe"));
-        
+
         Empresa empresa = empresaRepository.findById(idEmpresa)
                 .orElseThrow(() -> new IllegalArgumentException("La empresa especificada no existe"));
 
