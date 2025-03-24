@@ -56,4 +56,10 @@ public class RespuestaServiceImpl implements RespuestaService {
     public List<Respuesta> buscarRespuestasPorEmpresa(Long idEmpresa) {
         return respuestaRepository.findByEmpresa_Id(idEmpresa);
     }
+
+    @Override
+        // Ver todas las quejas de la BD
+    public List<Respuesta> obtenerTodasLasRespuestas(){
+            return respuestaRepository.findAll();
+    }
 }

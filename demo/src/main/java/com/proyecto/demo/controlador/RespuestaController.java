@@ -1,5 +1,6 @@
 package com.proyecto.demo.controlador;
 
+import com.proyecto.demo.entidad.Queja;
 import com.proyecto.demo.entidad.Respuesta;
 import com.proyecto.demo.servicio.RespuestaService;
 
@@ -63,5 +64,11 @@ public class RespuestaController {
         return respuestaService.buscarRespuestasPorEmpresa(id);
     }
     
-  
+      //Metodo para mostrar todas las Respuestas
+    @GetMapping("/todas")
+    public String listarTodasLasRespuestas(Model model) {
+        List<Respuesta> listaRespuestas = respuestaService.obtenerTodasLasRespuestas(); // Método en el servicio
+        model.addAttribute("respuestas", listaRespuestas);
+        return "listaRespuestas"; // Asegúrate de que el nombre coincida con la vista HTML
+    }
 }
