@@ -23,31 +23,60 @@
     
     <!-- Sección de configuraciones del Administrador -->
     <main>
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Descripción</th>
-                    <th>Tiempo de Atención (días)</th>
-                    <th>Acción</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="tipo : ${tiposQueja}">
-                    <td th:text="${tipo.id}"></td>
-                    <td th:text="${tipo.descripcion}"></td>
-                    <td>
-                        <form th:action="@{/tipo_quejas/actualizar}" method="post">
-                            <input type="hidden" name="id" th:value="${tipo.id}">
-                            <input type="number" name="tiempoAtencion" th:value="${tipo.tiempoAtencion}" min="1" required>
-                            <button type="submit">Actualizar</button>
-                        </form>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <a th:href="@{/portalAdministrador}" class="btn-volver">Volver al Portal Administrador</a>
-    </main>
+      <h2>Configuración de Tipos de Queja</h2>
+      <table>
+          <thead>
+              <tr>
+                  <th>ID</th>
+                  <th>Descripción</th>
+                  <th>Tiempo de Atención (días)</th>
+                  <th>Acción</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr th:each="tipo : ${tiposQueja}">
+                  <td th:text="${tipo.id}"></td>
+                  <td th:text="${tipo.descripcion}"></td>
+                  <td>
+                      <form th:action="@{/tipo_quejas/actualizar}" method="post">
+                          <input type="hidden" name="id" th:value="${tipo.id}">
+                          <input type="number" name="tiempoAtencion" th:value="${tipo.tiempoAtencion}" min="1" required>
+                          <button type="submit">Actualizar</button>
+                      </form>
+                  </td>
+              </tr>
+          </tbody>
+      </table>
+
+      <h2>Configuración de Empresas para Servicios</h2>
+      <table>
+          <thead>
+              <tr>
+                  <th>ID</th>
+                  <th>Nombre del Servicio</th>
+                  <th>Empresa Asignada</th>
+                  <th>Acción</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr th:each="servicio : ${servicios}">
+                  <td th:text="${servicio.id}"></td>
+                  <td th:text="${servicio.tipo}"></td>
+                  <td>
+                      <form th:action="@{/servicio/actualizarEmpresaServicio}" method="post">
+                          <input type="hidden" name="id" th:value="${servicio.id}">
+                          <select name="empresaId" required>
+                              <option th:each="empresa : ${empresas}" th:value="${empresa.id}" th:text="${empresa.nombre}" th:selected="${empresa.id == servicio.empresa.id}"></option>
+                          </select>
+                          <button type="submit">Actualizar</button>
+                      </form>
+                  </td>
+              </tr>
+          </tbody>
+      </table>
+      
+      <a th:href="@{/portalAdministrador}" class="btn-volver">Volver al Portal Administrador</a>
+  </main>
     
     <!-- Footer -->
     <footer>
