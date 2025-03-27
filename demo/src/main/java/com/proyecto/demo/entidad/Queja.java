@@ -1,5 +1,6 @@
 package com.proyecto.demo.entidad;
 
+import java.util.Calendar;
 import java.util.Date;
 import jakarta.persistence.*;
 
@@ -33,6 +34,13 @@ public class Queja {
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
+    @Column(nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE")
+    private boolean procesada = false;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = false)
+    private Date fechaLimite;
+
     // Constructor vacío
     public Queja() {}
 
@@ -52,6 +60,7 @@ public class Queja {
         this.servicio = servicio;
         this.empresa = empresa;
         this.usuario = usuario;
+        this.fechaLimite = calcularFechaLimite(fecha);
     }
 
     // Getters y Setters
@@ -117,6 +126,29 @@ public class Queja {
         if (this.fecha == null) {
             this.fecha = new Date();
         }
+    }
+
+    public boolean isProcesada() {
+        return procesada;
+    }
+
+    public void setProcesada(boolean procesada) {
+        this.procesada = procesada;
+    }
+
+    public Date getFechaLimite() {
+        return fechaLimite;
+    }
+
+    public void setFechaLimite(Date fechaLimite) {
+        this.fechaLimite = fechaLimite;
+    }
+
+    private Date calcularFechaLimite(Date fecha) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(fecha);
+        calendar.add(Calendar.DAY_OF_MONTH, 15); // Suma 15 días
+        return calendar.getTime();
     }
 
     // Método toString para depuración

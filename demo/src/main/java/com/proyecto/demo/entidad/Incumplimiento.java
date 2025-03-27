@@ -17,14 +17,23 @@ public class Incumplimiento {
 
     @Column(nullable = false)
     private String descripcion;
-
-    @OneToOne
-    @JoinColumn(name = "queja_id", nullable = false)
+    
+    // 1 Queja → 0 o 1 Incumplimiento
+    @ManyToOne
+    @JoinColumn(
+        name = "queja_id", 
+        nullable = false, 
+        unique = true
+    )
     private Queja queja;
 
     @ManyToOne
     @JoinColumn(name = "empresa_id", nullable = false)
     private Empresa empresa;
+
+    @ManyToOne
+    @JoinColumn(name = "profesional_id", nullable = true)
+    private Profesional profesionalAsignado;
 
     // Constructor con parámetros
     public Incumplimiento(String descripcion, Queja queja, Empresa empresa) {

@@ -15,6 +15,6 @@ public interface QuejaRepository extends JpaRepository<Queja, Long> {
     List<Queja> findByUsuario_Cedula(Long cedula);
     List<Queja> findByEmpresa_Id(Long empresaId);
 
-    @Query("SELECT q FROM Queja q WHERE q.fecha <= :fechaMaxima")
-    List<Queja> findAllPendientes(@Param("fechaMaxima") Date fechaMaxima);    
+    @Query("SELECT q FROM Queja q WHERE q.fechaLimite < :fechaActual AND q.procesada = false")
+    List<Queja> findQuejasVencidasNoProcesadas(@Param("fechaActual") Date fechaActual);  
 }

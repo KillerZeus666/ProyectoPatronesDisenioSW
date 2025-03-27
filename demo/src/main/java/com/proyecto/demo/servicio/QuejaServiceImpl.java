@@ -1,10 +1,14 @@
 package com.proyecto.demo.servicio;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -39,12 +43,21 @@ public class QuejaServiceImpl implements QuejaService {
     @Autowired
     private TipoQuejaRepository tipoQuejaRepository; // Agregado para validar el tipo de queja
 
+    private final List<IncumplimientoService> observers;
+
     @Autowired
-    private List<IncumplimientoService> observers;
+    public QuejaServiceImpl(List<IncumplimientoService> observers) {
+        this.observers = observers;
+    }
 
     @PostConstruct
     public void init() {
         System.out.println("QuejaServiceImpl ha sido registrado por Spring!");
+    }
+
+    @PostConstruct
+    public void initializeQuejaCheck() {
+        verificarQuejasVencidas();
     }
 
     @Override
@@ -66,8 +79,10 @@ public class QuejaServiceImpl implements QuejaService {
         }
 
         Queja nuevaQueja = new Queja(fecha, tipoQueja, descripcion, servicio, empresa, usuario);
+
         return quejaRepository.save(nuevaQueja);
     }
+
 
     @Override
     public Queja buscarQueja(Long id) {
@@ -84,19 +99,7 @@ public class QuejaServiceImpl implements QuejaService {
         System.out.println("Quejas encontradas para empresa " + empresaId + ": " + quejas.size());
         return quejas;
     }
-
-    private Date calcularFechaLimite(Queja queja) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(queja.getFecha());
-        calendar.add(Calendar.DAY_OF_MONTH, 1); // Suma 1 día; ajusta según tu lógica
-        return calendar.getTime();
-    }
     
-
-    private boolean estaVencida(Queja queja) {
-        Date fechaLimite = calcularFechaLimite(queja);
-        return new Date().after(fechaLimite);
-    }
 
     // Notifica el vencimiento de la queja a todos los observadores (servicios de incumplimiento)
     private void notificarVencimiento(Queja queja) {
@@ -109,21 +112,31 @@ public class QuejaServiceImpl implements QuejaService {
     }
 
     @Override
-    @Scheduled(cron = "0 * * * * *") // Ejemplo: cada minuto
+    @Scheduled(cron = "*/5 * * * * *") // Ejecutar cada 5 segundos
     public void verificarQuejasVencidas() {
-        // Se calcula la fecha límite: fecha actual menos 1 día
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_MONTH, -1);
-        Date fechaMinima = calendar.getTime();
+        System.out.println("[SCHEDULER] Iniciando verificación de quejas vencidas...");
         
-        List<Queja> quejasPendientes = quejaRepository.findAllPendientes(fechaMinima);
+        // 1. Obtener fecha actual en UTC
+        Date fechaActual = Date.from(LocalDateTime.now().atZone(ZoneId.of("UTC")).toInstant());
         
-        for (Queja queja : quejasPendientes) {
-            if (estaVencida(queja)) {
-                notificarVencimiento(queja);
-            }
-        }
+        // 2. Buscar quejas vencidas no procesadas usando la consulta
+        List<Queja> quejasVencidas = quejaRepository.findQuejasVencidasNoProcesadas(fechaActual);
+        
+        // Log de cantidad encontrada
+        System.out.println("[SCHEDULER] Quejas vencidas encontradas: " + quejasVencidas.size());
+        
+        // 3. Procesar cada queja
+        quejasVencidas.forEach(queja -> {
+            notificarVencimiento(queja);
+            queja.setProcesada(true);
+            quejaRepository.save(queja);
+        });
     }
-    
-    
+
+    // Ejecutar al iniciar la aplicación (solo una vez)
+    @EventListener(ApplicationReadyEvent.class)
+    public void ejecutarAlInicio() {
+        System.out.println("[INICIO] Ejecutando primera verificación de quejas vencidas...");
+        verificarQuejasVencidas();
+    }
 }
