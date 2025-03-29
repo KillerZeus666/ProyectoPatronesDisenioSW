@@ -18,13 +18,8 @@ public class Incumplimiento {
     @Column(nullable = false)
     private String descripcion;
     
-    // 1 Queja → 0 o 1 Incumplimiento
-    @ManyToOne
-    @JoinColumn(
-        name = "queja_id", 
-        nullable = false, 
-        unique = true
-    )
+    @OneToOne
+    @JoinColumn(name = "queja_id", nullable = false, unique = true)
     private Queja queja;
 
     @ManyToOne

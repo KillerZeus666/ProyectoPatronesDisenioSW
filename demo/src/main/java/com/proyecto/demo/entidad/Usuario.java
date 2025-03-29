@@ -6,6 +6,7 @@ import java.util.List;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name = "tipo_usuario")
 public class Usuario {
 
     @Id
@@ -27,8 +28,8 @@ public class Usuario {
     @Column(nullable = false)
     private String contraseña;
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
-    private List<Queja> quejas;
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Queja> quejas = new ArrayList<>();
 
     // Constructor vacío
     public Usuario() {}

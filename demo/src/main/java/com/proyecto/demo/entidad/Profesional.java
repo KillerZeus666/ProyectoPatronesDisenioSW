@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@DiscriminatorValue("PROFESIONAL")
 public class Profesional extends Usuario {
 
     @ManyToOne 
@@ -15,9 +16,11 @@ public class Profesional extends Usuario {
     @JoinColumn(name = "servicio_id", nullable = false)
     private Servicio servicio;
 
-    @OneToMany
-    @JoinColumn(name = "profesional_id")
-    private List<Incumplimiento> procesoIncumplimiento;
+    @Column(name = "carga_trabajo", nullable = false)
+    private Integer cargaTrabajo = 0;
+
+    @OneToMany(mappedBy = "profesionalAsignado")
+    private List<Incumplimiento> incumplimientosAsignados = new ArrayList<>();
 
     // Constructor vacío
     public Profesional() {}
@@ -28,7 +31,6 @@ public class Profesional extends Usuario {
         super(nombre, cedula, numeroCelular, correo, contraseña);
         this.servicio = servicio;
         this.tipo = tipo;
-        this.procesoIncumplimiento = new ArrayList<>();
     }
 
     // Getters y Setters
@@ -40,8 +42,8 @@ public class Profesional extends Usuario {
         return tipo;
     }
 
-    public List<Incumplimiento> getProcesoIncumplimiento() {
-        return procesoIncumplimiento;
+    public List<Incumplimiento> getIncumplimientosAsignados() {
+        return incumplimientosAsignados;
     }
 
     public void setServicio(Servicio servicio) {
@@ -52,7 +54,18 @@ public class Profesional extends Usuario {
         this.tipo = tipo;
     }
 
-    public void setProcesoIncumplimiento(List<Incumplimiento> procesoIncumplimiento) {
-        this.procesoIncumplimiento = procesoIncumplimiento;
+    public void setIncumplimientosAsignados(List<Incumplimiento> incumplimientosAsignados) {
+        this.incumplimientosAsignados = incumplimientosAsignados;
+    }
+
+    // Actualizar la carga
+    public void incrementarCargaTrabajo() {
+        this.cargaTrabajo++;
+    }
+
+    public void decrementarCargaTrabajo() {
+        if (this.cargaTrabajo > 0) {
+            this.cargaTrabajo--;
+        }
     }
 }

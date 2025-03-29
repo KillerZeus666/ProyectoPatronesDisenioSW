@@ -22,7 +22,8 @@ public class IncumplimientoServiceImpl implements IncumplimientoService {
         Incumplimiento incumplimiento = new Incumplimiento();
         incumplimiento.setQueja(queja);
         incumplimiento.setEmpresa(queja.getEmpresa());
-        incumplimiento.setDescripcion("Incumplimiento por vencimiento de queja #" + queja.getId());
+        incumplimiento.setDescripcion("Incumplimiento por vencimiento de queja #" + queja.getId()
+                                     + ": " + queja.getDescripcion());
 
         incumplimientoRepository.save(incumplimiento);
         System.out.println("Incumplimiento creado para queja ID: " + queja.getId());
