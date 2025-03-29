@@ -1,6 +1,7 @@
 package com.proyecto.demo.entidad;
 
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -104,15 +105,11 @@ public class DataBaseInit implements ApplicationRunner {
                 log.info("La tabla Empresa ya tiene registros. Se omite la inserción de empresas.");
             }
 
-            // Insertar Servicios solo si la tabla está vacía
+
             if (servicioRepository.count() == 0) {
-                // Se asume que las empresas ya existen; se pueden recuperar, por ejemplo, con
-                // findAll()
-                // Para efectos de ejemplo se crean nuevos objetos referenciales con el id
-                // deseado.
-                // Nota: En un escenario real es recomendable obtener la entidad completa.
+                
                 Empresa empresa1 = new Empresa();
-                empresa1.setId(1L); // Asumir que el id asignado es 1
+                empresa1.setId(1L);
                 Empresa empresa2 = new Empresa();
                 empresa2.setId(2L);
                 Empresa empresa3 = new Empresa();
@@ -227,47 +224,29 @@ public class DataBaseInit implements ApplicationRunner {
 
             // Insertar Profesionales solo si no existen en la tabla Profesional
             if (profesionalRepository.count() == 0) {
-                log.info("Iniciando inserción de profesionales...");
+                
+                List<Servicio> servicios = servicioRepository.findAll();
+                List<TipoQueja> tipos = tipoQuejaRepository.findAll();
+                int counter = 1;
 
-                // Obtener el servicio y el tipo de queja completos desde la base de datos
-                Servicio servicioRef1 = servicioRepository.findById(1L)
-                        .orElseThrow(() -> new RuntimeException("Servicio con id 1 no encontrado"));
-                TipoQueja tipoRef1 = tipoQuejaRepository.findById(1L)
-                        .orElseThrow(() -> new RuntimeException("TipoQueja con id 1 no encontrado"));
+                for (Servicio servicio : servicios) {
+                        for (TipoQueja tipo : tipos) {
+                                Profesional profesional = new Profesional(
+                                        "Profesional " + counter,
+                                        100000000L + counter, // Cedula única
+                                        3000000000L + counter, // Celular único
+                                        "profesional" + counter + "@example.com",
+                                        "password",
+                                        servicio,
+                                        tipo
+                                );
+                                profesionalRepository.save(profesional);
+                                counter++;
+                                log.info("Profesional {} creado para {} - {}", counter, servicio.getTipo(), tipo.getDescripcion());
+                        }
+                }
 
-                // Crear y guardar el primer profesional usando el constructor completo
-                Profesional profesional1 = new Profesional(
-                        "Carlos López", // nombre
-                        123123123L, // cedula
-                        3001231234L, // número celular
-                        "carlos.lopez@example.com", // correo
-                        "carlos123", // contraseña
-                        servicioRef1, // servicio
-                        tipoRef1 // tipo de queja
-                );
-                profesionalRepository.save(profesional1);
-                log.info("Profesional 1 insertado correctamente");
-
-                // Segundo profesional
-                Servicio servicioRef2 = servicioRepository.findById(3L)
-                        .orElseThrow(() -> new RuntimeException("Servicio con id 3 no encontrado"));
-                TipoQueja tipoRef2 = tipoQuejaRepository.findById(2L)
-                        .orElseThrow(() -> new RuntimeException("TipoQueja con id 2 no encontrado"));
-
-                Profesional profesional2 = new Profesional(
-                        "Ana Torres", // nombre
-                        456456456L, // cedula
-                        3109876544L, // número celular (cambiado a uno único)
-                        "ana.torres@example.com", // correo
-                        "ana123", // contraseña
-                        servicioRef2, // servicio
-                        tipoRef2 // tipo de queja
-                );
-
-                profesionalRepository.save(profesional2);
-                log.info("Profesional 2 insertado correctamente");
-
-                log.info("Profesionales insertados con éxito.");
+                log.info("{} profesionales insertados (uno por cada servicio/tipo).", servicios.size() * tipos.size());
             } else {
                 log.info("Ya existen " + profesionalRepository.count()
                         + " profesionales en la base de datos. Se omite la inserción.");

@@ -12,7 +12,8 @@ public class Profesional extends Usuario {
     @JoinColumn(name = "tipoqueja_id", nullable = false)
     private TipoQueja tipo;
 
-    @OneToOne
+    //Un servicio puede tener múltiples profesionales
+    @ManyToOne 
     @JoinColumn(name = "servicio_id", nullable = false)
     private Servicio servicio;
 
@@ -67,5 +68,9 @@ public class Profesional extends Usuario {
         if (this.cargaTrabajo > 0) {
             this.cargaTrabajo--;
         }
+    }
+
+    public int getCargaTrabajo() {
+        return cargaTrabajo;
     }
 }

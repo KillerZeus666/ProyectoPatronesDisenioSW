@@ -16,16 +16,22 @@ public class IncumplimientoServiceImpl implements IncumplimientoService {
     @Autowired 
     IncumplimientoRepository incumplimientoRepository; 
     
+    @Autowired
+    private ProfesionalService profesionalService;
+
     @Override
     @Transactional
     public void onQuejaVencida(Queja queja) {
         Incumplimiento incumplimiento = new Incumplimiento();
         incumplimiento.setQueja(queja);
         incumplimiento.setEmpresa(queja.getEmpresa());
-        incumplimiento.setDescripcion("Incumplimiento por vencimiento de queja #" + queja.getId()
-                                     + ": " + queja.getDescripcion());
+        incumplimiento.setDescripcion("Incumplimiento por vencimiento de queja #" + queja.getId() + ": " + queja.getDescripcion());
 
-        incumplimientoRepository.save(incumplimiento);
-        System.out.println("Incumplimiento creado para queja ID: " + queja.getId());
+        incumplimientoRepository.save(incumplimiento); 
+
+        // Asignar inmediatamente al profesional con menor carga
+        profesionalService.asignarIncumplimiento(incumplimiento); 
+
+        System.out.println("Incumplimiento creado y asignado: " + incumplimiento.getId());
     }
 }
