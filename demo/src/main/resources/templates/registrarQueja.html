@@ -5,9 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Registrar Queja</title>
         <link rel="stylesheet" th:href="@{/css/header_footer.css(v=${#dates.createNow().getTime()})}">
-        <link rel="stylesheet" th:href="@{/css/form.css(v=${#dates.createNow().getTime()})}">
-        <link rel="stylesheet" th:href="@{/css/contenedorRegistroQueja.css(v=${#dates.createNow().getTime()})}">
-
+        <link rel="stylesheet" th:href="@{/css/opciones.css(v=${#dates.createNow().getTime()})}">
     </head>
     <body>
         <!-- Header con logo y navegación -->
@@ -26,21 +24,44 @@
         <div class="contenedor-form">
             <!-- Sección de registro de queja -->
             <form th:action="@{/quejas/registrar}" method="post" th:object="${quejaRequest}">
+                <!-- Campo Fecha -->
                 <label for="fecha">Fecha:</label>
                 <input type="date" id="fecha" th:field="*{fecha}" required>
-
+    
+                <!-- Lista de Tipos de Queja -->
                 <label for="tipo">Tipo:</label>
-                <input type="text" id="tipo" th:field="*{tipo}" placeholder="Ej: Reclamo" required>
-
+                <select id="tipo" th:field="*{tipo}" required>
+                    <option value="" disabled selected>Seleccione un tipo de queja</option>
+                    <option th:each="tipoQueja : ${tiposQueja}" 
+                            th:value="${tipoQueja.id}" 
+                            th:text="${tipoQueja.descripcion}">
+                    </option>
+                </select>
+    
+                <!-- Lista de Empresas -->
+                <label for="idEmpresa">Empresa:</label>
+                <select id="idEmpresa" th:field="*{idEmpresa}" required>
+                    <option value="" disabled selected>Seleccione una empresa</option>
+                    <option th:each="empresa : ${empresas}" 
+                            th:value="${empresa.id}" 
+                            th:text="${empresa.nombre}">
+                    </option>
+                </select>
+    
+                <!-- Lista de Servicios -->
+                <label for="idServicio">Servicio:</label>
+                <select id="idServicio" th:field="*{idServicio}" required>
+                    <option value="" disabled selected>Seleccione un servicio</option>
+                    <option th:each="servicio : ${servicios}" 
+                            th:value="${servicio.id}" 
+                            th:text="${servicio.tipo}">
+                    </option>
+                </select>
+    
+                <!-- Campo Descripción -->
                 <label for="descripcion">Descripción:</label>
-                <textarea id="descripcion" th:field="*{descripcion}" placeholder="Detalle la queja" required></textarea>
-
-                <label for="idServicio">ID Servicio:</label>
-                <input type="number" id="idServicio" th:field="*{idServicio}" required>
-
-                <label for="idEmpresa">ID Empresa:</label>
-                <input type="number" id="idEmpresa" th:field="*{idEmpresa}" required>
-
+                <textarea id="descripcion" th:field="*{descripcion}" required></textarea>
+    
                 <button type="submit">Registrar Queja</button>
             </form>
         </div>

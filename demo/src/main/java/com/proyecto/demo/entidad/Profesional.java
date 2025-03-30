@@ -1,56 +1,76 @@
 package com.proyecto.demo.entidad;
 
 import jakarta.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@DiscriminatorValue("PROFESIONAL")
 public class Profesional extends Usuario {
 
-    @Column(nullable = false)
-    private String tipoServicio;
+    @ManyToOne 
+    @JoinColumn(name = "tipoqueja_id", nullable = false)
+    private TipoQueja tipo;
 
-    @Column(nullable = false)
-    private String tipoQueja;
+    //Un servicio puede tener múltiples profesionales
+    @ManyToOne 
+    @JoinColumn(name = "servicio_id", nullable = false)
+    private Servicio servicio;
 
-    @OneToMany
-    @JoinColumn(name = "profesional_id")
-    private List<Incumplimiento> procesoIncumplimiento;
+    @Column(name = "carga_trabajo", nullable = false)
+    private Integer cargaTrabajo = 0;
+
+    @OneToMany(mappedBy = "profesionalAsignado")
+    private List<Incumplimiento> incumplimientosAsignados = new ArrayList<>();
 
     // Constructor vacío
     public Profesional() {}
 
-    // Constructor con parámetros
-    public Profesional(String nombre, String correo, String contraseña, 
-                       String tipoServicio, String tipoQueja, List<Incumplimiento> procesoIncumplimiento) {
-        super(nombre, correo, contraseña);
-        this.tipoServicio = tipoServicio;
-        this.tipoQueja = tipoQueja;
-        this.procesoIncumplimiento = procesoIncumplimiento;
+    // Constructor que utiliza el constructor de Usuario
+    public Profesional(String nombre, long cedula, long numeroCelular, String correo, String contraseña,
+                       Servicio servicio, TipoQueja tipo) {
+        super(nombre, cedula, numeroCelular, correo, contraseña);
+        this.servicio = servicio;
+        this.tipo = tipo;
     }
 
-    // Getters
-    public String getTipoServicio() {
-        return tipoServicio;
+    // Getters y Setters
+    public Servicio getServicio() {
+        return servicio;
     }
 
-    public String getTipoQueja() {
-        return tipoQueja;
+    public TipoQueja getTipo() {
+        return tipo;
     }
 
-    public List<Incumplimiento> getProcesoIncumplimiento() {
-        return procesoIncumplimiento;
+    public List<Incumplimiento> getIncumplimientosAsignados() {
+        return incumplimientosAsignados;
     }
 
-    // Setters
-    public void setTipoServicio(String tipoServicio) {
-        this.tipoServicio = tipoServicio;
+    public void setServicio(Servicio servicio) {
+        this.servicio = servicio;
     }
 
-    public void setTipoQueja(String tipoQueja) {
-        this.tipoQueja = tipoQueja;
+    public void setTipo(TipoQueja tipo) {
+        this.tipo = tipo;
     }
 
-    public void setProcesoIncumplimiento(List<Incumplimiento> procesoIncumplimiento) {
-        this.procesoIncumplimiento = procesoIncumplimiento;
+    public void setIncumplimientosAsignados(List<Incumplimiento> incumplimientosAsignados) {
+        this.incumplimientosAsignados = incumplimientosAsignados;
+    }
+
+    // Actualizar la carga
+    public void incrementarCargaTrabajo() {
+        this.cargaTrabajo++;
+    }
+
+    public void decrementarCargaTrabajo() {
+        if (this.cargaTrabajo > 0) {
+            this.cargaTrabajo--;
+        }
+    }
+
+    public int getCargaTrabajo() {
+        return cargaTrabajo;
     }
 }

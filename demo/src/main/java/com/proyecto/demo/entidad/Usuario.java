@@ -1,10 +1,12 @@
 package com.proyecto.demo.entidad;
 
 import jakarta.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name = "tipo_usuario")
 public class Usuario {
 
     @Id
@@ -26,8 +28,8 @@ public class Usuario {
     @Column(nullable = false)
     private String contraseña;
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
-    private List<Queja> quejas;
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Queja> quejas = new ArrayList<>();
 
     // Constructor vacío
     public Usuario() {}
@@ -42,14 +44,11 @@ public class Usuario {
         this.quejas = quejas;
     }
 
-    // Constructor alternativo para `Profesional`
-    public Usuario(String nombre, String correo, String contraseña) {
+    // Constructor con lista de quejas vacía
+    public Usuario(String nombre, long cedula, long numeroCelular, String correo, String contraseña) {
         this.nombre = nombre;
-        this.correo = correo;
-        this.contraseña = contraseña;
-    }
-   // Constructor alternativo para `Profesional`
-    public Usuario(String correo, String contraseña) {
+        this.cedula = cedula;
+        this.numeroCelular = numeroCelular;
         this.correo = correo;
         this.contraseña = contraseña;
     }

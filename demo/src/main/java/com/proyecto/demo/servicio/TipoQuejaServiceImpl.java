@@ -13,13 +13,12 @@ public class TipoQuejaServiceImpl implements TipoQuejaService {
 
     @Autowired
     private TipoQuejaRepository tipoQuejaRepository;
-
-    // Buscar por descripcion del tipo de queja
+    //Buscar por descripcion del tipo de queja
     @Override
     public TipoQueja buscarTipoQueja(String descripcion) {
         return tipoQuejaRepository.findByDescripcion(descripcion);
     }
-
+    
     @Override
     public List<TipoQueja> obtenerTodosLosTiposQueja() {
         return tipoQuejaRepository.findAll();

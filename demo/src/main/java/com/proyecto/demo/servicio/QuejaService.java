@@ -9,7 +9,7 @@ import java.util.List;
 public interface QuejaService {
 
   // Registrar una nueva queja (sin ID, agregando idUsuario)
-  Queja registrarQueja(Date fecha, TipoQueja tipo, String descripcion, Long idServicio, Long idEmpresa, Long idUsuario);
+  Queja registrarQueja(Date fecha, Long idTipoQueja, String descripcion, Long idServicio, Long idEmpresa, Long idUsuario);
 
   // Buscar una queja por ID
   Queja buscarQueja(Long id);
@@ -22,4 +22,7 @@ public interface QuejaService {
 
   // Ver todas las quejas de la BD
   List<Queja> obtenerTodasLasQuejas();
+
+  //Método que se ejecuta periodicamente para verificar quejas vencidas
+  public void verificarQuejasVencidas();
 }

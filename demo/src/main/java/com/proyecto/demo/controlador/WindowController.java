@@ -1,5 +1,7 @@
 package com.proyecto.demo.controlador;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,8 +13,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.proyecto.demo.entidad.Empresa;
 import com.proyecto.demo.entidad.EntidadVigilante;
 import com.proyecto.demo.entidad.Queja;
+import com.proyecto.demo.entidad.Servicio;
+import com.proyecto.demo.entidad.TipoQueja;
 import com.proyecto.demo.entidad.Usuario;
 import com.proyecto.demo.servicio.QuejaService;
+import com.proyecto.demo.servicio.ServicioService;
+import com.proyecto.demo.servicio.TipoQuejaService;
 import com.proyecto.demo.servicio.UsuarioService;
 import com.proyecto.demo.servicio.EmpresaService;
 import com.proyecto.demo.servicio.EntidadVigilanteService;
@@ -119,15 +125,5 @@ public class WindowController {
         }
         model.addAttribute("usuario", usuarioLogueado);
         return "opcionesCiudadano"; // Nombre de la plantilla Thymeleaf
-    }
-
-    @GetMapping("/quejas/registrar")
-    public String mostrarFormularioRegistroQueja(Model model, HttpSession session) {
-        Usuario usuarioLogueado = (Usuario) session.getAttribute("usuarioLogueado");
-        if (usuarioLogueado == null) {
-            return "redirect:/inicio_sesion"; // Redirige al login si no hay usuario
-        }
-        model.addAttribute("quejaRequest", new QuejaRequest());
-        return "registrarQueja"; // Asegúrate de que exista registrarQueja.html
-    }
+    }    
 }

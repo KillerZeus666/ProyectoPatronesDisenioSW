@@ -1,7 +1,6 @@
 package com.proyecto.demo.repositorio;
 
 import com.proyecto.demo.entidad.Empresa;
-import com.proyecto.demo.entidad.Usuario;
 
 import org.springframework.stereotype.Repository;
 

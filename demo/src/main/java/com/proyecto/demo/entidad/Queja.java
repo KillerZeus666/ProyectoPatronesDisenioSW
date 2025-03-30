@@ -1,5 +1,6 @@
 package com.proyecto.demo.entidad;
 
+import java.util.Calendar;
 import java.util.Date;
 import jakarta.persistence.*;
 
@@ -14,12 +15,12 @@ public class Queja {
     @Column(nullable = false)
     private Date fecha;
 
-    @Column(nullable = false, length = 500)
-    private String descripcion;
-
-    @ManyToOne
+    @ManyToOne 
     @JoinColumn(name = "tipoqueja_id", nullable = false)
     private TipoQueja tipo;
+
+    @Column(nullable = false, length = 500)
+    private String descripcion;
 
     @ManyToOne
     @JoinColumn(name = "servicio_id", nullable = false)
@@ -32,6 +33,13 @@ public class Queja {
     @ManyToOne
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
+
+    @Column(nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE")
+    private boolean procesada = false;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = false)
+    private Date fechaLimite;
 
     // Constructor vacío
     public Queja() {
@@ -53,6 +61,7 @@ public class Queja {
         this.servicio = servicio;
         this.empresa = empresa;
         this.usuario = usuario;
+        this.fechaLimite = calcularFechaLimite(fecha);
     }
 
     // Getters y Setters
@@ -120,13 +129,36 @@ public class Queja {
         }
     }
 
+    public boolean isProcesada() {
+        return procesada;
+    }
+
+    public void setProcesada(boolean procesada) {
+        this.procesada = procesada;
+    }
+
+    public Date getFechaLimite() {
+        return fechaLimite;
+    }
+
+    public void setFechaLimite(Date fechaLimite) {
+        this.fechaLimite = fechaLimite;
+    }
+
+    private Date calcularFechaLimite(Date fecha) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(fecha);
+        calendar.add(Calendar.DAY_OF_MONTH, 15); // Suma 15 días
+        return calendar.getTime();
+    }
+
     // Método toString para depuración
     @Override
     public String toString() {
         return "Queja{" +
                 "id=" + id +
                 ", fecha=" + fecha +
-                ", tipo='" + tipo + '\'' +
+                ", tipo=" + (tipo != null ? tipo.getDescripcion() : "null") + // Usar getDescripcion()
                 ", descripcion='" + descripcion + '\'' +
                 ", servicio=" + (servicio != null ? servicio.getId() : "null") +
                 ", empresa=" + (empresa != null ? empresa.getId() : "null") +

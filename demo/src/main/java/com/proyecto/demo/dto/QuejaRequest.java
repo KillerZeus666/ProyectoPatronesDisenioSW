@@ -1,4 +1,4 @@
-package com.proyecto.demo.controlador;
+package com.proyecto.demo.dto;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -9,11 +9,15 @@ import java.util.Date;
 public class QuejaRequest {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date fecha;
-    private TipoQueja tipo;
+    private Long tipo;
     private String descripcion;
     private Long idServicio;
     private Long idEmpresa;
     private Long idUsuario;
+
+    // Default constructor
+    public QuejaRequest() {
+    }
 
     // Getters y Setters
     public Date getFecha() {
@@ -23,12 +27,10 @@ public class QuejaRequest {
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
-
-    public TipoQueja getTipo() {
+    public Long getTipo() {
         return tipo;
     }
-
-    public void setTipo(TipoQueja tipo) {
+    public void setTipo(Long tipo) {
         this.tipo = tipo;
     }
 

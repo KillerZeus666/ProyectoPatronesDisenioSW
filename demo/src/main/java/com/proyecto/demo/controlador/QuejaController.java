@@ -1,13 +1,15 @@
 package com.proyecto.demo.controlador;
 
+import com.proyecto.demo.dto.QuejaRequest;
 import com.proyecto.demo.entidad.Queja;
 import com.proyecto.demo.entidad.Usuario;
+import com.proyecto.demo.servicio.EmpresaService;
 import com.proyecto.demo.servicio.QuejaService;
+import com.proyecto.demo.servicio.ServicioService;
+import com.proyecto.demo.servicio.TipoQuejaService;
 
 import jakarta.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -22,50 +24,73 @@ public class QuejaController {
     @Autowired
     private QuejaService quejaService;
 
-    // Endpoint para registrar una queja
+    @Autowired
+    private EmpresaService empresaService;
+
+    @Autowired
+    private ServicioService servicioService;
+
+    @Autowired
+    private TipoQuejaService tipoQuejaService;
+
+    @GetMapping("/formulario")
+    public String mostrarFormularioRegistroQueja(Model model, HttpSession session) {
+        Usuario usuarioLogueado = (Usuario) session.getAttribute("usuarioLogueado");
+        if (usuarioLogueado == null) {
+            return "redirect:/portalUsuario";
+        }
+        model.addAttribute("quejaRequest", new QuejaRequest());
+        model.addAttribute("tiposQueja", tipoQuejaService.obtenerTodosLosTiposQueja());
+        model.addAttribute("empresas", empresaService.obtenerTodas());
+        model.addAttribute("servicios", servicioService.obtenerTodos());
+        return "registrarQueja";
+    } 
+
+    // Endpoint para registrar una queja usando x-www-form-urlencoded
     @PostMapping("/registrar")
-    public String registrarQueja(@ModelAttribute QuejaRequest request, Model model, HttpSession session) {
+    public String registrarQueja(@ModelAttribute QuejaRequest quejaRequest, Model model, HttpSession session) {
         // Obtener el usuario de la sesión
         Usuario usuarioLogueado = (Usuario) session.getAttribute("usuarioLogueado");
         if (usuarioLogueado == null) {
-            return "redirect:/inicio_sesion"; // Redirige si no hay usuario autenticado
+            return "redirect:/portalUsuario"; // Redirige si no hay usuario autenticado
         }
         // Asigna el idUsuario obtenido de la sesión al objeto request
-        request.setIdUsuario(usuarioLogueado.getId());
+        quejaRequest.setIdUsuario(usuarioLogueado.getId());
         
         // Llama al servicio para registrar la queja
-        Queja nuevaQueja = quejaService.registrarQueja(
-            request.getFecha(),
-            request.getTipo(),
-            request.getDescripcion(),
-            request.getIdServicio(),
-            request.getIdEmpresa(),
-            request.getIdUsuario()
+        quejaService.registrarQueja(
+            quejaRequest.getFecha(),
+            quejaRequest.getTipo(),
+            quejaRequest.getDescripcion(),
+            quejaRequest.getIdServicio(),
+            quejaRequest.getIdEmpresa(),
+            quejaRequest.getIdUsuario()
         );
-        return "redirect:/opcionesCiudadano"; // Redirige a la vista de opciones, por ejemplo
-    }  
-    
+        // Redirige a la pantalla de opciones del ciudadano
+        return "redirect:/opcionesCiudadano";
+    }
 
-    // Endpoint para buscar una queja por ID
-    @GetMapping("/id/{id}")
+    // Endpoint para buscar una queja por ID, devolviendo JSON
+    @GetMapping("/detalle/{id}")
+    @ResponseBody
     public Queja buscarQueja(@PathVariable Long id) {
         return quejaService.buscarQueja(id);
     }
 
-    // Endpoint para listar todas las quejas    
+    // Endpoint para ver quejas por cédula de usuario, devolviendo JSON
     @GetMapping("/usuario/{cedula}")
-    public String verQuejasPorUsuario(@PathVariable Long cedula, Model model) {
+    public String verQuejasPorUsr(@PathVariable Long cedula, Model model) {
         List<Queja> quejas = quejaService.verQuejasPorUsr(cedula);
         model.addAttribute("quejas", quejas);
-        return "QuejasCiudadano";  // Nombre de esta plantilla (misQuejas.html)
+        return "vistaQuejasCiudadano";
     }
 
-    // Endpoint para listar todas las quejas de una empresa con su id y mostrarlas en una vista HTML
-    @GetMapping("/{empresaId}")
+    // Endpoint para listar todas las quejas de una empresa y mostrarlas en una vista HTML
+    @GetMapping("/empresa/{empresaId}")
     public String obtenerQuejasPorEmpresa(@PathVariable Long empresaId, Model model) {
         List<Queja> quejas = quejaService.verQuejasPorEmpresa(empresaId);
         model.addAttribute("quejas", quejas);
-        return "vistaQuejas"; // Nombre del archivo HTML (vistaQuejas.html)
+        return "vistaQuejasEmpresa"; // Nombre de la plantilla HTML (vistaQuejas.html)
     }
     //Metodo para mostrar todas las quejas 
     @GetMapping("/todas")
