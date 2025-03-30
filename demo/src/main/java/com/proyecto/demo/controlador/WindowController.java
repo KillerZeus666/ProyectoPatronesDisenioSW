@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.proyecto.demo.entidad.Empresa;
@@ -126,4 +127,17 @@ public class WindowController {
         model.addAttribute("usuario", usuarioLogueado);
         return "opcionesCiudadano"; // Nombre de la plantilla Thymeleaf
     }    
+
+    @GetMapping("/logout")
+public String logout(HttpSession session) {
+    session.removeAttribute("usuarioLogueado");
+    session.removeAttribute("empresaId");
+    session.removeAttribute("empresaNombre");
+    session.removeAttribute("entidadId");
+    session.removeAttribute("entidadNombre");
+    return "redirect:/index";
+}
+
+
+
 }

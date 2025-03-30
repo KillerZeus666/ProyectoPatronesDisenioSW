@@ -16,7 +16,14 @@
         <nav>
             <a th:href="@{/index}">Inicio</a>
             <a th:href="@{/servicio}">Empresas</a>
-            <a th:href="@{/portalUsuario}">Iniciar sesión</a>
+        
+            <!-- Mostrar "Cerrar sesión" si hay un usuario, empresa o entidad en sesión -->
+            <a th:if="${session.empresaId != null or session.entidadId != null or session.usuarioLogueado != null}" 
+               th:href="@{/logout}">Cerrar sesión</a>
+        
+            <!-- Mostrar "Iniciar sesión" si NO hay usuario autenticado -->
+            <a th:unless="${session.empresaId != null or session.entidadId != null or session.usuarioLogueado != null}" 
+               th:href="@{/portalUsuario}">Iniciar sesión</a>
         </nav>
     </header>
 
