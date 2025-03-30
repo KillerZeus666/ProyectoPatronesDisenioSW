@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Registrar Queja</title>
         <link rel="stylesheet" th:href="@{/css/header_footer.css(v=${#dates.createNow().getTime()})}">
-        <link rel="stylesheet" th:href="@{/css/opciones.css(v=${#dates.createNow().getTime()})}">
+        <link rel="stylesheet" th:href="@{/css/form.css(v=${#dates.createNow().getTime()})}">
     </head>
     <body>
         <!-- Header con logo y navegación -->
@@ -22,7 +22,7 @@
 
         <!-- Contenedor principal -->
         <div class="contenedor-form">
-            <!-- Sección de registro de queja -->
+            <h1>Registrar Queja</h1>
             <form th:action="@{/quejas/registrar}" method="post" th:object="${quejaRequest}">
                 <!-- Campo Fecha -->
                 <label for="fecha">Fecha:</label>
@@ -66,25 +66,9 @@
             </form>
         </div>
 
-        
-        <!-- Footer -->
-        <footer>
-            <div class="footer-content">
-                <div class="logo-footer">
-                    <img src="https://i.postimg.cc/4NzHq4j1/logo.png" alt="Logo">
-                </div>
-                <div class="social-icons">
-                    <a href="#" target="_blank">
-                        <img src="https://i.postimg.cc/nhJBh9q5/github.png" alt="GitHub">
-                    </a>
-                    <a href="#" target="_blank">
-                        <img src="https://images.vexels.com/media/users/3/137380/isolated/preview/1b2ca367caa7eff8b45c09ec09b44c16-logotipo-de-icono-de-instagram.png" alt="Instagram">
-                    </a>
-                    <a href="#" target="_blank">
-                        <img src="https://images.vexels.com/media/users/3/137253/isolated/preview/90dd9f12fdd1eefb8c8976903944c026-logotipo-de-icono-de-facebook.png?w=360" alt="Facebook">
-                    </a>
-                </div>
-            </div>
-        </footer>
+       
     </body>
+
+
+
 </html>

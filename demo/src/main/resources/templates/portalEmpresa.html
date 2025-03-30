@@ -5,11 +5,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Servicio</title>
         <link rel="stylesheet" th:href="@{/css/header_footer.css(v=${#dates.createNow().getTime()})}">
-        <link rel="stylesheet" th:href="@{/css/portalEmpresa.css(v=${#dates.createNow().getTime()})}">
-
+        <link rel="stylesheet" th:href="@{/css/portalEmpresaActualizado.css(v=${#dates.createNow().getTime()})}">
+       
     </head>
 <body>
-    <!-- Header con logo y barra de navegación -->
     <header>
         <div class="logo">
             <img src="https://i.postimg.cc/4NzHq4j1/logo.png" alt="Logo">
@@ -20,23 +19,23 @@
             <a th:href="@{/portalUsuario}">Iniciar sesión</a>
         </nav>
     </header>
+    
+    <div class="contenedor">
         <h1>Bienvenido al Portal de las Empresas</h1>
         <h2 id="empresaNombre" th:text="${session.empresaNombre}" th:data-empresa-id="${session.empresaId}">Empresa desconocida</h2>
         
-       <!-- Enlace que genera la URL con el empresaId de la sesión -->
-        <a th:href="@{/quejas/empresa/{empresaId}(empresaId=${session.empresaId})}">
-            <button>Ver Quejas</button>
-        </a>
-
-           <!-- Enlace que genera la URL con el empresaId de la sesión -->
-        <a th:href="@{/incumplimiento/empresa/{empresaId}(empresaId=${session.empresaId})}">
-            <button>Ver Notificaciones de Incumplimiento</button>
-        </a>
-        
-        <!-- Contenedor donde se mostrarán las quejas -->
-        <div id="resultados"></div>
+        <div class="botones">
+            <a th:href="@{/quejas/empresa/{empresaId}(empresaId=${session.empresaId})}">
+                <button>Ver Quejas</button>
+            </a>
     
-    <!--Footer -->
+               <!-- Enlace que genera la URL con el empresaId de la sesión -->
+            <a th:href="@{/incumplimiento/empresa/{empresaId}(empresaId=${session.empresaId})}">
+                <button>Ver Notificaciones de Incumplimiento</button>
+            </a>
+        </div>
+    </div>
+    
     <footer>
         <div class="footer-content">
             <div class="logo-footer">
@@ -55,7 +54,5 @@
             </div>
         </div>
     </footer>
-
-    
 </body>
 </html>
