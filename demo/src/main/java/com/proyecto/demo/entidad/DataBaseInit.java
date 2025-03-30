@@ -43,8 +43,8 @@ public class DataBaseInit implements ApplicationRunner {
                 EntidadVigilante entidadVigilante = new EntidadVigilante(
                         "Superintendencia de Servicios Públicos Domiciliarios",
                         123456789,
-                        "sspd@example.com",
-                        "sspd123");
+                        "admin@gmail.com",
+                        "123");
                 entidadVigilanteRepository.save(entidadVigilante);
                 log.info("Entidad Vigilante insertada.");
             } else {

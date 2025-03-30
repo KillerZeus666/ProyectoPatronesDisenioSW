@@ -28,6 +28,10 @@
             <button>Ver Quejas</button>
         </a>
 
+           <!-- Enlace que genera la URL con el empresaId de la sesión -->
+        <a th:href="@{/incumplimiento/empresa/{empresaId}(empresaId=${session.empresaId})}">
+            <button>Ver Notificaciones de Incumplimiento</button>
+        </a>
         
         <!-- Contenedor donde se mostrarán las quejas -->
         <div id="resultados"></div>
