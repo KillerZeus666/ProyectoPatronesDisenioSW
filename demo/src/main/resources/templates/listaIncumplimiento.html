@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" th:href="@{/css/quejasPorEmpresa.css(v=${#dates.createNow().getTime()})}">
+
+<head>
+    <title>Lista de Incumplimientos</title>
+</head>
+<body>
+    <h2>Lista de Incumplimientos</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Empresa</th>
+                <th>Descripción</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="incumplimiento : ${incumplimientos}">
+                <td th:text="${incumplimiento.id}"></td>
+                <td th:text="${incumplimiento.empresa}"></td>
+                <td th:text="${incumplimiento.descripcion}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

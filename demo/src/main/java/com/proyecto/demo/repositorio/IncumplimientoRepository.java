@@ -11,5 +11,5 @@ import org.springframework.stereotype.Repository;
 public interface IncumplimientoRepository extends JpaRepository<Incumplimiento, Long> {
 
     List<Incumplimiento> findByProfesionalAsignadoIsNull();
-
+    List<Incumplimiento> findByEmpresa_Id(Long empresaId);
 }

@@ -1,5 +1,7 @@
 package com.proyecto.demo.servicio;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,5 +35,17 @@ public class IncumplimientoServiceImpl implements IncumplimientoService {
         profesionalService.asignarIncumplimiento(incumplimiento); 
 
         System.out.println("Incumplimiento creado y asignado: " + incumplimiento.getId());
+    }
+
+    @Override
+    public List<Incumplimiento> obtenerTodosIncumplimientos() {
+        return incumplimientoRepository.findAll();
+    }
+
+    @Override
+    public List<Incumplimiento> verIncumplimientosPorEmpresa(Long empresaId) {
+        List<Incumplimiento> incumplimientos = incumplimientoRepository.findByEmpresa_Id(empresaId);
+        System.out.println("Incumplimientos encontrados para empresa " + empresaId + ": " + incumplimientos.size());
+        return incumplimientos;
     }
 }

@@ -105,4 +105,9 @@ public class Empresa {
     public void setEntidadVigilante(EntidadVigilante entidadVigilante) {
         this.entidadVigilante = entidadVigilante;
     }
+
+    @Override
+    public String toString() {
+        return nombre;
+    }
 }
