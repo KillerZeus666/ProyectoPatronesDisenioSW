@@ -40,6 +40,7 @@
                         <th>Emisor</th>
                         <th>Empresa Remitente</th>
                         <th>Envío de Queja</th>
+                        <th>Estado Queja</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -55,6 +56,10 @@
                                 <button type="submit" class="btn-enviar">Enviar Queja</button>
                             </form>
                         </td>
+                        <td th:text="${queja.procesada} ? 'Vencida' : 'Pendiente'"
+                         th:classappend="${queja.procesada} ? 'estado-vencida' : 'estado-pendiente'">
+                        </td>
+
                     </tr>
                 </tbody>
             </table>

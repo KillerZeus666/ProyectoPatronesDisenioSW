@@ -104,3 +104,12 @@ h1 {
     opacity: 0;
     pointer-events: none;
 }
+
+.estado-vencida {
+    color: red;
+    font-weight: bold;
+}
+.estado-pendiente {
+    color: orange;
+    font-weight: bold;
+}
