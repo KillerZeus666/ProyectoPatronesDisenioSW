@@ -38,6 +38,7 @@ public class RespuestaServiceImpl implements RespuestaService {
         }
         
         Date fechaRespuesta = new Date();
+        queja.setProcesada(true);
         Respuesta nuevaRespuesta = new Respuesta(fechaRespuesta, descripcion, empresa, queja);
         return respuestaRepository.save(nuevaRespuesta);
     }
