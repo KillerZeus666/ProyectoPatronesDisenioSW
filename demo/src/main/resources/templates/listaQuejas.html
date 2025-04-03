@@ -56,7 +56,7 @@
                                 <button type="submit" class="btn-enviar">Enviar Queja</button>
                             </form>
                         </td>
-                        <td th:text="${queja.procesada} ? 'Vencida' : 'Pendiente'"
+                        <td th:text="${queja.procesada} ? 'Procesada' : 'Pendiente'"
                          th:classappend="${queja.procesada} ? 'estado-vencida' : 'estado-pendiente'">
                         </td>
 

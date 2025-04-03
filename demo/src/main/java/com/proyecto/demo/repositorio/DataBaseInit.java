@@ -1,4 +1,4 @@
-package com.proyecto.demo.entidad;
+package com.proyecto.demo.repositorio;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -7,13 +7,13 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
-import com.proyecto.demo.repositorio.EmpresaRepository;
-import com.proyecto.demo.repositorio.UsuarioRepository;
-import com.proyecto.demo.repositorio.QuejaRepository;
-import com.proyecto.demo.repositorio.EntidadVigilanteRepository;
-import com.proyecto.demo.repositorio.ProfesionalRepository;
-import com.proyecto.demo.repositorio.ServicioRepository;
-import com.proyecto.demo.repositorio.TipoQuejaRepository;
+import com.proyecto.demo.entidad.Empresa;
+import com.proyecto.demo.entidad.EntidadVigilante;
+import com.proyecto.demo.entidad.Profesional;
+import com.proyecto.demo.entidad.Queja;
+import com.proyecto.demo.entidad.Servicio;
+import com.proyecto.demo.entidad.TipoQueja;
+import com.proyecto.demo.entidad.Usuario;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
