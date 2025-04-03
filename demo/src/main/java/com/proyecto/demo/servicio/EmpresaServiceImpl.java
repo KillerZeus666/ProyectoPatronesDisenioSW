@@ -6,17 +6,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.proyecto.demo.entidad.Empresa;
-import com.proyecto.demo.entidad.Usuario;
+import com.proyecto.demo.entidad.EntidadVigilante;
 import com.proyecto.demo.repositorio.EmpresaRepository;
-import com.proyecto.demo.repositorio.UsuarioRepository;
+import com.proyecto.demo.repositorio.EntidadVigilanteRepository;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
 public class EmpresaServiceImpl implements EmpresaService {
     @Autowired
     EmpresaRepository empresaRepository;
+
+    @Autowired
+    EntidadVigilanteRepository entidadVigilanteRepository;
 
     @Override
     public List<Empresa> obtenerTodas() {
@@ -41,6 +43,17 @@ public class EmpresaServiceImpl implements EmpresaService {
     @Override
     public Empresa validarEmpresa(String correo, String contraseña) {
         return empresaRepository.findByNombreAndContraseña(correo, contraseña);
+    }
 
+    @Override
+    public void actualizarEntidadVigilante(Long empresaId, Long entidadId) {
+        Optional<Empresa> empresaOpt = empresaRepository.findById(empresaId);
+        Optional<EntidadVigilante> entidadOpt = entidadVigilanteRepository.findById(entidadId);
+
+        if (empresaOpt.isPresent() && entidadOpt.isPresent()) {
+            Empresa empresa = empresaOpt.get();
+            empresa.setEntidadVigilante(entidadOpt.get());
+            empresaRepository.save(empresa);
+        }
     }
 }

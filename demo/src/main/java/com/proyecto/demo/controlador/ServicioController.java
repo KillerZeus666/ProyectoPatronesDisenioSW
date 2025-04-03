@@ -32,6 +32,6 @@ public class ServicioController {
     @PostMapping("/actualizarEmpresaServicio")
     public String actualizarEmpresaServicio(@RequestParam Long servicioId, @RequestParam Long empresaId) {
         servicioService.actualizarEmpresa(servicioId, empresaId);
-        return "redirect:/configuracionTipoQueja";
+        return "redirect:/tipo_quejas";
     }
 }

@@ -3,10 +3,7 @@ package com.proyecto.demo.servicio;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.stereotype.Service;
-
 import com.proyecto.demo.entidad.Empresa;
-import com.proyecto.demo.entidad.Usuario;
 
 public interface EmpresaService {
 
@@ -19,5 +16,7 @@ public interface EmpresaService {
     public void eliminar(Long id);
 
     Empresa validarEmpresa(String correo, String contraseña);
+
+    public void actualizarEntidadVigilante(Long id, Long entidadId);
 
 }

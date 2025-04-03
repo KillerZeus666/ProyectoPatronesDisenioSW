@@ -34,4 +34,10 @@ public class EmpresaController {
         empresaService.eliminar(id);
         return "redirect:/empresa/listar";
     }
+
+    @PostMapping("/actualizarEntidadVigilante")
+    public String actualizarEntidadVigilante(@RequestParam Long id, @RequestParam Long entidadId) {
+        empresaService.actualizarEntidadVigilante(id, entidadId);
+        return "redirect:/tipo_quejas";
+    }
 }
