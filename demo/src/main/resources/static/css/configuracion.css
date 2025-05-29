@@ -78,7 +78,7 @@
     border-collapse: collapse;
 }
 
-.config-table th, 
+.config-table th,
 .config-table td {
     padding: 1rem;
     text-align: left;
@@ -169,32 +169,76 @@
     margin-top: 2rem;
 }
 
+/* Contenedor de empresas y selector de entidad */
+.empresas-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 1.5rem;
+}
+
+.entidad-selector {
+    background-color: var(--secondary-color);
+    padding: 1.5rem;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Checkbox personalizado */
+.checkbox-input {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--primary-color);
+    cursor: pointer;
+}
+
+/* Botón grande */
+.btn-large {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+}
+
+/* Selector de entidad */
+.entidad-selector .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.entidad-selector label {
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+
 /* Responsive */
 @media (max-width: 768px) {
     .config-container {
         padding: 0 1rem;
     }
-    
+
     .inline-form {
         flex-direction: column;
         align-items: flex-start;
         gap: 0.5rem;
     }
-    
+
     .form-group {
         width: 100%;
     }
-    
+
     .form-input {
         width: 100%;
     }
-    
+
     .btn-action {
         width: 100%;
         justify-content: center;
     }
-    
-    .config-table th, 
+
+    .config-table th,
     .config-table td {
         padding: 0.75rem;
     }
@@ -204,14 +248,25 @@
     .config-header h1 {
         font-size: 1.75rem;
     }
-    
+
     .section-header h2 {
         font-size: 1.1rem;
     }
-    
-    .config-table th, 
+
+    .config-table th,
     .config-table td {
         padding: 0.5rem;
         font-size: 0.9rem;
+    }
+}
+
+/* Responsive para el contenedor de empresas */
+@media (max-width: 768px) {
+    .empresas-container {
+        padding: 1rem;
+    }
+
+    .entidad-selector {
+        padding: 1rem;
     }
 }
