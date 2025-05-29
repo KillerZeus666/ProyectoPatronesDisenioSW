@@ -1,79 +1,315 @@
-/* Elimina márgenes y rellenos predeterminados */
+/* Reset y estilos base */
+:root {
+    --primary-color: #2C9494;
+    --primary-dark: #1A4D4D;
+    --primary-light: #4B9B9D;
+    --secondary-color: #F5F7FA;
+    --text-color: #333333;
+    --text-light: #666666;
+    --white: #FFFFFF;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Estilos para el header */
-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #2C9494;
-    padding: 20px;
-    width: 100%; /* Asegura que el header ocupe todo el ancho de la página */
-}
-/* Estilos generales */
 body {
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-color);
+    line-height: 1.6;
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Hace que el body ocupe toda la altura de la ventana */
+    min-height: 100vh;
+    background-color: var(--secondary-color);
 }
 
-/* Estilos para la barra de navegación */
-nav {
+/* Header styles */
+header {
+    background-color: var(--white);
+    box-shadow: var(--shadow);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding: 1rem 0;
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
     display: flex;
-    gap: 20px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.logo img {
+    height: 40px;
+}
+
+.logo span {
+    font-weight: 600;
+    color: var(--primary-dark);
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
 }
 
 nav a {
-    color: rgb(0, 0, 0);
     text-decoration: none;
-    font-size: 18px;
+    color: var(--text-color);
+    font-weight: 500;
+    transition: var(--transition);
+    position: relative;
 }
 
-nav a:hover {
+nav a.active {
+    color: var(--primary-color);
+}
+
+nav a.active::after,
+nav a:hover::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--primary-color);
+}
+
+.btn-login {
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 0.5rem 1.25rem;
+    border-radius: 4px;
+}
+
+.btn-login:hover {
+    background-color: var(--primary-dark);
+    text-decoration: none;
+}
+
+.btn-login:hover::after {
+    display: none;
+}
+
+.btn-logout {
+    color: var(--text-light);
+    padding: 0.5rem 1.25rem;
+    border-radius: 4px;
+    border: 1px solid var(--text-light);
+}
+
+.btn-logout:hover {
+    color: var(--primary-dark);
+    border-color: var(--primary-dark);
+    text-decoration: none;
+}
+
+.btn-logout:hover::after {
+    display: none;
+}
+
+.mobile-menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 24px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.mobile-menu-toggle span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: var(--primary-dark);
+    transition: var(--transition);
+}
+
+/* Footer styles */
+footer {
+    background-color: var(--primary-dark);
+    color: var(--white);
+    margin-top: auto;
+    padding: 3rem 0 0;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    align-items: center;
+    text-align: center;
+}
+
+.footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.logo-footer {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.logo-footer img {
+    height: 40px;
+}
+
+.logo-footer span {
+    font-weight: 600;
+    color: var(--white);
+}
+
+.footer-brand p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: space-around;
+}
+
+.links-column h4 {
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    color: var(--white);
+}
+
+.links-column ul {
+    list-style: none;
+}
+
+.links-column li {
+    margin-bottom: 0.5rem;
+}
+
+.links-column a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: var(--transition);
+    font-size: 0.9rem;
+}
+
+.links-column a:hover {
+    color: var(--white);
     text-decoration: underline;
 }
 
-/* Estilo para el logo */
-.logo img {
-    height: 50px; /* Ajusta el tamaño del logo según sea necesario */
-}
-/* Estilos para el footer *//* Estilos para el footer */
-footer {
-    background-color: #2C9494;
-    color: white;
+.footer-social{
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: relative;
-    justify-content: center; /* Asegura que el contenido esté centrado vertical y horizontalmente */
-    padding: 20px;
-    margin-top: auto; /* Hace que el footer siempre se quede al fondo */
+    text-align: center;
 }
 
-/* Logo en el footer */
-.logo-footer img {
-    height: 50px; /* Ajusta el tamaño del logo */
-    margin-bottom: 20px; /* Espacio entre el logo y los iconos */
+.footer-social h4 {
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    color: var(--white);
 }
 
-/* Contenedor de los iconos sociales */
 .social-icons {
     display: flex;
-    gap: 20px;
-    justify-content: center; /* Centra los íconos horizontalmente */
+    gap: 1rem;
 }
 
-/* Estilo de los iconos sociales */
-.social-icons a img {
-    width: 30px; /* Ajusta el tamaño de los íconos */
-    height: 30px;
-    transition: transform 0.3s ease;
+.social-icons a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    transition: var(--transition);
 }
 
-.social-icons a img:hover {
-    transform: scale(1.2); /* Efecto de aumento en el hover */
+.social-icons a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.social-icons img {
+    width: 20px;
+    height: 20px;
+}
+
+.footer-bottom {
+    margin-top: 3rem;
+    padding: 1rem 0;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .header-container {
+        padding: 0 1rem;
+    }
+
+    nav {
+        position: fixed;
+        top: 72px;
+        left: 0;
+        width: 100%;
+        background-color: var(--white);
+        box-shadow: var(--shadow);
+        padding: 1rem;
+        transform: translateY(-150%);
+        transition: var(--transition);
+        z-index: 99;
+    }
+
+    nav.active {
+        transform: translateY(0);
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .mobile-menu-toggle {
+        display: flex;
+    }
+
+    .mobile-menu-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .mobile-menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .mobile-menu-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    .footer-links {
+        flex-direction: column;
+        gap: 2rem;
+    }
 }

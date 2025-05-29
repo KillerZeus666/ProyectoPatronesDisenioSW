@@ -1,247 +1,315 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Servicio</title>
+    <title>Empresas Aliadas | Ventanilla Única</title>
     <link rel="stylesheet" th:href="@{/css/header_footer.css(v=${#dates.createNow().getTime()})}">
     <link rel="stylesheet" th:href="@{/css/servicio.css(v=${#dates.createNow().getTime()})}">
-    <link href="https://fonts.googleapis.com/css2?family=Alice&display=swap" rel="stylesheet">
-
-
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
+
 <body>
-    <!-- Header con logo y barra de navegación -->
+    <!-- Header moderno -->
     <header>
-        <div class="logo">
-            <img src="https://i.postimg.cc/4NzHq4j1/logo.png" alt="Logo">
+        <div class="header-container">
+            <div class="logo">
+                <img src="https://i.postimg.cc/4NzHq4j1/logo.png" alt="Logo Ventanilla Única">
+                <span>Ventanilla Única</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a th:href="@{/index}">Inicio</a></li>
+                    <li><a th:href="@{/servicio}" class="active">Empresas</a></li>
+                    <li>
+                        <a th:if="${session.empresaId != null or session.entidadId != null or session.usuarioLogueado != null}"
+                            th:href="@{/logout}" class="btn-logout">Cerrar sesión</a>
+                        <a th:unless="${session.empresaId != null or session.entidadId != null or session.usuarioLogueado != null}"
+                            th:href="@{/portalUsuario}" class="btn-login">Iniciar sesión</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
-        <nav>
-            <a th:href="@{/index}">Inicio</a>
-            <a th:href="@{/servicio}">Empresas</a>
-        
-            <!-- Mostrar "Cerrar sesión" si hay un usuario, empresa o entidad en sesión -->
-            <a th:if="${session.empresaId != null or session.entidadId != null or session.usuarioLogueado != null}" 
-               th:href="@{/logout}">Cerrar sesión</a>
-        
-            <!-- Mostrar "Iniciar sesión" si NO hay usuario autenticado -->
-            <a th:unless="${session.empresaId != null or session.entidadId != null or session.usuarioLogueado != null}" 
-               th:href="@{/portalUsuario}">Iniciar sesión</a>
-        </nav>
     </header>
 
-    <!-- Quejas por Empresa -->
-    <h1>Nuestras Empresas Aliadas</h1>
+    <!-- Contenido principal -->
+    <main class="services-container">
+        <!-- Hero section -->
+        <section class="services-hero">
+            <h1>Empresas Aliadas</h1>
+            <p class="subtitle">Conozca las empresas prestadoras de servicios domiciliarios asociadas a nuestro sistema
+            </p>
 
-    <!-- Tabs -->
-    <div class="tabs">
-        <div class="tab active" onclick="showTab('todas')">Todas</div>
-        <div class="tab" onclick="showTab('agua')">Agua</div>
-        <div class="tab" onclick="showTab('energia')">Energía</div>
-        <div class="tab" onclick="showTab('alcantarillado')">Alcantarillado</div>
-        <div class="tab" onclick="showTab('aseo')">Aseo</div>
-    </div>
-
-    <!-- Contenedor de empresas -->
-    <div id="todas" class="empresa-container">
-        <div class="empresa">
-            <img src="https://i.postimg.cc/wBWm2Wn8/img2.jpg" alt="Icono Empresa 1">
-            <div class="empresa-info">
-                <h3>EmCali</h3>
-                <p>Empresa pública de Cali que suministra agua potable a la ciudad.</p>
-                <a href="/portalUsuario" class="boton-queja">Nueva Queja</a>
+            <!-- Filtros por categoría -->
+            <div class="category-filters">
+                <button class="filter-btn active" data-category="all">
+                    <i class="fas fa-layer-group"></i> Todas
+                </button>
+                <button class="filter-btn" data-category="water">
+                    <i class="fas fa-tint"></i> Agua
+                </button>
+                <button class="filter-btn" data-category="energy">
+                    <i class="fas fa-bolt"></i> Energía
+                </button>
+                <button class="filter-btn" data-category="sewer">
+                    <i class="fas fa-water"></i> Alcantarillado
+                </button>
+                <button class="filter-btn" data-category="waste">
+                    <i class="fas fa-trash-alt"></i> Aseo
+                </button>
             </div>
-        </div>
+        </section>
 
-        <div class="empresa">
-            <img src="https://i.postimg.cc/DZ8bMrKW/img3.jpg" alt="Icono Empresa 2">
-            <div class="empresa-info">
-                <h3>Acueducto</h3>
-                <p>Empresa encargada del suministro de agua potable en Bogotá.</p>
-                <a href="/portalUsuario" class="boton-queja">Nueva Queja</a>
+        <!-- Listado de empresas -->
+        <section class="companies-grid">
+            <!-- Empresa 1 - Agua -->
+            <div class="company-card" data-categories="water">
+                <div class="company-logo">
+                    <img src="https://i.postimg.cc/wBWm2Wn8/img2.jpg" alt="EmCali">
+                    <span class="company-category water">
+                        <i class="fas fa-tint"></i> Agua
+                    </span>
+                </div>
+                <div class="company-info">
+                    <h3>EmCali</h3>
+                    <p class="company-description">Empresa pública de Cali que suministra agua potable a la ciudad.</p>
+                    <div class="company-actions">
+                        <a th:href="@{/quejas/formulario}" class="btn-complaint">
+                            <i class="fas fa-plus-circle"></i> Nueva Queja
+                        </a>
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <div class="empresa">
-            <img src="https://i.postimg.cc/859rQ71Z/img4.jpg" alt="Icono Empresa 3">
-            <div class="empresa-info">
-                <h3>Codensa</h3>
-                <p>Empresa encargada de la distribución de energía eléctrica en Bogotá y sus alrededores.</p>
-                <a href="/portalUsuario" class="boton-queja">Nueva Queja</a>
+            <!-- Empresa 2 - Agua -->
+            <div class="company-card" data-categories="water">
+                <div class="company-logo">
+                    <img src="https://i.postimg.cc/DZ8bMrKW/img3.jpg" alt="Acueducto">
+                    <span class="company-category water">
+                        <i class="fas fa-tint"></i> Agua
+                    </span>
+                </div>
+                <div class="company-info">
+                    <h3>Acueducto de Bogotá</h3>
+                    <p class="company-description">Empresa encargada del suministro de agua potable en Bogotá.</p>
+                    <div class="company-actions">
+                        <a th:href="@{/quejas/formulario}" class="btn-complaint">
+                            <i class="fas fa-plus-circle"></i> Nueva Queja
+                        </a>
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <div class="empresa">
-            <img src="https://i.postimg.cc/KjT3Zmjx/img6.png" alt="Icono Empresa 4">
-            <div class="empresa-info">
-                <h3>InterColombia</h3>
-                <p>Empresa que transporta energía eléctrica a nivel nacional.</p>
-                <a href="/portalUsuario" class="boton-queja">Nueva Queja</a>
+            <!-- Empresa 3 - Energía -->
+            <div class="company-card" data-categories="energy">
+                <div class="company-logo">
+                    <img src="https://i.postimg.cc/859rQ71Z/img4.jpg" alt="Codensa">
+                    <span class="company-category energy">
+                        <i class="fas fa-bolt"></i> Energía
+                    </span>
+                </div>
+                <div class="company-info">
+                    <h3>Codensa</h3>
+                    <p class="company-description">Empresa encargada de la distribución de energía eléctrica en Bogotá y
+                        sus alrededores.</p>
+                    <div class="company-actions">
+                        <a th:href="@{/quejas/formulario}" class="btn-complaint">
+                            <i class="fas fa-plus-circle"></i> Nueva Queja
+                        </a>
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <div class="empresa">
-            <img src="https://i.postimg.cc/sXk1Hbc8/veolia.jpg" alt="Icono Empresa 5">
-            <div class="empresa-info">
-                <h3>Veolia Colombia</h3>
-                <p>Empresa que gestiona servicios de manejo de residuos, proporcionando soluciones sostenibles para el manejo de estos recursos.</p>
-                <a href="/portalUsuario" class="boton-queja">Nueva Queja</a>
+            <!-- Empresa 4 - Energía -->
+            <div class="company-card" data-categories="energy">
+                <div class="company-logo">
+                    <img src="https://i.postimg.cc/KjT3Zmjx/img6.png" alt="InterColombia">
+                    <span class="company-category energy">
+                        <i class="fas fa-bolt"></i> Energía
+                    </span>
+                </div>
+                <div class="company-info">
+                    <h3>InterColombia</h3>
+                    <p class="company-description">Empresa que transporta energía eléctrica a nivel nacional.</p>
+                    <div class="company-actions">
+                        <a th:href="@{/quejas/formulario}" class="btn-complaint">
+                            <i class="fas fa-plus-circle"></i> Nueva Queja
+                        </a>
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <div class="empresa">
-            <img src="https://i.postimg.cc/Kj3vnQhN/aseoC.png" alt="Icono Empresa 6">
-            <div class="empresa-info">
-                <h3>Aseo Capital</h3>
-                <p>Empresa encargada de la recolección, transporte y disposición de residuos sólidos en Bogotá.</p>
-                <a href="/portalUsuario" class="boton-queja">Nueva Queja</a>
+            <!-- Empresa 5 - Aseo -->
+            <div class="company-card" data-categories="waste">
+                <div class="company-logo">
+                    <img src="https://i.postimg.cc/sXk1Hbc8/veolia.jpg" alt="Veolia Colombia">
+                    <span class="company-category waste">
+                        <i class="fas fa-trash-alt"></i> Aseo
+                    </span>
+                </div>
+                <div class="company-info">
+                    <h3>Veolia Colombia</h3>
+                    <p class="company-description">Empresa que gestiona servicios de manejo de residuos, proporcionando
+                        soluciones sostenibles.</p>
+                    <div class="company-actions">
+                        <a th:href="@{/quejas/formulario}" class="btn-complaint">
+                            <i class="fas fa-plus-circle"></i> Nueva Queja
+                        </a>
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <div class="empresa">
-            <img src="https://i.postimg.cc/TYmnxJ5g/epm.png" alt="Icono Empresa 7">
-            <div class="empresa-info">
-                <h3>EPM</h3>
-                <p>Empresas Públicas de Medellín, empresa pública que ofrece servicios de alcantarillado en la ciudad de Medellín y otras regiones de Colombia.</p>
-                <a href="/portalUsuario" class="boton-queja">Nueva Queja</a>
+            <!-- Empresa 6 - Aseo -->
+            <div class="company-card" data-categories="waste">
+                <div class="company-logo">
+                    <img src="https://i.postimg.cc/Kj3vnQhN/aseoC.png" alt="Aseo Capital">
+                    <span class="company-category waste">
+                        <i class="fas fa-trash-alt"></i> Aseo
+                    </span>
+                </div>
+                <div class="company-info">
+                    <h3>Aseo Capital</h3>
+                    <p class="company-description">Empresa encargada de la recolección, transporte y disposición de
+                        residuos sólidos en Bogotá.</p>
+                    <div class="company-actions">
+                        <a th:href="@{/quejas/formulario}" class="btn-complaint">
+                            <i class="fas fa-plus-circle"></i> Nueva Queja
+                        </a>
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <div class="empresa">
-            <img src="https://i.postimg.cc/fLrRtppy/aguas.jpg" alt="Icono Empresa 8">
-            <div class="empresa-info">
-                <h3>Aguas de la Sabana</h3>
-                <p>Empresa que se encarga del tratamiento de aguas residuales en la región de la Sabana de Bogotá.</p>
-                <a href="/portalUsuario" class="boton-queja">Nueva Queja</a>
+            <!-- Empresa 7 - Alcantarillado -->
+            <div class="company-card" data-categories="sewer">
+                <div class="company-logo">
+                    <img src="https://i.postimg.cc/TYmnxJ5g/epm.png" alt="EPM">
+                    <span class="company-category sewer">
+                        <i class="fas fa-water"></i> Alcantarillado
+                    </span>
+                </div>
+                <div class="company-info">
+                    <h3>EPM</h3>
+                    <p class="company-description">Empresas Públicas de Medellín, ofrece servicios de alcantarillado en
+                        Medellín y otras regiones.</p>
+                    <div class="company-actions">
+                        <a th:href="@{/quejas/formulario}" class="btn-complaint">
+                            <i class="fas fa-plus-circle"></i> Nueva Queja
+                        </a>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
 
-    <!-- Las demás secciones (Agua, Energía, Alcantarillado, Aseo) estarán ocultas por defecto -->
-    <div id="agua" class="empresa-container" style="display:none;">
-        <div class="empresa">
-            <img src="https://i.postimg.cc/wBWm2Wn8/img2.jpg" alt="Icono Empresa 1">
-            <div class="empresa-info">
-                <h3>EmCali</h3>
-                <p>Empresa pública de Cali que suministra agua potable a la ciudad.</p>
-                <a href="/portalUsuario" class="boton-queja">Nueva Queja</a>
+            <!-- Empresa 8 - Alcantarillado -->
+            <div class="company-card" data-categories="sewer">
+                <div class="company-logo">
+                    <img src="https://i.postimg.cc/fLrRtppy/aguas.jpg" alt="Aguas de la Sabana">
+                    <span class="company-category sewer">
+                        <i class="fas fa-water"></i> Alcantarillado
+                    </span>
+                </div>
+                <div class="company-info">
+                    <h3>Aguas de la Sabana</h3>
+                    <p class="company-description">Empresa que se encarga del tratamiento de aguas residuales en la
+                        región de la Sabana de Bogotá.</p>
+                    <div class="company-actions">
+                        <a th:href="@{/quejas/formulario}" class="btn-complaint">
+                            <i class="fas fa-plus-circle"></i> Nueva Queja
+                        </a>
+                    </div>
+                </div>
             </div>
-        </div>
+        </section>
+    </main>
 
-        <div class="empresa">
-            <img src="https://i.postimg.cc/DZ8bMrKW/img3.jpg" alt="Icono Empresa 2">
-            <div class="empresa-info">
-                <h3>Acueducto</h3>
-                <p>Empresa encargada del suministro de agua potable en Bogotá.</p>
-                <a href="/portalUsuario" class="boton-queja">Nueva Queja</a>
-            </div>
-        </div>
-    </div>
-
-    <div id="energia" class="empresa-container" style="display:none;">
-        <div class="empresa">
-            <img src="https://i.postimg.cc/859rQ71Z/img4.jpg" alt="Icono Empresa 3">
-            <div class="empresa-info">
-                <h3>Codensa</h3>
-                <p>Empresa encargada de la distribución de energía eléctrica en Bogotá y sus alrededores.</p>
-                <a href="/portalUsuario" class="boton-queja">Nueva Queja</a>
-            </div>
-        </div>
-
-        <div class="empresa">
-            <img src="https://i.postimg.cc/KjT3Zmjx/img6.png" alt="Icono Empresa 4">
-            <div class="empresa-info">
-                <h3>InterColombia</h3>
-                <p>Empresa que transporta energía eléctrica a nivel nacional.</p>
-                <a href="/portalUsuario" class="boton-queja">Nueva Queja</a>
-            </div>
-        </div>
-    </div>
-
-    <div id="alcantarillado" class="empresa-container" style="display:none;">
-        <div class="empresa">
-            <img src="https://i.postimg.cc/TYmnxJ5g/epm.png" alt="Icono Empresa 7">
-            <div class="empresa-info">
-                <h3>EPM</h3>
-                <p>Empresas Públicas de Medellín, empresa pública que ofrece servicios de alcantarillado en la ciudad de Medellín y otras regiones de Colombia.</p>
-                <a href="/portalUsuario" class="boton-queja">Nueva Queja</a>
-            </div>
-        </div>
-
-        <div class="empresa">
-            <img src="https://i.postimg.cc/fLrRtppy/aguas.jpg" alt="Icono Empresa 8">
-            <div class="empresa-info">
-                <h3>Aguas de la Sabana</h3>
-                <p>Empresa que se encarga del tratamiento de aguas residuales en la región de la Sabana de Bogotá.</p>
-                <a href="/portalUsuario" class="boton-queja">Nueva Queja</a>
-            </div>
-        </div>
-    </div>
-
-    <div id="aseo" class="empresa-container" style="display:none;">
-        <div class="empresa">
-            <img src="https://i.postimg.cc/sXk1Hbc8/veolia.jpg" alt="Icono Empresa 5">
-            <div class="empresa-info">
-                <h3>Veolia Colombia</h3>
-                <p>Empresa que gestiona servicios de manejo de residuos, proporcionando soluciones sostenibles para el manejo de estos recursos.</p>
-                <a href="/portalUsuario" class="boton-queja">Nueva Queja</a>
-            </div>
-        </div>
-
-        <div class="empresa">
-            <img src="https://i.postimg.cc/Kj3vnQhN/aseoC.png" alt="Icono Empresa 6">
-            <div class="empresa-info">
-                <h3>Aseo Capital</h3>
-                <p>Empresa encargada de la recolección, transporte y disposición de residuos sólidos en Bogotá.</p>
-                <a href="/portalUsuario" class="boton-queja">Nueva Queja</a>
-            </div>
-        </div>
-    </div>
-
-    <!--Footer -->
     <footer>
-        <div class="footer-content">
-            <div class="logo-footer">
-                <img src="https://i.postimg.cc/4NzHq4j1/logo.png" alt="Logo">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <div class="logo-footer">
+                    <img src="https://i.postimg.cc/4NzHq4j1/logo.png" alt="Logo Ventanilla Única">
+                    <span>Ventanilla Única</span>
+                </div>
+                <p>Sistema de gestión de quejas ciudadanas para servicios domiciliarios.</p>
             </div>
-            <div class="social-icons">
-                <a href="https://github.com/KillerZeus666/ProyectoPatronesDisenioSW" target="_blank">
-                    <img src="https://i.postimg.cc/nhJBh9q5/github.png" alt="GitHub">
-                </a>
-                
-                <a href="#" target="_blank">
-                    <img src="https://images.vexels.com/media/users/3/137380/isolated/preview/1b2ca367caa7eff8b45c09ec09b44c16-logotipo-de-icono-de-instagram.png" alt="Instagram">
-                </a>
-                <a href="#" target="_blank">
-                    <img src="https://images.vexels.com/media/users/3/137253/isolated/preview/90dd9f12fdd1eefb8c8976903944c026-logotipo-de-icono-de-facebook.png?w=360" alt="Facebook">
-                </a>
+
+            <div class="footer-links">
+                <div class="links-column">
+                    <h4>Navegación</h4>
+                    <ul>
+                        <li><a th:href="@{/index}">Inicio</a></li>
+                        <li><a th:href="@{/servicio}">Empresas</a></li>
+                        <li><a th:href="@{/portalUsuario}">Iniciar sesión</a></li>
+                    </ul>
+                </div>
+
+                <div class="links-column">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Términos y condiciones</a></li>
+                        <li><a href="#">Política de privacidad</a></li>
+                        <li><a href="#">Protección de datos</a></li>
+                    </ul>
+                </div>
             </div>
+
+            <div class="footer-social">
+                <h4>Síguenos</h4>
+                <div class="social-icons">
+                    <a href="https://github.com/KillerZeus666/ProyectoPatronesDisenioSW" target="_blank"
+                        aria-label="GitHub">
+                        <img src="https://i.postimg.cc/nhJBh9q5/github.png" alt="GitHub">
+                    </a>
+                    <a href="#" target="_blank" aria-label="Instagram">
+                        <img src="https://images.vexels.com/media/users/3/137380/isolated/preview/1b2ca367caa7eff8b45c09ec09b44c16-logotipo-de-icono-de-instagram.png"
+                            alt="Instagram">
+                    </a>
+                    <a href="#" target="_blank" aria-label="Facebook">
+                        <img src="https://images.vexels.com/media/users/3/137253/isolated/preview/90dd9f12fdd1eefb8c8976903944c026-logotipo-de-icono-de-facebook.png?w=360"
+                            alt="Facebook">
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 Ventanilla Única - Omnichannel. Todos los derechos reservados.</p>
         </div>
     </footer>
 
-
-    <!-- JavaScript -->
     <script>
-        function showTab(tabName) {
-            // Ocultar todas las secciones
-            const tabs = ['todas', 'agua', 'energia', 'alcantarillado', 'aseo'];
-            tabs.forEach(tab => {
-                document.getElementById(tab).style.display = 'none';
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu-toggle').addEventListener('click', function () {
+            document.querySelector('nav').classList.toggle('active');
+            this.classList.toggle('active');
+        });
+
+        // Filtrado de empresas por categoría
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function () {
+                // Actualizar botones activos
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+
+                const category = this.dataset.category;
+                const companyCards = document.querySelectorAll('.company-card');
+
+                companyCards.forEach(card => {
+                    if (category === 'all' || card.dataset.categories.includes(category)) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
             });
-
-            // Mostrar la sección correspondiente
-            document.getElementById(tabName).style.display = 'block';
-
-            // Cambiar estilo de los tabs
-            const tabElements = document.querySelectorAll('.tab');
-            tabElements.forEach(tab => {
-                tab.classList.remove('active');
-            });
-            document.querySelector(`.tab[onclick="showTab('${tabName}')"]`).classList.add('active');
-        }
-
-        // Inicializar con la sección "Todas" visible
-        showTab('todas');
+        });
     </script>
 </body>
+
 </html>
