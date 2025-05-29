@@ -40,4 +40,12 @@ public class EmpresaController {
         empresaService.actualizarEntidadVigilante(id, entidadId);
         return "redirect:/tipo_quejas";
     }
+
+    @PostMapping("/actualizarEntidadesVigilantes")
+    public String actualizarEntidadesVigilantes(
+        @RequestParam List<Long> empresaIds,
+        @RequestParam Long entidadId) {
+        empresaService.actualizarEntidadVigilanteMultiple(empresaIds, entidadId);
+        return "redirect:/tipo_quejas";
+    }
 }

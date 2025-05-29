@@ -22,7 +22,7 @@ public class EmpresaServiceImpl implements EmpresaService {
 
     @Override
     public List<Empresa> obtenerTodas() {
-        return empresaRepository.findAll();
+        return empresaRepository.findAllOrderedById();
     }
 
     @Override
@@ -54,6 +54,21 @@ public class EmpresaServiceImpl implements EmpresaService {
             Empresa empresa = empresaOpt.get();
             empresa.setEntidadVigilante(entidadOpt.get());
             empresaRepository.save(empresa);
+        }
+    }
+
+    @Override
+    public void actualizarEntidadVigilanteMultiple(List<Long> empresaIds, Long entidadId) {
+        Optional<EntidadVigilante> entidadOpt = entidadVigilanteRepository.findById(entidadId);
+        if (entidadOpt.isPresent()) {
+            EntidadVigilante entidad = entidadOpt.get();
+            empresaIds.forEach(empresaId -> {
+                Optional<Empresa> empresaOpt = empresaRepository.findById(empresaId);
+                empresaOpt.ifPresent(empresa -> {
+                    empresa.setEntidadVigilante(entidad);
+                    empresaRepository.save(empresa);
+                });
+            });
         }
     }
 }

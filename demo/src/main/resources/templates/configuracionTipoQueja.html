@@ -1,19 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Configuraciones</title>
-    <link
-      rel="stylesheet"
-      th:href="@{/css/header_footer.css(v=${#dates.createNow().getTime()})}"
-    />
-    <link
-      rel="stylesheet"
-      th:href="@{/css/opciones.css(v=${#dates.createNow().getTime()})}"
-    />
+    <link rel="stylesheet" th:href="@{/css/header_footer.css(v=${#dates.createNow().getTime()})}" />
+    <link rel="stylesheet" th:href="@{/css/opciones.css(v=${#dates.createNow().getTime()})}" />
     <link rel="stylesheet" th:href="@{/css/quejasPorEmpresa.css}" />
-  </head>
+    <link rel="stylesheet" th:href="@{/css/configTipoQueja.css(v=${#dates.createNow().getTime()})}" />
+</head>
   <body>
     <!-- Header -->
     <header>
@@ -107,38 +102,49 @@
           </tr>
         </tbody>
       </table>
+        <h2>Configuración de Enrutamiento de Quejas Vencidas</h2>
+        <form th:action="@{/empresa/actualizarEntidadesVigilantes}" method="post">
+          <div class="empresas-container">
+            <div class="empresas-list">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Seleccionar</th>
+                    <th>ID</th>
+                    <th>Nombre de la Empresa</th>
+                    <th>Entidad Vigilante Actual</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr th:each="empresa : ${empresas}">
+                    <td>
+                      <input type="checkbox" 
+                            name="empresaIds" 
+                            th:value="${empresa.id}"
+                            th:id="'empresa_' + ${empresa.id}"/>
+                    </td>
+                    <td th:text="${empresa.id}"></td>
+                    <td th:text="${empresa.nombre}"></td>
+                    <td th:text="${empresa.entidadVigilante != null ? empresa.entidadVigilante.nombre : 'No asignada'}"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
 
-      <h2>Configuración de Enrutamiento de Quejas Vencidas</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Nombre de la Empresa</th>
-            <th>Entidad Vigilante Asignada</th>
-            <th>Acción</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr th:each="empresa : ${empresas}">
-            <td th:text="${empresa.id}"></td>
-            <td th:text="${empresa.nombre}"></td>
-            <td>
-              <form
-                th:action="@{/empresa/actualizarEntidadVigilante}"
-                method="post"
-              >
-                <input type="hidden" name="id" th:value="${empresa.id}" />
-                <select name="entidadId" required>
-                  <option value="">-- Seleccionar Entidad --</option>
-                  <option
-                    th:each="entidad : ${entidades}"
-                    th:value="${entidad.id}"
-                    th:text="${entidad.nombre}"
-                    th:selected="${empresa.entidadVigilante != null and entidad.id == empresa.entidadVigilante.id}"
-                  ></option>
-                </select>
-                <button type="submit">Actualizar</button>
-              </form>
+            <div class="entidad-selector">
+              <label for="entidadId">Seleccionar Entidad Vigilante:</label>
+              <select name="entidadId" id="entidadId" required>
+                <option value="">-- Seleccionar Entidad --</option>
+                <option th:each="entidad : ${entidades}"
+                        th:value="${entidad.id}"
+                        th:text="${entidad.nombre}">
+                </option>
+              </select>
+              
+              <button type="submit" class="btn-actualizar">Actualizar Entidad Vigilante</button>
+            </div>
+          </div>
+        </form>
             </td>
           </tr>
         </tbody>

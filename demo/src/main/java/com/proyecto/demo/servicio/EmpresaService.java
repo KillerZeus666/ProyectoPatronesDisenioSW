@@ -19,4 +19,6 @@ public interface EmpresaService {
 
     public void actualizarEntidadVigilante(Long id, Long entidadId);
 
+    public void actualizarEntidadVigilanteMultiple(List<Long> empresaIds, Long entidadId);
+
 }
