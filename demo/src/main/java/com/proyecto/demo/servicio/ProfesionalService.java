@@ -1,5 +1,6 @@
 package com.proyecto.demo.servicio;
 
+import com.proyecto.demo.entidad.EntidadVigilante;
 import com.proyecto.demo.entidad.Incumplimiento;
 import com.proyecto.demo.entidad.Profesional;
 
@@ -9,4 +10,7 @@ public interface ProfesionalService {
     public void balancearCargaTrabajo();
 
     public void balancearAutomaticamente();
+
+    public Profesional validarEntidad(String correo, String contraseña);
+
 }

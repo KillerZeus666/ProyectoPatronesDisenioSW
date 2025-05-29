@@ -10,6 +10,7 @@ import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import com.proyecto.demo.entidad.EntidadVigilante;
 import com.proyecto.demo.entidad.Incumplimiento;
 import com.proyecto.demo.entidad.Profesional;
 import com.proyecto.demo.entidad.Queja;
@@ -110,5 +111,10 @@ public class ProfesionalServiceImpl implements ProfesionalService {
     public void balancearAutomaticamente() {
         balancearCargaTrabajo();
         System.out.println("Balanceo periódico: " + LocalDateTime.now());
+    }
+
+    @Override
+    public Profesional validarEntidad(String correo, String contraseña) {
+        return profesionalRepository.findByCorreoAndContraseña(correo, contraseña);
     }
 }

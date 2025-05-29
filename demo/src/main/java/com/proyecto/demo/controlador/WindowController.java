@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.proyecto.demo.entidad.Empresa;
 import com.proyecto.demo.entidad.EntidadVigilante;
+import com.proyecto.demo.entidad.Profesional;
 import com.proyecto.demo.entidad.Queja;
 import com.proyecto.demo.entidad.Servicio;
 import com.proyecto.demo.entidad.TipoQueja;
@@ -23,7 +24,7 @@ import com.proyecto.demo.servicio.TipoQuejaService;
 import com.proyecto.demo.servicio.UsuarioService;
 import com.proyecto.demo.servicio.EmpresaService;
 import com.proyecto.demo.servicio.EntidadVigilanteService;
-
+import com.proyecto.demo.servicio.ProfesionalService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -42,6 +43,9 @@ public class WindowController {
 
     @Autowired
     private EntidadVigilanteService entidadService;
+
+    @Autowired
+    private ProfesionalService profesionalService;
 
     @GetMapping("/index")
     public String mostrarPaginaIndex() {
@@ -88,6 +92,8 @@ public class WindowController {
         Usuario usuario = usuarioService.validarUsuario(correo, contraseña);
         Empresa empresa = empresaService.validarEmpresa(correo, contraseña);
         EntidadVigilante entidadVigilante = entidadService.validarEntidad(correo, contraseña);
+        Profesional profesional = profesionalService.validarEntidad(correo, contraseña);
+
     
         // Caso 1: Ningún usuario, empresa ni entidad coinciden
         if (usuario == null && empresa == null && entidadVigilante == null) {
@@ -109,6 +115,14 @@ public class WindowController {
             session.setAttribute("entidadNombre", entidadVigilante.getNombre());
             System.out.println("Entidad Vigilante guardada en sesión: " + entidadVigilante.getNombre());
             return "redirect:/portalAdministrador";
+        }
+
+           // Caso 4: Inicio de sesión de entidad vigilante
+        if (profesional != null) {
+            session.setAttribute("profesionalId", profesional.getId());
+            session.setAttribute("profesionalNombre", profesional.getNombre());
+            System.out.println("Profesional guardado en sesión: " + profesional.getNombre());
+            return "redirect:/portalProfesional";
         }
     
         // Caso 4: Inicio de sesión de usuario
