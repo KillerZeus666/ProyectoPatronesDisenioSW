@@ -75,6 +75,11 @@ public class WindowController {
         return "portalAdministrador";
     }
 
+    @GetMapping("/portalProfesional")
+    public String mostrarPortalProfesional() {
+        return "portalProfesional";
+    }
+
     @GetMapping("/listaQuejas")
     public String mostrarTodasLasQuejas() {
         return "listaQuejas";
