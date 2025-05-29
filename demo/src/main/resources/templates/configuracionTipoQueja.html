@@ -1,182 +1,250 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Configuraciones</title>
-    <link
-      rel="stylesheet"
-      th:href="@{/css/header_footer.css(v=${#dates.createNow().getTime()})}"
-    />
-    <link
-      rel="stylesheet"
-      th:href="@{/css/opciones.css(v=${#dates.createNow().getTime()})}"
-    />
-    <link rel="stylesheet" th:href="@{/css/quejasPorEmpresa.css}" />
-  </head>
-  <body>
-    <!-- Header -->
-    <header>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Configuración | Ventanilla Única</title>
+  <link rel="stylesheet" th:href="@{/css/header_footer.css(v=${#dates.createNow().getTime()})}">
+  <link rel="stylesheet" th:href="@{/css/configuracion.css(v=${#dates.createNow().getTime()})}">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+  <!-- Header moderno -->
+  <header>
+    <div class="header-container">
       <div class="logo">
-        <img src="https://i.postimg.cc/4NzHq4j1/logo.png" alt="Logo" />
+        <img src="https://i.postimg.cc/4NzHq4j1/logo.png" alt="Logo Ventanilla Única">
+        <span>Ventanilla Única</span>
       </div>
       <nav>
-        <a th:href="@{/index}">Inicio</a>
-        <a th:href="@{/servicio}">Empresas</a>
-
-        <!-- Mostrar "Cerrar sesión" si hay un usuario, empresa o entidad en sesión -->
-        <a
-          th:if="${session.empresaId != null or session.entidadId != null or session.usuarioLogueado != null}"
-          th:href="@{/logout}"
-          >Cerrar sesión</a
-        >
-
-        <!-- Mostrar "Iniciar sesión" si NO hay usuario autenticado -->
-        <a
-          th:unless="${session.empresaId != null or session.entidadId != null or session.usuarioLogueado != null}"
-          th:href="@{/portalUsuario}"
-          >Iniciar sesión</a
-        >
+        <ul>
+          <li><a th:href="@{/index}">Inicio</a></li>
+          <li><a th:href="@{/servicio}">Empresas</a></li>
+          <li>
+            <a th:if="${session.empresaId != null or session.entidadId != null or session.usuarioLogueado != null}"
+              th:href="@{/logout}" class="btn-logout">Cerrar sesión</a>
+            <a th:unless="${session.empresaId != null or session.entidadId != null or session.usuarioLogueado != null}"
+              th:href="@{/portalUsuario}" class="btn-login">Iniciar sesión</a>
+          </li>
+        </ul>
       </nav>
-    </header>
-
-    <!-- Sección de configuraciones del Administrador -->
-    <main>
-      <h2>Configuración de Tipos de Queja</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Descripción</th>
-            <th>Tiempo de Atención (días)</th>
-            <th>Acción</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr th:each="tipo : ${tiposQueja}">
-            <td th:text="${tipo.id}"></td>
-            <td th:text="${tipo.descripcion}"></td>
-            <td>
-              <form th:action="@{/tipo_quejas/actualizar}" method="post">
-                <input type="hidden" name="id" th:value="${tipo.id}" />
-                <input
-                  type="number"
-                  name="tiempoAtencion"
-                  th:value="${tipo.tiempoAtencion}"
-                  min="1"
-                  required
-                />
-                <button type="submit">Actualizar</button>
-              </form>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <h2>Configuración de Empresas para Servicios</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Nombre del Servicio</th>
-            <th>Empresa Asignada</th>
-            <th>Acción</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr th:each="servicio : ${servicios}">
-            <td th:text="${servicio.id}"></td>
-            <td th:text="${servicio.tipo}"></td>
-            <td>
-              <form
-                th:action="@{/servicio/actualizarEmpresaServicio}"
-                method="post"
-              >
-                <input type="hidden" name="servicioId" th:value="${servicio.id}" />
-                <select name="empresaId" required>
-                  <option
-                    th:each="empresa : ${empresas}"
-                    th:value="${empresa.id}"
-                    th:text="${empresa.nombre}"
-                    th:selected="${empresa.id == servicio.empresa.id}"
-                  ></option>
-                </select>
-                <button type="submit">Actualizar</button>
-              </form>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <h2>Configuración de Enrutamiento de Quejas Vencidas</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Nombre de la Empresa</th>
-            <th>Entidad Vigilante Asignada</th>
-            <th>Acción</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr th:each="empresa : ${empresas}">
-            <td th:text="${empresa.id}"></td>
-            <td th:text="${empresa.nombre}"></td>
-            <td>
-              <form
-                th:action="@{/empresa/actualizarEntidadVigilante}"
-                method="post"
-              >
-                <input type="hidden" name="id" th:value="${empresa.id}" />
-                <select name="entidadId" required>
-                  <option value="">-- Seleccionar Entidad --</option>
-                  <option
-                    th:each="entidad : ${entidades}"
-                    th:value="${entidad.id}"
-                    th:text="${entidad.nombre}"
-                    th:selected="${empresa.entidadVigilante != null and entidad.id == empresa.entidadVigilante.id}"
-                  ></option>
-                </select>
-                <button type="submit">Actualizar</button>
-              </form>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <a th:href="@{/portalAdministrador}" class="btn-volver"
-        >Volver al Portal Administrador</a
-      >
-    </main>
-
-    <!-- Footer -->
-    <footer>
-      <div class="footer-content">
-        <div class="logo-footer">
-          <img src="https://i.postimg.cc/4NzHq4j1/logo.png" alt="Logo" />
-        </div>
-        <div class="social-icons">
-          <a
-            href="https://github.com/KillerZeus666/ProyectoPatronesDisenioSW"
-            target="_blank"
-          >
-            <img src="https://i.postimg.cc/nhJBh9q5/github.png" alt="GitHub" />
-          </a>
-
-          <a href="#" target="_blank">
-            <img
-              src="https://images.vexels.com/media/users/3/137380/isolated/preview/1b2ca367caa7eff8b45c09ec09b44c16-logotipo-de-icono-de-instagram.png"
-              alt="Instagram"
-            />
-          </a>
-          <a href="#" target="_blank">
-            <img
-              src="https://images.vexels.com/media/users/3/137253/isolated/preview/90dd9f12fdd1eefb8c8976903944c026-logotipo-de-icono-de-facebook.png?w=360"
-              alt="Facebook"
-            />
-          </a>
-        </div>
+      <div class="mobile-menu-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
       </div>
-    </footer>
-  </body>
+    </div>
+  </header>
+
+  <!-- Contenido principal -->
+  <main class="config-container">
+    <div class="config-header">
+      <h1><i class="fas fa-cog"></i> Panel de Configuración</h1>
+      <p>Administre los parámetros del sistema de gestión de quejas</p>
+    </div>
+
+    <!-- Sección de configuración -->
+    <div class="config-section">
+      <div class="section-header">
+        <h2><i class="fas fa-exclamation-circle"></i> Tipos de Queja</h2>
+        <p>Configure los tipos de queja y sus tiempos de atención</p>
+      </div>
+
+      <div class="table-responsive">
+        <table class="config-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Descripción</th>
+              <th>Tiempo de Atención (días)</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="tipo : ${tiposQueja}">
+              <td th:text="${tipo.id}"></td>
+              <td th:text="${tipo.descripcion}"></td>
+              <td>
+                <form class="inline-form" th:action="@{/tipo_quejas/actualizar}" method="post">
+                  <input type="hidden" name="id" th:value="${tipo.id}">
+                  <div class="form-group">
+                    <input type="number" name="tiempoAtencion" th:value="${tipo.tiempoAtencion}" min="1" required
+                      class="form-input">
+                  </div>
+              </td>
+              <td>
+                <button type="submit" class="btn-action">
+                  <i class="fas fa-save"></i> Guardar
+                </button>
+                </form>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Sección de configuración -->
+    <div class="config-section">
+      <div class="section-header">
+        <h2><i class="fas fa-building"></i> Asignación de Empresas</h2>
+        <p>Gestione las empresas asignadas a cada servicio</p>
+      </div>
+
+      <div class="table-responsive">
+        <table class="config-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Servicio</th>
+              <th>Empresa Asignada</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="servicio : ${servicios}">
+              <td th:text="${servicio.id}"></td>
+              <td th:text="${servicio.tipo}"></td>
+              <td>
+                <form class="inline-form" th:action="@{/servicio/actualizarEmpresaServicio}" method="post">
+                  <input type="hidden" name="servicioId" th:value="${servicio.id}">
+                  <div class="form-group">
+                    <select name="empresaId" required class="form-select">
+                      <option th:each="empresa : ${empresas}" th:value="${empresa.id}" th:text="${empresa.nombre}"
+                        th:selected="${empresa.id == servicio.empresa.id}">
+                      </option>
+                    </select>
+                  </div>
+              </td>
+              <td>
+                <button type="submit" class="btn-action">
+                  <i class="fas fa-save"></i> Guardar
+                </button>
+                </form>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Sección de configuración -->
+    <div class="config-section">
+      <div class="section-header">
+        <h2><i class="fas fa-shield-alt"></i> Entidades Vigilantes</h2>
+        <p>Asigne entidades vigilantes para quejas vencidas</p>
+      </div>
+
+      <div class="table-responsive">
+        <table class="config-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Empresa</th>
+              <th>Entidad Vigilante</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="empresa : ${empresas}">
+              <td th:text="${empresa.id}"></td>
+              <td th:text="${empresa.nombre}"></td>
+              <td>
+                <form class="inline-form" th:action="@{/empresa/actualizarEntidadVigilante}" method="post">
+                  <input type="hidden" name="id" th:value="${empresa.id}">
+                  <div class="form-group">
+                    <select name="entidadId" required class="form-select">
+                      <option value="">-- Seleccionar --</option>
+                      <option th:each="entidad : ${entidades}" th:value="${entidad.id}" th:text="${entidad.nombre}"
+                        th:selected="${empresa.entidadVigilante != null and entidad.id == empresa.entidadVigilante.id}">
+                      </option>
+                    </select>
+                  </div>
+              </td>
+              <td>
+                <button type="submit" class="btn-action">
+                  <i class="fas fa-save"></i> Guardar
+                </button>
+                </form>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="config-actions">
+      <a th:href="@{/portalAdministrador}" class="btn-back">
+        <i class="fas fa-arrow-left"></i> Volver al Panel
+      </a>
+    </div>
+  </main>
+
+  <script>
+    // Mobile menu toggle
+    document.querySelector('.mobile-menu-toggle').addEventListener('click', function () {
+      document.querySelector('nav').classList.toggle('active');
+      this.classList.toggle('active');
+    });
+  </script>
+</body>
+
+<footer>
+  <div class="footer-container">
+    <div class="footer-brand">
+      <div class="logo-footer">
+        <img src="https://i.postimg.cc/4NzHq4j1/logo.png" alt="Logo Ventanilla Única">
+        <span>Ventanilla Única</span>
+      </div>
+      <p>Sistema de gestión de quejas ciudadanas para servicios domiciliarios.</p>
+    </div>
+
+    <div class="footer-links">
+      <div class="links-column">
+        <h4>Navegación</h4>
+        <ul>
+          <li><a th:href="@{/index}">Inicio</a></li>
+          <li><a th:href="@{/servicio}">Empresas</a></li>
+          <li><a th:href="@{/portalUsuario}">Iniciar sesión</a></li>
+        </ul>
+      </div>
+
+      <div class="links-column">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Términos y condiciones</a></li>
+          <li><a href="#">Política de privacidad</a></li>
+          <li><a href="#">Protección de datos</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-social">
+      <h4>Síguenos</h4>
+      <div class="social-icons">
+        <a href="https://github.com/KillerZeus666/ProyectoPatronesDisenioSW" target="_blank" aria-label="GitHub">
+          <img src="https://i.postimg.cc/nhJBh9q5/github.png" alt="GitHub">
+        </a>
+        <a href="#" target="_blank" aria-label="Instagram">
+          <img
+            src="https://images.vexels.com/media/users/3/137380/isolated/preview/1b2ca367caa7eff8b45c09ec09b44c16-logotipo-de-icono-de-instagram.png"
+            alt="Instagram">
+        </a>
+        <a href="#" target="_blank" aria-label="Facebook">
+          <img
+            src="https://images.vexels.com/media/users/3/137253/isolated/preview/90dd9f12fdd1eefb8c8976903944c026-logotipo-de-icono-de-facebook.png?w=360"
+            alt="Facebook">
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; 2025 Ventanilla Única - Omnichannel. Todos los derechos reservados.</p>
+  </div>
+</footer>
+
 </html>

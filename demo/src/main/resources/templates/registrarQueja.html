@@ -1,82 +1,130 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Registrar Queja</title>
-        <link rel="stylesheet" th:href="@{/css/header_footer.css(v=${#dates.createNow().getTime()})}">
-        <link rel="stylesheet" th:href="@{/css/form.css(v=${#dates.createNow().getTime()})}">
-    </head>
-    <body>
-        <!-- Header con logo y navegación -->
-        <header>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Queja | Ventanilla Única</title>
+    <link rel="stylesheet" th:href="@{/css/header_footer.css(v=${#dates.createNow().getTime()})}">
+    <link rel="stylesheet" th:href="@{/css/form.css(v=${#dates.createNow().getTime()})}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <!-- Header moderno -->
+    <header>
+        <div class="header-container">
             <div class="logo">
-                <img src="https://i.postimg.cc/4NzHq4j1/logo.png" alt="Logo">
+                <img src="https://i.postimg.cc/4NzHq4j1/logo.png" alt="Logo Ventanilla Única">
+                <span>Ventanilla Única</span>
             </div>
             <nav>
-                <a th:href="@{/index}">Inicio</a>
-                <a th:href="@{/servicio}">Empresas</a>
-            
-                <!-- Mostrar "Cerrar sesión" si hay un usuario, empresa o entidad en sesión -->
-                <a th:if="${session.empresaId != null or session.entidadId != null or session.usuarioLogueado != null}" 
-                   th:href="@{/logout}">Cerrar sesión</a>
-            
-                <!-- Mostrar "Iniciar sesión" si NO hay usuario autenticado -->
-                <a th:unless="${session.empresaId != null or session.entidadId != null or session.usuarioLogueado != null}" 
-                   th:href="@{/portalUsuario}">Iniciar sesión</a>
+                <ul>
+                    <li><a th:href="@{/index}">Inicio</a></li>
+                    <li><a th:href="@{/servicio}">Empresas</a></li>
+                    <li>
+                        <a th:if="${session.empresaId != null or session.entidadId != null or session.usuarioLogueado != null}"
+                            th:href="@{/logout}" class="btn-logout">Cerrar sesión</a>
+                        <a th:unless="${session.empresaId != null or session.entidadId != null or session.usuarioLogueado != null}"
+                            th:href="@{/portalUsuario}" class="btn-login">Iniciar sesión</a>
+                    </li>
+                </ul>
             </nav>
-            
-        </header>
+            <div class="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
 
-        <!-- Contenedor principal -->
-        <div class="contenedor-form">
-            <h1>Registrar Queja</h1>
-            <form th:action="@{/quejas/registrar}" method="post" th:object="${quejaRequest}">
-                <!-- Campo Fecha -->
-                <label for="fecha">Fecha:</label>
-                <input type="date" id="fecha" th:field="*{fecha}" required>
-    
-                <!-- Lista de Tipos de Queja -->
-                <label for="tipo">Tipo:</label>
-                <select id="tipo" th:field="*{tipo}" required>
-                    <option value="" disabled selected>Seleccione un tipo de queja</option>
-                    <option th:each="tipoQueja : ${tiposQueja}" 
-                            th:value="${tipoQueja.id}" 
+    <!-- Contenedor principal del formulario -->
+    <main class="form-container">
+        <div class="form-card">
+            <div class="form-header">
+                <h1>Registrar Nueva Queja</h1>
+                <p>Complete el siguiente formulario para radicar su queja ante la empresa correspondiente</p>
+            </div>
+
+            <form th:action="@{/quejas/registrar}" method="post" th:object="${quejaRequest}" class="queja-form">
+                <!-- Grupo de campos -->
+                <div class="form-group">
+                    <label for="fecha">Fecha de la queja</label>
+                    <input type="date" id="fecha" th:field="*{fecha}" required>
+                    <span class="form-hint">Seleccione la fecha cuando ocurrió el incidente</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="tipo">Tipo de queja</label>
+                    <select id="tipo" th:field="*{tipo}" required>
+                        <option value="" disabled selected>Seleccione un tipo</option>
+                        <option th:each="tipoQueja : ${tiposQueja}" th:value="${tipoQueja.id}"
                             th:text="${tipoQueja.descripcion}">
-                    </option>
-                </select>
-    
-                <!-- Lista de Empresas -->
-                <label for="idEmpresa">Empresa:</label>
-                <select id="idEmpresa" th:field="*{idEmpresa}" required>
-                    <option value="" disabled selected>Seleccione una empresa</option>
-                    <option th:each="empresa : ${empresas}" 
-                            th:value="${empresa.id}" 
-                            th:text="${empresa.nombre}">
-                    </option>
-                </select>
-    
-                <!-- Lista de Servicios -->
-                <label for="idServicio">Servicio:</label>
-                <select id="idServicio" th:field="*{idServicio}" required>
-                    <option value="" disabled selected>Seleccione un servicio</option>
-                    <option th:each="servicio : ${servicios}" 
-                            th:value="${servicio.id}" 
-                            th:text="${servicio.tipo}">
-                    </option>
-                </select>
-    
-                <!-- Campo Descripción -->
-                <label for="descripcion">Descripción:</label>
-                <textarea id="descripcion" th:field="*{descripcion}" required></textarea>
-    
-                <button type="submit">Registrar Queja</button>
+                        </option>
+                    </select>
+                    <span class="form-hint">Seleccione la categoría que mejor describa su queja</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="idEmpresa">Empresa relacionada</label>
+                    <select id="idEmpresa" th:field="*{idEmpresa}" required>
+                        <option value="" disabled selected>Seleccione una empresa</option>
+                        <option th:each="empresa : ${empresas}" th:value="${empresa.id}" th:text="${empresa.nombre}">
+                        </option>
+                    </select>
+                    <span class="form-hint">Seleccione la empresa prestadora del servicio</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="idServicio">Servicio afectado</label>
+                    <select id="idServicio" th:field="*{idServicio}" required>
+                        <option value="" disabled selected>Seleccione un servicio</option>
+                        <option th:each="servicio : ${servicios}" th:value="${servicio.id}" th:text="${servicio.tipo}">
+                        </option>
+                    </select>
+                    <span class="form-hint">Seleccione el servicio que está presentando problemas</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="descripcion">Descripción detallada</label>
+                    <textarea id="descripcion" th:field="*{descripcion}"
+                        placeholder="Describa con el mayor detalle posible la situación que desea reportar..."
+                        required></textarea>
+                    <span class="form-hint">Máximo 500 caracteres. Sea claro y específico.</span>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn-submit">
+                        <span class="btn-text">Registrar Queja</span>
+                        <span class="btn-icon">→</span>
+                    </button>
+                </div>
             </form>
+            <!-- Botón de volver -->
+            <a href="/opcionesCiudadano" class="btn-volver">Volver a las opciones</a>
         </div>
 
-       
-    </body>
+    </main>
 
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu-toggle').addEventListener('click', function () {
+            document.querySelector('nav').classList.toggle('active');
+            this.classList.toggle('active');
+        });
 
+        // Mejorar la experiencia de los selects
+        document.querySelectorAll('select').forEach(select => {
+            select.addEventListener('focus', function () {
+                this.parentNode.classList.add('focused');
+            });
+
+            select.addEventListener('blur', function () {
+                this.parentNode.classList.remove('focused');
+            });
+        });
+    </script>
+</body>
 
 </html>
