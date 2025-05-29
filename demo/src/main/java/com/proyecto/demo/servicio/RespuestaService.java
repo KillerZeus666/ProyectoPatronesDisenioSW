@@ -16,4 +16,8 @@ public interface RespuestaService {
 
       // Ver todas las quejas de la BD
     List<Respuesta> obtenerTodasLasRespuestas();
+
+      // Ver todas las quejas por cédula del usuario
+    List<Respuesta> verRespuestasPorUsuario(Long cedula); 
+
 }

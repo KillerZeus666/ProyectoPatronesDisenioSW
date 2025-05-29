@@ -71,4 +71,13 @@ public class RespuestaController {
         model.addAttribute("respuestas", listaRespuestas);
         return "listaRespuestas"; // Asegúrate de que el nombre coincida con la vista HTML
     }
+
+        // Endpoint para ver quejas por cédula de usuario, devolviendo JSON
+    @GetMapping("/usuario/{cedula}")
+    public String verRespuestasPorUsuario(@PathVariable Long cedula, Model model) {
+        List<Respuesta> respuestas = respuestaService.verRespuestasPorUsuario(cedula);
+        model.addAttribute("respuestas", respuestas);
+        return "vistaRespuestasCiudadano";
+    }
+
 }

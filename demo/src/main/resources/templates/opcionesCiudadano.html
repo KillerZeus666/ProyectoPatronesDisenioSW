@@ -38,6 +38,8 @@
           <!-- Opción para ver las quejas realizadas por el usuario -->
           <!-- Se asume que el objeto 'usuario' ya está en el modelo y tiene el atributo 'cedula' -->
           <a class="btn" th:href="@{'/quejas/usuario/' + ${usuario.cedula}}">Ver Mis Quejas</a>
+          <!-- Se asume que el objeto 'usuario' ya está en el modelo y tiene el atributo 'cedula' -->
+          <a class="btn" th:href="@{'/respuestas/usuario/' + ${usuario.cedula}}">Ver Respuestas</a>
         </div>
       </div>
     </section>

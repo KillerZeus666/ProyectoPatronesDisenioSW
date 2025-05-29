@@ -1,7 +1,9 @@
 package com.proyecto.demo.servicio;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,6 +12,7 @@ import com.proyecto.demo.entidad.Empresa;
 import com.proyecto.demo.entidad.Queja;
 import com.proyecto.demo.entidad.Respuesta;
 import com.proyecto.demo.repositorio.EmpresaRepository;
+import com.proyecto.demo.repositorio.QuejaRepository;
 import com.proyecto.demo.repositorio.RespuestaRepository;
 
 @Service
@@ -20,6 +23,9 @@ public class RespuestaServiceImpl implements RespuestaService {
 
     @Autowired
     private QuejaService quejaService;
+
+    @Autowired
+    private QuejaRepository quejaRepository; 
 
     @Autowired
     private EmpresaRepository empresaRepository;
@@ -63,4 +69,22 @@ public class RespuestaServiceImpl implements RespuestaService {
     public List<Respuesta> obtenerTodasLasRespuestas(){
             return respuestaRepository.findAll();
     }
+
+  
+
+@Override
+    public List<Respuesta> verRespuestasPorUsuario(Long cedula) {
+        
+        // Buscar las quejas del usuario por cédula
+        List<Queja> quejasUsuario = quejaRepository.findByUsuario_Cedula(cedula);
+
+        List<Respuesta> respuestas = new ArrayList<>();
+        for (Queja queja : quejasUsuario) {
+            List<Respuesta> respuestasQueja = respuestaRepository.findByQuejaId(queja.getId());
+            respuestas.addAll(respuestasQueja);
+        }
+
+        return respuestas;
+    }
+
 }
