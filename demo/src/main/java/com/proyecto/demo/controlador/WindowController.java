@@ -97,7 +97,7 @@ public class WindowController {
         Usuario usuario = usuarioService.validarUsuario(correo, contraseña);
         Empresa empresa = empresaService.validarEmpresa(correo, contraseña);
         EntidadVigilante entidadVigilante = entidadService.validarEntidad(correo, contraseña);
-        Profesional profesional = profesionalService.validarEntidad(correo, contraseña);
+        Profesional profesional = profesionalService.validarProfesional(correo, contraseña);
 
     
         // Caso 1: Ningún usuario, empresa ni entidad coinciden

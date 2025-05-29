@@ -114,7 +114,7 @@ public class ProfesionalServiceImpl implements ProfesionalService {
     }
 
     @Override
-    public Profesional validarEntidad(String correo, String contraseña) {
+    public Profesional validarProfesional(String correo, String contraseña) {
         return profesionalRepository.findByCorreoAndContraseña(correo, contraseña);
     }
 }

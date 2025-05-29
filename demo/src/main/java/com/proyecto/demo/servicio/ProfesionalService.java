@@ -11,6 +11,6 @@ public interface ProfesionalService {
 
     public void balancearAutomaticamente();
 
-    public Profesional validarEntidad(String correo, String contraseña);
+    public Profesional validarProfesional(String correo, String contraseña);
 
 }

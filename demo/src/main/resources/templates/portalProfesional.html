@@ -1,1 +1,59 @@
-Holaaaaa
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Profesional</title>
+    <link rel="stylesheet" th:href="@{/css/header_footer.css(v=${#dates.createNow().getTime()})}">
+    <link rel="stylesheet" th:href="@{/css/portalEmpresaActualizado.css(v=${#dates.createNow().getTime()})}">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="https://i.postimg.cc/4NzHq4j1/logo.png" alt="Logo">
+        </div>
+        <nav>
+            <a th:href="@{/index}">Inicio</a>
+            <a th:href="@{/servicio}">Empresas</a>
+
+            <!-- Mostrar "Cerrar sesión" si hay un usuario autenticado -->
+            <a th:if="${session.empresaId != null or session.entidadId != null or session.usuarioLogueado != null or session.profesionalId != null}" 
+               th:href="@{/logout}">Cerrar sesión</a>
+
+            <!-- Mostrar "Iniciar sesión" si no hay autenticación -->
+            <a th:unless="${session.empresaId != null or session.entidadId != null or session.usuarioLogueado != null or session.profesionalId != null}" 
+               th:href="@{/portalUsuario}">Iniciar sesión</a>
+        </nav>
+    </header>
+
+    <main class="contenedor">
+        <h1>Bienvenido al Portal del Profesional</h1>
+        <h2 id="profesionalNombre" th:text="${session.profesionalNombre}" th:data-profesional-id="${session.profesionalId}">Profesional desconocido</h2>
+        
+        <div class="botones">
+            <a th:href="@{'/profesional/casos/' + ${session.profesionalId}}">
+                <button>Ver Casos Asignados</button>
+            </a>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="logo-footer">
+                <img src="https://i.postimg.cc/4NzHq4j1/logo.png" alt="Logo">
+            </div>
+            <div class="social-icons">
+                <a href="https://github.com/KillerZeus666/ProyectoPatronesDisenioSW" target="_blank">
+                    <img src="https://i.postimg.cc/nhJBh9q5/github.png" alt="GitHub">
+                </a>
+                <a href="#" target="_blank">
+                    <img src="https://images.vexels.com/media/users/3/137380/isolated/preview/1b2ca367caa7eff8b45c09ec09b44c16-logotipo-de-icono-de-instagram.png" alt="Instagram">
+                </a>
+                <a href="#" target="_blank">
+                    <img src="https://images.vexels.com/media/users/3/137253/isolated/preview/90dd9f12fdd1eefb8c8976903944c026-logotipo-de-icono-de-facebook.png" alt="Facebook">
+                </a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
