@@ -13,4 +13,7 @@ public interface IncumplimientoService {
     
     // Ver incumplimiento por empresa 
     List<Incumplimiento> verIncumplimientosPorEmpresa(Long empresaId);
+
+    //Ver incumplimientos por profesional
+    List<Incumplimiento> obtenerIncumplimientosPorProfesional(Long profesionalId);
 }

@@ -12,4 +12,6 @@ public interface IncumplimientoRepository extends JpaRepository<Incumplimiento, 
 
     List<Incumplimiento> findByProfesionalAsignadoIsNull();
     List<Incumplimiento> findByEmpresa_Id(Long empresaId);
+    List<Incumplimiento> findByProfesionalAsignadoId(Long id);
+
 }

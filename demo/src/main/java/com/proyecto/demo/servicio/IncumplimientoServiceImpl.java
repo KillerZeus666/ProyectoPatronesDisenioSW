@@ -48,4 +48,9 @@ public class IncumplimientoServiceImpl implements IncumplimientoService {
         System.out.println("Incumplimientos encontrados para empresa " + empresaId + ": " + incumplimientos.size());
         return incumplimientos;
     }
+
+    @Override
+    public List<Incumplimiento> obtenerIncumplimientosPorProfesional(Long profesionalId) {
+        return incumplimientoRepository.findByProfesionalAsignadoId(profesionalId);
+    }
 }

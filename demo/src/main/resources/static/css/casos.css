@@ -1,0 +1,87 @@
+h1 { 
+    text-align: center;
+    font-size: 23px;
+    margin: 30px 0;
+}
+
+.btn-accion, .btn-volver {
+    display: inline-block;
+    padding: 8px 15px;
+    background-color: #2C9494; /* Azul */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.btn-accion:hover, .btn-volver:hover {
+    background-color: #1F6B6B; /* Azul más oscuro al pasar el mouse */
+}
+
+/* Contenedor de la tabla para centrar */
+.table-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
+
+/* Estilo para la tabla */
+.styled-table {
+    width: 80%;
+    border-collapse: collapse;
+    background: #ffffff;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+}
+
+/* Encabezados */
+.styled-table thead {
+    background: #2C9494;
+    color: #ffffff;
+    text-align: left;
+}
+
+/* Filas */
+.styled-table th, .styled-table td {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Hover en filas */
+.styled-table tbody tr:hover {
+    background: rgba(44, 148, 148, 0.1);
+}
+
+/* Mensajes de estado */
+.estado-vencida {
+    color: red;
+    font-weight: bold;
+}
+
+.estado-pendiente {
+    color: orange;
+    font-weight: bold;
+}
+
+.mensaje-exito {
+    background-color: #d4edda;
+    color: #1F6B6B;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #c3e6cb;
+    border-radius: 5px;
+    text-align: center;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.ocultar {
+    opacity: 0;
+    pointer-events: none;
+}
